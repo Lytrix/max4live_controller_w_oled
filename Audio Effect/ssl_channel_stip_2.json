@@ -1,0 +1,21 @@
+{
+	"pattrstorage" : 	{
+		"name" : "u603006327",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"serial::baud" : [ "115200" ],
+					"serial::port" : [ 2 ],
+					"Parameter_1::save_selected" : [ 12 ],
+					"Parameter_1[1]::save_selected" : [ 13 ],
+					"Parameter_1[2]::save_selected" : [ 14 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}
