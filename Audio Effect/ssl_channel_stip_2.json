@@ -7,12 +7,12 @@
 				"data" : 				{
 					"serial::baud" : [ "115200" ],
 					"serial::port" : [ 2 ],
-					"Parameter_1::save_selected" : [ 12 ],
 					"Parameter_1::save_osc_address" : [ "/p1" ],
-					"Parameter_1[1]::save_selected" : [ 13 ],
+					"Parameter_1::parameter_menu::save_selected_parameter" : [ 12 ],
 					"Parameter_1[1]::save_osc_address" : [ "/p2" ],
-					"Parameter_1[2]::save_selected" : [ 14 ],
-					"Parameter_1[2]::save_osc_address" : [ "/p3" ]
+					"Parameter_1[1]::parameter_menu::save_selected_parameter" : [ 13 ],
+					"Parameter_1[2]::save_osc_address" : [ "/p3" ],
+					"Parameter_1[2]::parameter_menu::save_selected_parameter" : [ 14 ]
 				}
 
 			}
