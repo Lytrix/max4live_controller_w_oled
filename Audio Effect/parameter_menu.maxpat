@@ -29,7 +29,7 @@
 		"toolbars_unpinned_last_save" : 0,
 		"tallnewobj" : 0,
 		"boxanimatetime" : 200,
-		"enablehscroll" : 1,
+		"enablehscroll" : 0,
 		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
 		"description" : "",
@@ -40,13 +40,13 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-1",
+					"id" : "obj-2",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "bang", "bang" ],
-					"patching_rect" : [ 124.5625, 45.0, 55.0, 22.0 ],
-					"text" : "onebang"
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 124.5625, 31.0, 73.0, 22.0 ],
+					"text" : "r ---load_vst"
 				}
 
 			}
@@ -58,7 +58,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ -52.0, 217.15384578704834, 174.0, 22.0 ],
-					"restore" : [ 0 ],
+					"restore" : [ 51 ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -84,7 +84,7 @@
 				"box" : 				{
 					"comment" : "Parameter Name",
 					"id" : "obj-4",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -102,9 +102,11 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 135.0625, 269.0, 159.0, 22.0 ],
+					"patching_rect" : [ 135.0625, 269.0, 159.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0625, 0.0, 159.0, 22.0 ],
+					"presentation_rect" : [ 0.0625, 0.0, 220.0, 23.0 ],
+					"style" : "rnbohighcontrast",
+					"textcolor" : [ 0.847058823529412, 0.847058823529412, 0.847058823529412, 1.0 ],
 					"varname" : "umenu"
 				}
 
@@ -117,18 +119,6 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 36.0625, 352.59375, 97.0, 20.0 ],
 					"text" : "parameter index"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-118",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "bang", "int", "int" ],
-					"patching_rect" : [ 124.5625, 12.0, 83.0, 22.0 ],
-					"text" : "live.thisdevice"
 				}
 
 			}
@@ -243,7 +233,7 @@
 				"box" : 				{
 					"comment" : "Parameter Index",
 					"id" : "obj-122",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -255,13 +245,6 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-85", 0 ],
-					"source" : [ "obj-1", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-101", 0 ]
 				}
@@ -271,13 +254,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-107", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-1", 0 ],
-					"source" : [ "obj-118", 0 ]
 				}
 
 			}
@@ -299,6 +275,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-101", 0 ],
 					"source" : [ "obj-157", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-85", 0 ],
+					"source" : [ "obj-2", 0 ]
 				}
 
 			}
@@ -357,6 +340,45 @@
 					"source" : [ "obj-93", 0 ]
 				}
 
+			}
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "thru.maxpat",
+				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
+		"styles" : [ 			{
+				"name" : "rnbohighcontrast",
+				"default" : 				{
+					"accentcolor" : [ 0.666666666666667, 0.666666666666667, 0.666666666666667, 1.0 ],
+					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"angle" : 270.0,
+						"autogradient" : 0.0,
+						"color" : [ 0.0, 0.0, 0.0, 1.0 ],
+						"color1" : [ 0.090196078431373, 0.090196078431373, 0.090196078431373, 1.0 ],
+						"color2" : [ 0.156862745098039, 0.168627450980392, 0.164705882352941, 1.0 ],
+						"proportion" : 0.5,
+						"type" : "color"
+					}
+,
+					"clearcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"color" : [ 1.0, 0.874509803921569, 0.141176470588235, 1.0 ],
+					"editing_bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
+					"elementcolor" : [ 0.223386004567146, 0.254748553037643, 0.998085916042328, 1.0 ],
+					"fontsize" : [ 13.0 ],
+					"locked_bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
+					"selectioncolor" : [ 0.301960784313725, 0.694117647058824, 0.949019607843137, 1.0 ],
+					"stripecolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
+					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"textcolor_inverse" : [ 1.0, 1.0, 1.0, 1.0 ]
+				}
+,
+				"parentstyle" : "",
+				"multi" : 0
 			}
  ]
 	}

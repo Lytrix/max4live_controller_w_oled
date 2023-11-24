@@ -148,13 +148,14 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "Load Selected VST3 plugin",
 					"id" : "obj-2",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 391.5, 412.5, 30.0, 30.0 ]
+					"patching_rect" : [ 391.5, 412.5, 30.0, 30.0 ],
+					"varname" : "load_vst3"
 				}
 
 			}
@@ -182,7 +183,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 305.0, 331.5, 192.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, -1.5, 140.0, 23.0 ],
+					"presentation_rect" : [ 0.0, -1.5, 290.0, 23.0 ],
 					"style" : "rnbohighcontrast",
 					"textcolor" : [ 0.847058823529412, 0.847058823529412, 0.847058823529412, 1.0 ]
 				}
@@ -350,6 +351,8 @@
 
 			}
  ],
+		"dependency_cache" : [  ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "rnbohighcontrast",
 				"default" : 				{

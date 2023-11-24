@@ -68,7 +68,7 @@
 					"outlettype" : [ "int", "" ],
 					"patching_rect" : [ 410.918445459433997, 400.96153849363327, 160.031250000000057, 24.0625 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 70.934070459433997, 7.292045831680298, 159.812500000000057, 21.354545831680298 ],
+					"presentation_rect" : [ 70.934070459433997, 4.292045831680298, 219.812500000000057, 22.0 ],
 					"varname" : "parameter_menu",
 					"viewvisibility" : 1
 				}
@@ -241,6 +241,8 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"border" : 1.0,
 					"id" : "obj-66",
 					"maxclass" : "textedit",
 					"numinlets" : 1,
@@ -249,8 +251,9 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 68.0, 603.0, 57.0, 18.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, 7.292045831680298, 68.934070459433997, 22.0 ],
+					"presentation_rect" : [ 2.572007711444598, 4.292045831680298, 65.362062747989398, 22.330155611038208 ],
 					"text" : "/p1",
+					"textcolor" : [ 0.870588235294118, 0.870588235294118, 0.870588235294118, 1.0 ],
 					"varname" : "textedit[1]"
 				}
 
@@ -472,6 +475,16 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor2" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_color1" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_color2" : [ 0.8, 0.8, 0.8, 1.0 ],
+					"bgfillcolor_proportion" : 0.5,
+					"bgfillcolor_type" : "color",
+					"gradient" : 1,
 					"id" : "obj-128",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -479,8 +492,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 585.0, 863.0, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 355.010995558330023, 7.292045831680298, 40.0, 22.0 ],
-					"text" : "kHz"
+					"presentation_rect" : [ 358.498800448008978, 4.292045831680298, 40.0, 22.0 ],
+					"text" : "kHz",
+					"textcolor" : [ 0.701960784313725, 0.701960784313725, 0.701960784313725, 1.0 ]
 				}
 
 			}
@@ -527,7 +541,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 379.980770915746689, 898.0, 89.62264084815979, 22.0 ],
-					"text" : "PARA"
+					"text" : "AUTO"
 				}
 
 			}
@@ -707,13 +721,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-105",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 315.0, 977.0, 63.0, 35.0 ],
-					"text" : "/title Select"
+					"patching_rect" : [ 315.0, 977.0, 63.0, 49.0 ],
+					"text" : "/title Compressor"
 				}
 
 			}
@@ -761,7 +775,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ -17.0, 273.888716757297516, 150.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 184.934070459433997, 78.5, 110.576925098896027, 20.0 ],
+					"presentation_rect" : [ 187.934070459433997, 79.5, 110.576925098896027, 20.0 ],
 					"text" : "Send offset"
 				}
 
@@ -774,7 +788,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ -10.0, 251.888716757297516, 150.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 70.934070459433997, 78.5, 110.576925098896027, 20.0 ],
+					"presentation_rect" : [ 73.934070459433997, 79.5, 110.576925098896027, 20.0 ],
 					"text" : "pushed data"
 				}
 
@@ -787,7 +801,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ -10.0, 231.0, 150.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.065929540566003, 78.5, 59.0, 20.0 ],
+					"presentation_rect" : [ 2.934070459433997, 79.5, 59.0, 20.0 ],
 					"text" : "Pot input"
 				}
 
@@ -897,7 +911,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 816.0, 664.0, 59.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 300.934070459433997, 51.292045831680298, 59.0, 22.0 ],
+					"presentation_rect" : [ 303.934070459433997, 52.292045831680298, 59.0, 22.0 ],
 					"text" : "/p1"
 				}
 
@@ -1186,7 +1200,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 400.35714536053797, 977.0, 197.0, 22.0 ],
-					"text" : "/p1/name PARA"
+					"text" : "/p1/name AUTO"
 				}
 
 			}
@@ -1220,7 +1234,7 @@
 				"box" : 				{
 					"comment" : "Parameter OSC ID ",
 					"id" : "obj-6",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1302,7 +1316,7 @@
 				"box" : 				{
 					"comment" : "Potentiometer input",
 					"id" : "obj-20",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1328,7 +1342,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-15",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1341,7 +1355,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-4",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1522,7 +1536,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1889.0, 386.323837578296661, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -0.065929540566003, 51.292045831680298, 69.0, 22.0 ],
+					"presentation_rect" : [ 2.934070459433997, 52.292045831680298, 69.0, 22.0 ],
 					"text" : "1078"
 				}
 
@@ -1583,7 +1597,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1598.0, 621.331124246120453, 50.0, 22.0 ],
-					"text" : "1"
+					"text" : "0"
 				}
 
 			}
@@ -1596,7 +1610,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1754.760870397090912, 862.050860285758972, 84.239129602909088, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 70.934070459433997, 51.292045831680298, 110.576925098896027, 22.0 ],
+					"presentation_rect" : [ 73.934070459433997, 52.292045831680298, 110.576925098896027, 22.0 ],
 					"text" : "12 0.263184"
 				}
 
@@ -1701,7 +1715,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1492.0, 875.050860285758972, 50.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 184.934070459433997, 51.292045831680298, 110.538462549448013, 22.0 ]
+					"presentation_rect" : [ 187.934070459433997, 52.292045831680298, 110.538462549448013, 22.0 ]
 				}
 
 			}
@@ -1780,7 +1794,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1565.0, 534.467560410499573, 50.0, 22.0 ],
-					"text" : "0"
+					"text" : "1"
 				}
 
 			}
@@ -1828,7 +1842,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1820.0, 702.050860285758972, 50.0, 22.0 ],
-					"text" : "0"
+					"text" : "51"
 				}
 
 			}
@@ -1859,7 +1873,7 @@
 				"box" : 				{
 					"comment" : "All Parameter Index + Values Input",
 					"id" : "obj-7",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1992,6 +2006,16 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor2" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_angle" : 270.0,
+					"bgfillcolor_autogradient" : 0.0,
+					"bgfillcolor_color" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_color1" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_color2" : [ 0.8, 0.8, 0.8, 1.0 ],
+					"bgfillcolor_proportion" : 0.5,
+					"bgfillcolor_type" : "color",
+					"gradient" : 1,
 					"id" : "obj-185",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -1999,8 +2023,9 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 925.5, 684.59799587726593, 57.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 292.5, 7.292045831680298, 57.0, 22.0 ],
-					"text" : "Off"
+					"presentation_rect" : [ 294.036585330963135, 4.292045831680298, 62.462215117045844, 22.0 ],
+					"text" : "Off",
+					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ]
 				}
 
 			}
@@ -2020,11 +2045,11 @@
 				"box" : 				{
 					"comment" : "Bang to initatialize",
 					"id" : "obj-1",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 388.934070459433997, 236.0, 30.0, 30.0 ],
 					"varname" : "Bang"
 				}
@@ -2034,7 +2059,7 @@
 				"box" : 				{
 					"comment" : "Parameter Names List",
 					"id" : "obj-2",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -2168,7 +2193,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 271.934070459433997, 542.730772376060486, 29.5, 22.0 ],
-					"text" : "0"
+					"text" : "51"
 				}
 
 			}
@@ -2186,32 +2211,15 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
 					"id" : "obj-21",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ -25.0, 167.0, 150.0, 34.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -4.065929540566003, 1.292045831680298, 294.576925098896027, 34.0 ],
+					"presentation_rect" : [ -1.065929540566003, 0.292045831680298, 403.576925098896027, 34.0 ],
 					"text" : "\n",
-					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.666666666666667, 0.666666666666667, 0.666666666666667, 1.0 ],
-					"id" : "obj-22",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ -10.0, 182.0, 150.0, 47.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 2,
-					"presentation_rect" : [ -9.065929540566003, -5.207954168319702, 408.576925098896027, 47.0 ],
-					"text" : "\n\n",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
 
@@ -3598,6 +3606,28 @@
 
 			}
  ],
+		"dependency_cache" : [ 			{
+				"name" : "parameter_menu.maxpat",
+				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Audio Effect",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "struplow.js",
+				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Audio Effect",
+				"patcherrelativepath" : ".",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "thru.maxpat",
+				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "Audiomix",
 				"default" : 				{
@@ -3652,14 +3682,7 @@
 				"parentstyle" : "",
 				"multi" : 0
 			}
- ],
-		"saved_attribute_attributes" : 		{
-			"default_plcolor" : 			{
-				"expression" : ""
-			}
-
-		}
-
+ ]
 	}
 
 }
