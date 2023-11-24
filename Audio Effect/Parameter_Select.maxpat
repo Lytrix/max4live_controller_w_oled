@@ -40,12 +40,109 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-137",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 15.5, 496.0, 136.0, 22.0 ],
+					"restore" : [ "/p1" ],
+					"saved_object_attributes" : 					{
+						"parameter_enable" : 0,
+						"parameter_mappable" : 0
+					}
+,
+					"text" : "pattr save_osc_address",
+					"varname" : "save_osc_address"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Verdana",
+					"fontsize" : 12.0,
+					"id" : "obj-118",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1293.177978515625, 506.467560410499573, 169.0, 50.0 ],
+					"text" : "hacky retry if out of sync\nmetro stops if in sync again"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-112",
+					"maxclass" : "toggle",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1450.0, 597.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-80",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 1380.5, 553.0, 63.0, 22.0 ],
+					"text" : "metro 500"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-61",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 68.0, 627.087684825062752, 59.0, 22.0 ],
+					"text" : "route text"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-66",
+					"maxclass" : "textedit",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "", "int", "", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 68.0, 603.0, 57.0, 18.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 0.0, 7.292045831680298, 68.934070459433997, 22.0 ],
+					"text" : "/p1",
+					"varname" : "textedit[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-114",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "int", "int" ],
+					"patching_rect" : [ 1451.5, 543.467560410499573, 48.0, 22.0 ],
+					"text" : "change"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-45",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 1741.0, 790.0, 22.0, 22.0 ],
+					"patching_rect" : [ 1741.0, 821.0, 22.0, 22.0 ],
 					"text" : "t b"
 				}
 
@@ -106,7 +203,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1493.0, 986.0, 50.0, 22.0 ],
-					"text" : "3252"
+					"text" : "2766"
 				}
 
 			}
@@ -166,7 +263,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1764.0, 947.0, 101.0, 22.0 ],
-					"text" : "12 0.742676"
+					"text" : "12 0.675293"
 				}
 
 			}
@@ -202,7 +299,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1520.0, 417.467560410499573, 50.0, 22.0 ],
-					"text" : "3042"
+					"text" : "2766"
 				}
 
 			}
@@ -431,7 +528,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1122.543479144573212, 1081.629168808460236, 146.456520855426788, 22.0 ],
-					"text" : "/p1/slidervalue 0.742676"
+					"text" : "/p1/slidervalue 0.675293"
 				}
 
 			}
@@ -710,7 +807,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 816.0, 664.0, 59.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 4.934070459433997, 7.292045831680298, 59.0, 22.0 ],
+					"presentation_rect" : [ 300.934070459433997, 51.292045831680298, 59.0, 22.0 ],
 					"text" : "/p1"
 				}
 
@@ -735,7 +832,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1353.677978515625, 1085.129168808460236, 119.0, 22.0 ],
-					"text" : "/p1/offset 3252"
+					"text" : "/p1/offset 2766"
 				}
 
 			}
@@ -867,7 +964,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 922.677978515625, 1081.629168808460236, 119.0, 22.0 ],
-					"text" : "/p1/value \"1.32\""
+					"text" : "/p1/value \"1.17\""
 				}
 
 			}
@@ -1229,7 +1326,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1882.25, 699.83112370967865, 131.923078656196594, 20.0 ],
+					"patching_rect" : [ 1879.326921343803406, 654.83112370967865, 131.923078656196594, 20.0 ],
 					"text" : "scale 12 bit to 0-1 float"
 				}
 
@@ -1240,7 +1337,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1816.326921343803633, 874.050860285758972, 163.0, 20.0 ],
+					"patching_rect" : [ 1816.326921343803633, 905.050860285758972, 163.0, 20.0 ],
 					"text" : "only send if value is changed"
 				}
 
@@ -1252,7 +1349,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1716.722403883934021, 726.050860285758972, 99.0, 33.0 ],
+					"patching_rect" : [ 1715.760870397090912, 702.050860285758972, 99.0, 33.0 ],
 					"text" : "receive selected parameter index"
 				}
 
@@ -1336,7 +1433,7 @@
 					"patching_rect" : [ 1889.0, 386.323837578296661, 50.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ -0.065929540566003, 51.292045831680298, 69.0, 22.0 ],
-					"text" : "3042"
+					"text" : "2767"
 				}
 
 			}
@@ -1371,8 +1468,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1898.25, 793.920422852039337, 59.0, 22.0 ],
-					"text" : "0.742676"
+					"patching_rect" : [ 2029.326921343803406, 702.050860285758972, 59.0, 22.0 ],
+					"text" : "0.59375"
 				}
 
 			}
@@ -1384,7 +1481,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1365.177978515625, 696.59799587726593, 50.0, 22.0 ],
-					"text" : "3252"
+					"text" : "2766"
 				}
 
 			}
@@ -1407,10 +1504,10 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1754.760870397090912, 831.050860285758972, 84.239129602909088, 22.0 ],
+					"patching_rect" : [ 1754.760870397090912, 862.050860285758972, 84.239129602909088, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 70.934070459433997, 51.292045831680298, 110.576925098896027, 22.0 ],
-					"text" : "12 0.742676"
+					"text" : "12 0.675293"
 				}
 
 			}
@@ -1487,7 +1584,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1820.0, 793.920422852039337, 45.0, 22.0 ],
+					"patching_rect" : [ 1820.0, 824.920422852039337, 45.0, 22.0 ],
 					"text" : "pak 0 f"
 				}
 
@@ -1499,7 +1596,7 @@
 					"numinlets" : 6,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1882.25, 737.050860285758972, 100.0, 22.0 ],
+					"patching_rect" : [ 1879.326921343803406, 692.050860285758972, 100.0, 22.0 ],
 					"text" : "scale 0 4096. 0 1"
 				}
 
@@ -1640,7 +1737,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1820.0, 737.050860285758972, 50.0, 22.0 ],
+					"patching_rect" : [ 1820.0, 702.050860285758972, 50.0, 22.0 ],
 					"text" : "12"
 				}
 
@@ -1652,7 +1749,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1754.760870397090912, 874.050860285758972, 60.0, 22.0 ],
+					"patching_rect" : [ 1754.760870397090912, 905.050860285758972, 60.0, 22.0 ],
 					"text" : "zl.change"
 				}
 
@@ -1663,7 +1760,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1841.0, 832.050860285758972, 146.0, 20.0 ],
+					"patching_rect" : [ 1841.0, 863.050860285758972, 146.0, 20.0 ],
 					"text" : " new param index + value"
 				}
 
@@ -1773,7 +1870,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 997.289999999999964, 684.59799587726593, 59.0, 22.0 ],
-					"text" : "0.742676"
+					"text" : "0.675293"
 				}
 
 			}
@@ -1813,7 +1910,7 @@
 					"patching_rect" : [ 925.5, 684.59799587726593, 57.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 292.5, 7.292045831680298, 57.0, 22.0 ],
-					"text" : "\"1.32\""
+					"text" : "\"1.17\""
 				}
 
 			}
@@ -2012,7 +2109,7 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-131",
-					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset" ],
+					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2220,6 +2317,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-80", 0 ],
+					"source" : [ "obj-112", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-112", 0 ],
+					"source" : [ "obj-114", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-116", 0 ],
 					"source" : [ "obj-115", 0 ]
 				}
@@ -2289,6 +2400,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-185", 0 ],
 					"order" : 0,
+					"source" : [ "obj-125", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-66", 0 ],
+					"order" : 5,
 					"source" : [ "obj-125", 0 ]
 				}
 
@@ -2445,6 +2564,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-131", 0 ],
 					"source" : [ "obj-135", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-66", 0 ],
+					"source" : [ "obj-137", 1 ]
 				}
 
 			}
@@ -2661,6 +2787,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-112", 0 ],
+					"order" : 2,
+					"source" : [ "obj-16", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-159", 1 ],
 					"order" : 0,
 					"source" : [ "obj-163", 0 ]
@@ -2685,6 +2819,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-144", 0 ],
+					"order" : 0,
+					"source" : [ "obj-173", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-66", 0 ],
+					"order" : 1,
 					"source" : [ "obj-173", 0 ]
 				}
 
@@ -2732,6 +2875,13 @@
 					"destination" : [ "obj-60", 0 ],
 					"order" : 0,
 					"source" : [ "obj-185", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-114", 0 ],
+					"source" : [ "obj-19", 0 ]
 				}
 
 			}
@@ -3074,9 +3224,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-18", 1 ],
+					"source" : [ "obj-60", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-27", 1 ],
 					"order" : 0,
-					"source" : [ "obj-6", 0 ]
+					"source" : [ "obj-61", 0 ]
 				}
 
 			}
@@ -3084,14 +3241,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-27", 0 ],
 					"order" : 1,
-					"source" : [ "obj-6", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-18", 1 ],
-					"source" : [ "obj-60", 0 ]
+					"source" : [ "obj-61", 0 ]
 				}
 
 			}
@@ -3129,6 +3279,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-127", 0 ],
 					"source" : [ "obj-65", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-61", 0 ],
+					"source" : [ "obj-66", 0 ]
 				}
 
 			}
@@ -3259,6 +3416,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-159", 0 ],
+					"source" : [ "obj-80", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-71", 0 ],
 					"source" : [ "obj-81", 0 ]
 				}
@@ -3340,7 +3504,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
-					"order" : 2,
+					"order" : 3,
 					"source" : [ "obj-9", 0 ]
 				}
 
@@ -3349,6 +3513,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-19", 1 ],
 					"order" : 1,
+					"source" : [ "obj-9", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"order" : 2,
 					"source" : [ "obj-9", 0 ]
 				}
 
