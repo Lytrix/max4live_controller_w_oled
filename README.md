@@ -8,7 +8,7 @@ This setup can easily be extended to a 4 units by using jumper cables on the sam
 ![Image](Images/m4live_controller.png)![Image](Images/m4live_plugin.png)
 ### History ###
 
-After using excelent Eurorack Droid system and having created my own Launchpad type solution on it, I wanted to have more the hands on controllers also for my DAW controls.
+After using excelent Eurorack Droid system and having created my own Launchpad type solution on it, I wanted to have more hands on controllers also for my VST plugins within Ableton.
 
 I really like the SSL suite of EQ's so I first looked at the UC1, As it was too big to fit in my small studio, I decided to build my own eurorack version to fit into my controller case with visual feedback to limit having to look at the DAW screen when adjusting EQ. 
 
