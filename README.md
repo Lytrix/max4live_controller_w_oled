@@ -4,6 +4,8 @@ This repository contain the files to be able to create a Max4live 4 controller w
 
 This setup can easily be extended to a 4 units by using jumper cables on the same pcb together with the headers on the boards to maximize a 5 panel order from jlcpcb.
 
+![Image](images/m4live_controller.png)  ![Image](images/potentiometer_experiment.png) ![Image](images/wip_3_parameters.png)
+
 ### History ###
 
 After using excelent Eurorack Droid system and having created my own Launchpad type solution on it, I wanted to have more the hands on controllers also for my DAW controls.
@@ -59,8 +61,6 @@ I tested first a simple setup with using the standard serial ASCII communication
 The [Open Sound Control (OSC)](https://opensoundcontrol.stanford.edu/spec-1_0.html) addressing structure felt like a much more robust way to send information back and forth, but unfortunately the OSC library from [CNMAT](https://github.com/CNMAT/OSC) did not work properly any more in the current MaxMSP and via serial (instead of network port). After a lot of research I finally found a good working library to make this work on the Teensy with MaxMSP (jey!):
 https://github.com/thomasfredericks/MicroOsc
 
-
-![Image](m4live_controller.png)  ![Image](potentiometer_experiment.png) ![Image](wip_3_parameters.png)
 
 ### Research documentation ###
 
