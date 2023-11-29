@@ -4,8 +4,8 @@ This repository contain the files to be able to create a Max4live 4 controller w
 
 This setup can easily be extended to a 4 units by using jumper cables on the same pcb together with the headers on the boards to maximize a 5 panel order from jlcpcb.
 
-![Image](Images/m4live_controller.png)![Image](Images/potentiometer_experiment.png)![Image](Images/wip_3_parameters.png)![Image](Images/magnetic_encoder_hack.png)
-
+![Image](Images/potentiometer_experiment.png)![Image](Images/wip_3_parameters.png)![Image](Images/magnetic_encoder_hack.png)
+![Image](Images/m4live_controller.png)![Image](Images/m4live_plugin.png)
 ### History ###
 
 After using excelent Eurorack Droid system and having created my own Launchpad type solution on it, I wanted to have more the hands on controllers also for my DAW controls.
