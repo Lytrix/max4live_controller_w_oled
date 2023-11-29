@@ -60,7 +60,7 @@ The [Open Sound Control (OSC)](https://opensoundcontrol.stanford.edu/spec-1_0.ht
 https://github.com/thomasfredericks/MicroOsc
 
 
-![Image](m4live_controller.png)
+![Image](m4live_controller.png)  ![Image](potentiometer_experiment.png) ![Image](wip_3_parameters.png)
 
 ### Research documentation ###
 
