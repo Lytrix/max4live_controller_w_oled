@@ -6,7 +6,7 @@
 				"id" : 1,
 				"data" : 				{
 					"serial::baud" : [ "115200" ],
-					"serial::port" : [ 2 ],
+					"serial::port" : [ 0 ],
 					"Parameter_1::save_osc_address" : [ "/p1" ],
 					"Parameter_1::parameter_menu::save_selected_parameter" : [ 12 ],
 					"Parameter_1[1]::save_osc_address" : [ "/p2" ],
