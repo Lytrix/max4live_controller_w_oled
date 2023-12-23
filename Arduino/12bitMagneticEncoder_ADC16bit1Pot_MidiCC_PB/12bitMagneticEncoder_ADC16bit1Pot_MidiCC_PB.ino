@@ -34,7 +34,7 @@ AS5600 as5600_2(&Wire);
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
 #define I2C_BUSS &Wire  // $Wire, &Wire1, ..
-#define I2C_SPEED 900000
+#define I2C_SPEED 1000000
 // #define I2C_BUSS2 &Wire1  // $Wire, &Wire1, ..
 
 
@@ -163,7 +163,6 @@ void sendValueMagneticEncoder(AS5600 &as5600_reference, int channel, char* oscNa
   strcpy(OSCaddress, oscName);
   strcat(OSCaddress, potmeterNumber);
   tcaSelect(tcaAddress);
-  delayMicroseconds(1);
   newValue[channel] = as5600_reference.readAngle();
   if (newValue[channel] != oldValue[channel]) {  
       myMicroOsc.sendInt(OSCaddress, newValue[channel]);  // SEND MAGNETIC ENCODE
@@ -236,11 +235,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
     oscMessageParser(i, "/slidervalue");
     if (oscMessage.checkOscAddress(oscAddress)) {
-    //  if (millis() - myChronoStart2 >= 20) {                     // IF 50 MS HAVE ELLAPSED
-    //    myChronoStart2 = millis(); 
-    sliderValue[i]=oscMessage.nextAsFloat();
-       
-    //  }
+       sliderValue[i]=oscMessage.nextAsFloat();   
     }
 
     oscMessageParser(i, "/name");
@@ -296,83 +291,71 @@ void displayRow(int x) {
 
 // Clear and push display with updated values in void Loop()
 void updateDisplay(int channel) {
-tcaSelect(channel);
-delayMicroseconds(1);
-int x;
-int i;
-length = sizeof(title)/sizeof(char);
-center = SCREEN_WIDTH/2 - round(length/2);
+  tcaSelect(channel);
+  int x;
+  int i;
+  length = sizeof(title)/sizeof(char);
+  center = SCREEN_WIDTH/2 - round(length/2);
 
-display.clearDisplay();
+  display.clearDisplay();
 
+  x = 0;
+  i = 0;
 
-x = 0;
-i = 0;
-// fillLength = round(sliderValue[x] * sliderLength);
+  display.setCursor(2, 15);
+  display.print(displayTxt[x][i]); // temp test
 
-display.setCursor(2, 15);
-display.print(displayTxt[x][i]); // temp test
+  // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 
-// display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
+  i = 1;
+  display.setCursor(75, 15);
+  display.print(displayTxt[x][i]); // temp test
 
-i = 1;
-display.setCursor(75, 15);
-display.print(displayTxt[x][i]); // temp test
+  i = 2;
+  display.setCursor(105, 15);
+  display.println(displayTxt[x][i]); // temp test
 
-i = 2;
-display.setCursor(105, 15);
-display.println(displayTxt[x][i]); // temp test
-
-x = 1;
-i = 0;
-display.drawRect(33, 17, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
+  x = 1;
+  i = 0;
+  display.drawRect(33, 17, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
 
-display.setCursor(2, 35);
-display.print(displayTxt[x][i]); // temp test
+  display.setCursor(2, 35);
+  display.print(displayTxt[x][i]); // temp test
 
-// display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
-
-
-i = 1;
-display.setCursor(75, 35);
-display.print(displayTxt[x][i]); // temp test
-
-i = 2;
-display.setCursor(105, 35);
-display.println(displayTxt[x][i]); // temp test
-
-display.drawRect(33, 37, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
-
-x = 2;
-i = 0;
-
-display.setCursor(2, 55);
-display.print(displayTxt[x][i]); // temp test
-
-// // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
-i = 1;
-display.setCursor(75, 55);
-display.print(displayTxt[x][i]); // temp test
-i = 2;
-display.setCursor(105, 55);
-display.println(displayTxt[x][i]); // temp test
-
-display.drawRect(33, 57, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
-
-display.setCursor(center, 2);
-display.println(title);
-  // Old setup
-  //display.setCursor(0, 26);
-  //display.println(parameterName1);
-  //display.setCursor(80, 26);
-  //display.println(parameterValue);
-  //display.setCursor(110, 26);
-  //display.println(parameterType);
-display.display();
-//display.display();
+  // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 
 
+  i = 1;
+  display.setCursor(75, 35);
+  display.print(displayTxt[x][i]); // temp test
+
+  i = 2;
+  display.setCursor(105, 35);
+  display.println(displayTxt[x][i]); // temp test
+
+  display.drawRect(33, 37, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
+
+  x = 2;
+  i = 0;
+
+  display.setCursor(2, 55);
+  display.print(displayTxt[x][i]); // temp test
+
+  // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
+  i = 1;
+  display.setCursor(75, 55);
+  display.print(displayTxt[x][i]); // temp test
+  i = 2;
+  display.setCursor(105, 55);
+  display.println(displayTxt[x][i]); // temp test
+
+  display.drawRect(33, 57, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
+
+  display.setCursor(center, 2);
+  display.println(title);
+  
+  display.display();
 }
 
 // Slicer function used to limit parameter names on display.
@@ -399,7 +382,6 @@ void slice(const char* str, char* result, size_t start, size_t end)
   SETUP
 *****************/
 void setup() {
-  //Serial.begin(115200);
   Serial.begin(115200);
 
   pinMode(button1, INPUT_PULLUP); // btn1
