@@ -9,10 +9,14 @@
 					"serial::port" : [ 2 ],
 					"Parameter_1::save_osc_address" : [ "/p1" ],
 					"Parameter_1::parameter_menu::save_selected_parameter" : [ 12 ],
-					"Parameter_1[1]::save_osc_address" : [ "/p2" ],
-					"Parameter_1[1]::parameter_menu::save_selected_parameter" : [ 13 ],
-					"Parameter_1[2]::save_osc_address" : [ "/p3" ],
-					"Parameter_1[2]::parameter_menu::save_selected_parameter" : [ 14 ]
+					"Parameter_2::save_osc_address" : [ "/p2" ],
+					"Parameter_2::parameter_menu::save_selected_parameter" : [ 13 ],
+					"Parameter_3::save_osc_address" : [ "/p3" ],
+					"Parameter_3::parameter_menu::save_selected_parameter" : [ 14 ],
+					"Parameter_4::save_osc_address" : [ "/b1" ],
+					"Parameter_4::parameter_menu::save_selected_parameter" : [ 0 ],
+					"Parameter_5::save_osc_address" : [ "/b2" ],
+					"Parameter_5::parameter_menu::save_selected_parameter" : [ 0 ]
 				}
 
 			}
