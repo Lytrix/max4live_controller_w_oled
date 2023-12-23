@@ -37,7 +37,7 @@ AS5600 as5600_2(&Wire);
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
 #define I2C_BUSS &Wire  // $Wire, &Wire1, ..
-#define I2C_SPEED 1000000
+#define I2C_SPEED 900000
 // #define I2C_BUSS2 &Wire1  // $Wire, &Wire1, ..
 
 
@@ -130,6 +130,15 @@ int displayPos[3][3][2]= {
     }
 };
 
+const int button1 = 0;  // the number of the pushbutton pin
+const int button2 = 1;  // the number of the pushbutton pin
+const int led1 = 8;    // the number of the LED pin
+const int led2 = 9;    // the number of the LED pin
+
+// variables will change:
+int btn1 = false;  // variable for reading the pushbutton status
+int btn2 = false;  // variable for reading the pushbutton status
+
 // Test variables
 int ledPin = 13;
 
@@ -157,6 +166,7 @@ void sendValueMagneticEncoder(AS5600 &as5600_reference, int channel, char* oscNa
   strcpy(OSCaddress, oscName);
   strcat(OSCaddress, potmeterNumber);
   tcaSelect(tcaAddress);
+  delayMicroseconds(1);
   newValue[channel] = as5600_reference.readAngle();
   if (newValue[channel] != oldValue[channel]) {  
       myMicroOsc.sendInt(OSCaddress, newValue[channel]);  // SEND MAGNETIC ENCODE
@@ -167,6 +177,7 @@ void sendValueMagneticEncoder(AS5600 &as5600_reference, int channel, char* oscNa
 // Offset Magnetic Encoder // If VST value is update via mouse input, recieve updated value to calculate new offset of magnetic encoder, so it does not jump.
 void setOffsetMagneticEncoder(AS5600 &as5600_reference, int channel, int parameterOffset, int tcaAddress) {
   tcaSelect(tcaAddress);
+  delayMicroseconds(1);
   int readAngle = as5600_reference.readAngle();
   // Serial.print("instance");
   // Serial.println(readAngle);
@@ -210,10 +221,10 @@ void oscMessageParser(int parameterNumber, char oscAddressType[10]){
 
 // OSC MESSAGE LISTENER
 void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
-  
+
   // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
   for (int i = 0; i <= 2; i++)  { 
-    oscMessageParser(i, "/offset");
+    oscMessageParser(0, "/offset");
     if (oscMessage.checkOscAddress(oscAddress)) {
       int parameterOffset = oscMessage.nextAsInt();
       //Serial.print("parameterOffset: ");
@@ -252,13 +263,17 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     strcpy(title, oscMessage.nextAsString());
   }
 
+  if (oscMessage.checkOscAddress("/btn1")) {  // IF THE ADDRESS IS /led
+    int newValue = oscMessage.nextAsInt();   // GET NEW VALUE AS INT
+    digitalWrite(btn1, newValue);          // SET LED OUTPUT TO VALUE (DIGITAL: OFF/ON)
+  }
+
   // Basic tester
   if (oscMessage.checkOscAddress("/led")) {  // IF THE ADDRESS IS /led
     int newValue = oscMessage.nextAsInt();   // GET NEW VALUE AS INT
     digitalWrite(ledPin, newValue);          // SET LED OUTPUT TO VALUE (DIGITAL: OFF/ON)
     Serial.write("led on");
   }
-   
 }
 
 
@@ -286,14 +301,13 @@ void displayRow(int x) {
 
 // Clear and push display with updated values in void Loop()
 void updateDisplay(int channel) {
-
 tcaSelect(channel);
+delayMicroseconds(1);
 int x;
 int i;
 display.clearDisplay();
-
-display.setCursor(center, 0);
-display.print(title);
+//display.setCursor(center, 0);
+//display.print(title);
 
 x = 0;
 i = 0;
@@ -305,15 +319,16 @@ display.print(displayTxt[x][i]); // temp test
 // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 
 i = 1;
-display.setCursor(75, 15);
+//display.setCursor(75, 15);
 display.print(displayTxt[x][i]); // temp test
 
 i = 2;
-display.setCursor(105, 15);
-display.print(displayTxt[x][i]); // temp test
+//display.setCursor(105, 15);
+display.println(displayTxt[x][i]); // temp test
 
 x = 1;
 i = 0;
+display.drawRect(72, 17, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
 
 display.setCursor(2, 35);
@@ -323,12 +338,14 @@ display.print(displayTxt[x][i]); // temp test
 
 
 i = 1;
-display.setCursor(75, 35);
+//display.setCursor(75, 35);
 display.print(displayTxt[x][i]); // temp test
 
 i = 2;
-display.setCursor(105, 35);
-display.print(displayTxt[x][i]); // temp test
+//display.setCursor(105, 35);
+display.println(displayTxt[x][i]); // temp test
+
+display.drawRect(72, 37, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
 x = 2;
 i = 0;
@@ -338,11 +355,14 @@ display.print(displayTxt[x][i]); // temp test
 
 // // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 i = 1;
-display.setCursor(75, 55);
+//display.setCursor(75, 55);
 display.print(displayTxt[x][i]); // temp test
 i = 2;
-display.setCursor(105, 55);
-display.print(displayTxt[x][i]); // temp test
+//display.setCursor(105, 55);
+display.println(displayTxt[x][i]); // temp test
+
+display.drawRect(72, 57, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
+
 
   // Old setup
   //display.setCursor(0, 26);
@@ -351,12 +371,10 @@ display.print(displayTxt[x][i]); // temp test
   //display.println(parameterValue);
   //display.setCursor(110, 26);
   //display.println(parameterType);
-
-
-display.drawRect(33, 17, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
-display.drawRect(33, 37, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
-display.drawRect(33, 57, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
 display.display();
+//display.display();
+
+
 }
 
 // Slicer function used to limit parameter names on display.
@@ -385,6 +403,12 @@ void slice(const char* str, char* result, size_t start, size_t end)
 void setup() {
   //Serial.begin(115200);
   Serial.begin(115200);
+
+  pinMode(button1, INPUT_PULLUP); // btn1
+  pinMode(button2, INPUT_PULLUP); // btn2
+  pinMode(led1, OUTPUT);  // led1
+  pinMode(led2, OUTPUT);  // led2
+
   Wire.begin();
 
   Serial.println(__FILE__);
@@ -411,6 +435,7 @@ void setup() {
 
 // Initiate Magnectic Encoder 2
   tcaSelect(0);
+  delayMicroseconds(10);
   as5600_2.begin();  //  set direction pin.
   as5600_2.setDirection(AS5600_CLOCK_WISE);
   Serial.print("Connect as5600_2: ");
@@ -418,6 +443,7 @@ void setup() {
 
   // Initiate Magnectic Encoder 0
   tcaSelect(1);
+  delayMicroseconds(10);
   as5600_0.begin();  //  set direction pin.
   as5600_0.setDirection(AS5600_CLOCK_WISE);
   Serial.print("Connect as5600_0: ");
@@ -425,6 +451,7 @@ void setup() {
 
   // Initiate Magnectic Encoder 1
   tcaSelect(6);
+  delayMicroseconds(10);
   as5600_1.begin();  //  set direction pin.
   as5600_1.setDirection(AS5600_CLOCK_WISE);
   Serial.print("Connect as5600_1: ");
@@ -432,6 +459,7 @@ void setup() {
 
 
   tcaSelect(7);
+  delayMicroseconds(10);
   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
     for (;;)
@@ -440,7 +468,7 @@ void setup() {
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   // Clear the buffer
-  display.clearDisplay();
+  //display.clearDisplay();
 
   // display.setTextSize(1);  // Draw 1X-scale text
   // display.setTextColor(SSD1306_WHITE);
@@ -523,15 +551,29 @@ void loop() {
    //   sendData(); 
                                // RESTART CHRONO
   //}  
- 
-  myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);
+
   updateDisplay(7); 
-  if (millis() - myChronoStart >= 51) {                     // IF 50 MS HAVE ELLAPSED
+  myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);
+  
+  if (millis() - myChronoStart >= 50) {                     // IF 50 MS HAVE ELLAPSED
     sendValueMagneticEncoder(as5600List[0][0], 0, "/pot", tcaAddress[0]);
     sendValueMagneticEncoder(as5600List[1][0], 1, "/pot", tcaAddress[1]);
-   sendValueMagneticEncoder(as5600List[2][0], 2, "/pot", tcaAddress[2]);
+    sendValueMagneticEncoder(as5600List[2][0], 2, "/pot", tcaAddress[2]);
     myChronoStart = millis(); 
-  }      
+  }   
+
+  if (digitalRead(button1) == true) {
+    btn1 = !btn1;
+    if(btn1==1){
+      digitalWrite(led1, HIGH);
+    } else {
+      digitalWrite(led1, LOW);
+    }
+    //while(digitalRead(button1) == true);
+    //delay(50); // keeps a small delay
+  }
+
+
   // Loop over as5600 instances and /pot1, /pot2, ...
   //for (int i = 0; i <= 2; i++) {
 
