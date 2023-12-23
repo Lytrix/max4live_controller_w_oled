@@ -20,9 +20,6 @@
 MicroOscSlip<256> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
-unsigned long myChronoStart2 = 10; 
-unsigned long myChronoStart3 = 20; 
-unsigned long myChronoStart4 = 30; 
 // Set address of first I2C multiplexer
 #define TCAADDR 0x70
 
@@ -177,7 +174,6 @@ void sendValueMagneticEncoder(AS5600 &as5600_reference, int channel, char* oscNa
 // Offset Magnetic Encoder // If VST value is update via mouse input, recieve updated value to calculate new offset of magnetic encoder, so it does not jump.
 void setOffsetMagneticEncoder(AS5600 &as5600_reference, int channel, int parameterOffset, int tcaAddress) {
   tcaSelect(tcaAddress);
-  delayMicroseconds(1);
   int readAngle = as5600_reference.readAngle();
   // Serial.print("instance");
   // Serial.println(readAngle);
@@ -201,7 +197,6 @@ void setOffsetMagneticEncoder(AS5600 &as5600_reference, int channel, int paramet
     strcat(OSCaddress, potmeterNumber);
     newValue[channel] = as5600_reference.readAngle();
     if (newValue[channel] != oldValue[channel]) {
-      tcaSelect(tcaAddress);
       myMicroOsc.sendInt(OSCaddress, newValue[channel]);  // SEND MAGNETIC ENCODE
       oldValue[channel] = newValue[channel];
     }
@@ -224,7 +219,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
   // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
   for (int i = 0; i <= 2; i++)  { 
-    oscMessageParser(0, "/offset");
+    oscMessageParser(i, "/offset");
     if (oscMessage.checkOscAddress(oscAddress)) {
       int parameterOffset = oscMessage.nextAsInt();
       //Serial.print("parameterOffset: ");
@@ -259,7 +254,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     }
   }
 
-  if (oscMessage.checkOscAddress("/title")) { 
+  if (oscMessage.checkOscAddress("/p1/title")) { 
     strcpy(title, oscMessage.nextAsString());
   }
 
@@ -280,8 +275,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 int16_t sliderLength = 37;
 int16_t sliderHeight = 5; // larger values cause flickering screen :(
 int16_t fillLength;
-int16_t length = sizeof(title)/sizeof(char);
-int16_t center = SCREEN_WIDTH/2 - (length/2);
+int16_t length = 0;
+int16_t center = 0;
 char *setTitle = "";
 
 // Generate 1 of 2 rows of display information using the prefilled array.
@@ -305,9 +300,11 @@ tcaSelect(channel);
 delayMicroseconds(1);
 int x;
 int i;
+length = sizeof(title)/sizeof(char);
+center = SCREEN_WIDTH/2 - round(length/2);
+
 display.clearDisplay();
-//display.setCursor(center, 0);
-//display.print(title);
+
 
 x = 0;
 i = 0;
@@ -319,16 +316,16 @@ display.print(displayTxt[x][i]); // temp test
 // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 
 i = 1;
-//display.setCursor(75, 15);
+display.setCursor(75, 15);
 display.print(displayTxt[x][i]); // temp test
 
 i = 2;
-//display.setCursor(105, 15);
+display.setCursor(105, 15);
 display.println(displayTxt[x][i]); // temp test
 
 x = 1;
 i = 0;
-display.drawRect(72, 17, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
+display.drawRect(33, 17, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
 
 display.setCursor(2, 35);
@@ -338,14 +335,14 @@ display.print(displayTxt[x][i]); // temp test
 
 
 i = 1;
-//display.setCursor(75, 35);
+display.setCursor(75, 35);
 display.print(displayTxt[x][i]); // temp test
 
 i = 2;
-//display.setCursor(105, 35);
+display.setCursor(105, 35);
 display.println(displayTxt[x][i]); // temp test
 
-display.drawRect(72, 37, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
+display.drawRect(33, 37, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
 x = 2;
 i = 0;
@@ -355,15 +352,16 @@ display.print(displayTxt[x][i]); // temp test
 
 // // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 i = 1;
-//display.setCursor(75, 55);
+display.setCursor(75, 55);
 display.print(displayTxt[x][i]); // temp test
 i = 2;
-//display.setCursor(105, 55);
+display.setCursor(105, 55);
 display.println(displayTxt[x][i]); // temp test
 
-display.drawRect(72, 57, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
+display.drawRect(33, 57, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
-
+display.setCursor(center, 2);
+display.println(title);
   // Old setup
   //display.setCursor(0, 26);
   //display.println(parameterName1);
@@ -435,7 +433,6 @@ void setup() {
 
 // Initiate Magnectic Encoder 2
   tcaSelect(0);
-  delayMicroseconds(10);
   as5600_2.begin();  //  set direction pin.
   as5600_2.setDirection(AS5600_CLOCK_WISE);
   Serial.print("Connect as5600_2: ");
@@ -443,7 +440,6 @@ void setup() {
 
   // Initiate Magnectic Encoder 0
   tcaSelect(1);
-  delayMicroseconds(10);
   as5600_0.begin();  //  set direction pin.
   as5600_0.setDirection(AS5600_CLOCK_WISE);
   Serial.print("Connect as5600_0: ");
@@ -451,7 +447,6 @@ void setup() {
 
   // Initiate Magnectic Encoder 1
   tcaSelect(6);
-  delayMicroseconds(10);
   as5600_1.begin();  //  set direction pin.
   as5600_1.setDirection(AS5600_CLOCK_WISE);
   Serial.print("Connect as5600_1: ");
