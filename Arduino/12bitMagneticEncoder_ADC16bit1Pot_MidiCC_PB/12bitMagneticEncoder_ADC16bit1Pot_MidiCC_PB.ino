@@ -17,7 +17,7 @@
 // THE NUMBER 128 BETWEEN THE < > SYMBOLS  BELOW IS THE MAXIMUM NUMBER OF BYTES RESERVED FOR INCOMMING MESSAGES.
 // MAKE SURE THIS NUMBER OF BYTES CAN HOLD THE SIZE OF THE MESSAGE YOUR ARE RECEIVING IN ARDUINO.
 // OUTGOING MESSAGES ARE WRITTEN DIRECTLY TO THE OUTPUT AND DO NOT NEED ANY RESERVED BYTES.
-MicroOscSlip<256> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
+MicroOscSlip<128> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
 // Set address of first I2C multiplexer
@@ -34,7 +34,7 @@ AS5600 as5600_2(&Wire);
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
 #define I2C_BUSS &Wire  // $Wire, &Wire1, ..
-#define I2C_SPEED 800000
+#define I2C_SPEED 1000000
 // #define I2C_BUSS2 &Wire1  // $Wire, &Wire1, ..
 
 
@@ -75,16 +75,25 @@ char parameterName3[36]="";
 char parameterValue3[10]="";
 char parameterType3[3]="";
 
+char buttonValue1[16]="";
+char buttonValue2[16]="";
+
 float parameterSliderValue1 = 0.0;
 float parameterSliderValue2 = 0.0;
 float parameterSliderValue3 = 0.0;
 
 // List of parameter values to iterate over in OSC addresses
-char *displayTxt[3][3]= {
+char *displayTxtKnob[3][3]= {
   {parameterName1, parameterValue1, parameterType1},
   {parameterName2, parameterValue2, parameterType2},
   {parameterName3, parameterValue3, parameterType3}
 };
+
+// List of parameter values to iterate over in OSC addresses
+char *displayTxtButton[1][2]= {
+  {buttonValue1, buttonValue2}
+};
+
 
 float sliderValue[3]= {
   parameterSliderValue1, parameterSliderValue2, parameterSliderValue3
@@ -97,7 +106,7 @@ int tcaAddress[3] = {1,6,0};
 
 // For creating OSC address to receive on
 char oscAddress[24];
-char oscParam[7] = "/p";
+char oscParam[2][7] = {"/p", "/b"};
 char strNumber[2];
 
 // For creating OSC address to send values
@@ -132,9 +141,9 @@ const int buttonPin[2] = {0,1}; // Teensy pin connected to button's pin
 const int ledPin[2] = {8,9}; // Teensy pin connected to LED's pin
 
 // variables will change:
-int ledState[2]; // the current state of LED
-int lastButtonState[2];    // the previous state of button
-int currentButtonState[2]; // the current state of button
+int ledState[2]= {LOW, LOW}; // the current state of LED
+int lastButtonState[2]= {LOW, LOW};    // the previous state of button
+int currentButtonState[2]= {LOW, LOW}; // the current state of button
 
 // Test variables
 int ledPinTeensy = 13;
@@ -203,7 +212,7 @@ void setOffsetMagneticEncoder(AS5600 &as5600_reference, int channel, int paramet
 }
 
 // Parse all OSC addresses in a for loop by (1, "/name") equals: /param1/name
-void oscMessageParser(int parameterNumber, char oscAddressType[10]){
+void oscMessageParser(char oscParam[7], int parameterNumber, char oscAddressType[10]){
   itoa(parameterNumber+1, strNumber, 10);
 
   strcpy(oscAddress, oscParam);
@@ -216,7 +225,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
 // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
   for (int i = 0; i <= 2; i++)  { 
-    oscMessageParser(i, "/offset");
+    oscMessageParser(oscParam[0], i, "/offset");
     if (oscMessage.checkOscAddress(oscAddress)) {
       int parameterOffset = oscMessage.nextAsInt();
       //Serial.print("parameterOffset: ");
@@ -226,24 +235,24 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
       setOffsetMagneticEncoder(as5600List[i][0], i, parameterOffset, tcaAddress[i]); //channel 0, instance as5600_0
     }
 
-    oscMessageParser(i, "/value");
+    oscMessageParser(oscParam[0], i, "/value");
     if (oscMessage.checkOscAddress(oscAddress)) {
-      strcpy(displayTxt[i][1], oscMessage.nextAsString());
+      strcpy(displayTxtKnob[i][1], oscMessage.nextAsString());
     }
 
-    oscMessageParser(i, "/slidervalue");
+    oscMessageParser(oscParam[0], i, "/slidervalue");
     if (oscMessage.checkOscAddress(oscAddress)) {
       sliderValue[i]=oscMessage.nextAsFloat(); 
     }
 
-    oscMessageParser(i, "/name");
+    oscMessageParser(oscParam[0], i, "/name");
     if (oscMessage.checkOscAddress(oscAddress)) { 
-      strcpy(displayTxt[i][0], oscMessage.nextAsString());
+      strcpy(displayTxtKnob[i][0], oscMessage.nextAsString());
     }
     
-    oscMessageParser(i, "/type");
+    oscMessageParser(oscParam[0], i, "/type");
     if (oscMessage.checkOscAddress(oscAddress)) { 
-      strcpy(displayTxt[i][2], oscMessage.nextAsString());
+      strcpy(displayTxtKnob[i][2], oscMessage.nextAsString());
     }
   }
   // if (oscMessage.checkOscAddress("/btn1")) {  // IF THE ADDRESS IS /led
@@ -253,6 +262,37 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
   if (oscMessage.checkOscAddress("/p1/title")) {  // IF THE ADDRESS IS /led
     strcpy(title, oscMessage.nextAsString());         // SET LED OUTPUT TO VALUE (DIGITAL: OFF/ON)
+  }
+  
+  // Receive VST button state and set led
+  for (int i = 0; i <= 1; i++)  { 
+
+    oscMessageParser(oscParam[1], i, "/value");
+    if (oscMessage.checkOscAddress(oscAddress)) {  // IF THE ADDRESS IS /b1/value
+      strcpy(displayTxtButton[0][i], oscMessage.nextAsString());
+    }
+
+    oscMessageParser(oscParam[1], i, "/state");
+    // Serial.println(oscAddress);
+    if (oscMessage.checkOscAddress(oscAddress)) {  // IF THE ADDRESS IS /b1/state
+     
+      int newValue = oscMessage.nextAsInt(); 
+       // Serial.println(newValue);
+      //ledState[i] = newValue;
+      if (newValue == 1){
+        digitalWrite(ledPin[i], HIGH);
+        lastButtonState[i] = HIGH;
+        //currentButtonState[i]= HIGH;
+        ledState[i]=HIGH;
+      }
+      if (newValue == 0){
+        digitalWrite(ledPin[i], LOW);
+        lastButtonState[i] = HIGH;  
+        //currentButtonState[i]= HIGH;
+        ledState[i]=LOW; 
+      }
+      //digitalWrite(ledPin[i], ledState[i]); 
+    }
   }
 
   // Basic tester
@@ -277,7 +317,7 @@ void displayRow(int x) {
     // i = 0;
   for (int i = 0; i <= 2; i++) { // loop over each display element
     display.setCursor(displayPos[x][i][0], displayPos[x][i][1]);
-    display.println(displayTxt[x][i]); // temp test
+    display.println(displayTxtKnob[x][i]); // temp test
   }
     display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, SSD1306_WHITE);
     fillLength = round(sliderValue[x] * sliderLength);
@@ -295,60 +335,60 @@ void updateDisplay(int channel) {
 
   display.clearDisplay();
 
-
+  
   x = 0;
   i = 0;
   // fillLength = round(sliderValue[x] * sliderLength);
 
-  display.setCursor(2, 15);
-  display.print(displayTxt[x][i]); // temp test
+  display.setCursor(2, 12);
+  display.print(displayTxtKnob[x][i]); // temp test
 
   // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 
   i = 1;
-  display.setCursor(75, 15);
-  display.print(displayTxt[x][i]); // temp test
+  display.setCursor(75, 12);
+  display.print(displayTxtKnob[x][i]); // temp test
 
   i = 2;
-  display.setCursor(105, 15);
-  display.println(displayTxt[x][i]); // temp test
+  display.setCursor(105, 12);
+  display.println(displayTxtKnob[x][i]); // temp test
 
   x = 1;
   i = 0;
-  display.drawRect(33, 17, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
+  display.drawRect(33, 14, round(sliderValue[0] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
 
-  display.setCursor(2, 35);
-  display.print(displayTxt[x][i]); // temp test
+  display.setCursor(2, 27);
+  display.print(displayTxtKnob[x][i]); // temp test
 
   // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
 
 
   i = 1;
-  display.setCursor(75, 35);
-  display.print(displayTxt[x][i]); // temp test
+  display.setCursor(75, 27);
+  display.print(displayTxtKnob[x][i]); // temp test
 
   i = 2;
-  display.setCursor(105, 35);
-  display.println(displayTxt[x][i]); // temp test
+  display.setCursor(105, 28);
+  display.println(displayTxtKnob[x][i]); // temp test
 
-  display.drawRect(33, 37, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
+  display.drawRect(33, 30, round(sliderValue[1] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
   x = 2;
   i = 0;
 
-  display.setCursor(2, 55);
-  display.print(displayTxt[x][i]); // temp test
+  display.setCursor(2, 42);
+  display.print(displayTxtKnob[x][i]); // temp test
 
   // // display.drawRect(30, displayPos[x][0][1], sliderLength, sliderHeight, WHITE);
   i = 1;
-  display.setCursor(75, 55);
-  display.print(displayTxt[x][i]); // temp test
+  display.setCursor(75, 42);
+  display.print(displayTxtKnob[x][i]); // temp test
   i = 2;
-  display.setCursor(105, 55);
-  display.println(displayTxt[x][i]); // temp test
+  display.setCursor(105, 42);
+  display.println(displayTxtKnob[x][i]); // temp test
 
-  display.drawRect(33, 57, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
+  display.drawRect(33, 44, round(sliderValue[2] * sliderLength), sliderHeight, SSD1306_WHITE); 
 
   display.setCursor(center, 2);
   display.println(title);
@@ -359,6 +399,13 @@ void updateDisplay(int channel) {
     //display.println(parameterValue);
     //display.setCursor(110, 26);
     //display.println(parameterType);
+
+  // Button 1 info
+  display.setCursor(2, 56);
+  display.print(displayTxtButton[0][0]);
+  // Button 2 info
+  display.setCursor(75, 56);
+  display.println(displayTxtButton[0][1]);
   display.display();
 }
 
@@ -370,15 +417,15 @@ void buttonState(int item, char *oscAddress) {
 
   if(lastButtonState[item] == HIGH && currentButtonState[item] == LOW) {
     
-    // Serial.print("Button");
-    // Serial.print(item);
-    // Serial.println(" is pressed");
+     Serial.print("Button");
+     Serial.print(item);
+     Serial.println(" is pressed");
     
     // toggle state of LED
     ledState[item] = !ledState[item];
     
     int num = item + 1;
-    // Serial.println(num);
+     Serial.println(num);
     
     char cStr[2];
     char buff[16];  
@@ -388,7 +435,7 @@ void buttonState(int item, char *oscAddress) {
     
     myMicroOsc.sendInt(buff, ledState[item]);
     // control LED arccoding to the toggled state
-    digitalWrite(ledPin[item], ledState[item]); 
+   // digitalWrite(ledPin[item], ledState[item]); 
     // Serial.print("Ledstate: ");
     // Serial.println(ledState[item]); 
     
@@ -412,7 +459,6 @@ void slice(const char* str, char* result, size_t start, size_t end) {
   SETUP
 *****************/
 void setup() {
-  //Serial.begin(115200);
   Serial.begin(115200);
 
   for (int i = 0; i < 2; i++) {
@@ -449,7 +495,7 @@ void setup() {
 // Initiate Magnectic Encoder 2
   tcaSelect(0);
   as5600_2.begin();  //  set direction pin.
-  as5600_2.setDirection(AS5600_CLOCK_WISE);
+  as5600_2.setDirection(AS5600_COUNTERCLOCK_WISE);
   Serial.print("Connect as5600_2: ");
   Serial.println(as5600_2.isConnected() ? "true" : "false");
 
