@@ -40,6 +40,25 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-137",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
+					"patching_rect" : [ 35.0, 332.0, 135.0, 22.0 ],
+					"restore" : [ 0 ],
+					"saved_object_attributes" : 					{
+						"parameter_enable" : 0,
+						"parameter_mappable" : 0
+					}
+,
+					"text" : "pattr save_selected_vst",
+					"varname" : "save_selected_vst"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-5",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -175,7 +194,7 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-124",
-					"items" : [ "Select VST3 plugin", ",", "SSL 4K B", ",", "SSL 4K E", ",", "SSL Fusion Transformer", ",", "SSL Fusion Vintage Drive", ",", "SSL Native Bus Compressor 2", ",", "SSL Native Channel Strip 2", ",", "SSL Native FlexVerb", ",", "VBC FG-Grey", ",", "VBC FG-MU", ",", "VBC FG-Red", ",", "VBC Rack", ",", "Virtual Mix Rack" ],
+					"items" : [ "Select VST3 plugin", ",", "Harrison_32Bus", ",", "Harrison_DrumFlow", ",", "Harrison_MPCChannelStrip", ",", "Harrison_MPCCompressor", ",", "SSL 4K B", ",", "SSL 4K E", ",", "SSL Fusion Transformer", ",", "SSL Fusion Vintage Drive", ",", "SSL Meter", ",", "SSL Native Bus Compressor 2", ",", "SSL Native Channel Strip 2", ",", "SSL Native FlexVerb", ",", "SSL Native X-Echo", ",", "SSL Native X-EQ 2", ",", "SSL Native X-Saturator v6", ",", "SSL Native X-ValveComp v6", ",", "SSL SubGen", ",", "SSL X-Delay", ",", "VBC FG-Grey", ",", "VBC FG-MU", ",", "VBC FG-Red", ",", "VBC Rack", ",", "Virtual Mix Rack" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -185,7 +204,8 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0, -1.5, 290.0, 23.0 ],
 					"style" : "rnbohighcontrast",
-					"textcolor" : [ 0.847058823529412, 0.847058823529412, 0.847058823529412, 1.0 ]
+					"textcolor" : [ 0.847058823529412, 0.847058823529412, 0.847058823529412, 1.0 ],
+					"varname" : "umenu"
 				}
 
 			}
@@ -282,6 +302,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-126", 0 ],
 					"source" : [ "obj-127", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-124", 0 ],
+					"source" : [ "obj-137", 1 ]
 				}
 
 			}
