@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 5,
-			"revision" : 5,
+			"minor" : 1,
+			"revision" : 11,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -45,8 +45,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 35.0, 332.0, 135.0, 22.0 ],
-					"restore" : [ 0 ],
+					"patching_rect" : [ 50.0, 331.5, 135.0, 22.0 ],
+					"restore" : [ 1 ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -112,8 +112,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 271.430693089962006, 153.762376308441162, 29.5, 22.0 ],
-					"text" : "5"
+					"patching_rect" : [ 381.430693089962006, 121.5, 29.5, 22.0 ],
+					"text" : "1"
 				}
 
 			}
@@ -169,7 +169,7 @@
 				"box" : 				{
 					"comment" : "Load Selected VST3 plugin",
 					"id" : "obj-2",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -194,7 +194,7 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-124",
-					"items" : [ "Select VST3 plugin", ",", "Harrison_32Bus", ",", "Harrison_DrumFlow", ",", "Harrison_MPCChannelStrip", ",", "Harrison_MPCCompressor", ",", "SSL 4K B", ",", "SSL 4K E", ",", "SSL Fusion Transformer", ",", "SSL Fusion Vintage Drive", ",", "SSL Meter", ",", "SSL Native Bus Compressor 2", ",", "SSL Native Channel Strip 2", ",", "SSL Native FlexVerb", ",", "SSL Native X-Echo", ",", "SSL Native X-EQ 2", ",", "SSL Native X-Saturator v6", ",", "SSL Native X-ValveComp v6", ",", "SSL SubGen", ",", "SSL X-Delay", ",", "VBC FG-Grey", ",", "VBC FG-MU", ",", "VBC FG-Red", ",", "VBC Rack", ",", "Virtual Mix Rack" ],
+					"items" : [ "Select VST3 plugin", ",", "SSL Native Channel Strip 2" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -378,13 +378,21 @@
 
 			}
  ],
-		"dependency_cache" : [  ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "rnbohighcontrast",
 				"default" : 				{
-					"accentcolor" : [ 0.666666666666667, 0.666666666666667, 0.666666666666667, 1.0 ],
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"selectioncolor" : [ 0.301960784313725, 0.694117647058824, 0.949019607843137, 1.0 ],
+					"clearcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"accentcolor" : [ 0.666666666666667, 0.666666666666667, 0.666666666666667, 1.0 ],
+					"color" : [ 1.0, 0.874509803921569, 0.141176470588235, 1.0 ],
+					"locked_bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
+					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"elementcolor" : [ 0.223386004567146, 0.254748553037643, 0.998085916042328, 1.0 ],
+					"fontsize" : [ 13.0 ],
+					"stripecolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
+					"editing_bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
+					"textcolor_inverse" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"bgfillcolor" : 					{
 						"angle" : 270.0,
 						"autogradient" : 0.0,
@@ -394,17 +402,7 @@
 						"proportion" : 0.5,
 						"type" : "color"
 					}
-,
-					"clearcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-					"color" : [ 1.0, 0.874509803921569, 0.141176470588235, 1.0 ],
-					"editing_bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
-					"elementcolor" : [ 0.223386004567146, 0.254748553037643, 0.998085916042328, 1.0 ],
-					"fontsize" : [ 13.0 ],
-					"locked_bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
-					"selectioncolor" : [ 0.301960784313725, 0.694117647058824, 0.949019607843137, 1.0 ],
-					"stripecolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
-					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"textcolor_inverse" : [ 1.0, 1.0, 1.0, 1.0 ]
+
 				}
 ,
 				"parentstyle" : "",
@@ -413,8 +411,16 @@
 , 			{
 				"name" : "rnbomonokai",
 				"default" : 				{
-					"accentcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"clearcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
+					"accentcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+					"color" : [ 0.611764705882353, 0.125490196078431, 0.776470588235294, 1.0 ],
+					"locked_bgcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
+					"textcolor" : [ 0.129412, 0.129412, 0.129412, 1.0 ],
+					"elementcolor" : [ 0.749019607843137, 0.83921568627451, 1.0, 1.0 ],
+					"stripecolor" : [ 0.796078431372549, 0.207843137254902, 1.0, 1.0 ],
+					"editing_bgcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
+					"fontname" : [ "Lato" ],
 					"bgfillcolor" : 					{
 						"angle" : 270.0,
 						"autogradient" : 0.0,
@@ -424,15 +430,7 @@
 						"proportion" : 0.39,
 						"type" : "color"
 					}
-,
-					"clearcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
-					"color" : [ 0.611764705882353, 0.125490196078431, 0.776470588235294, 1.0 ],
-					"editing_bgcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
-					"elementcolor" : [ 0.749019607843137, 0.83921568627451, 1.0, 1.0 ],
-					"fontname" : [ "Lato" ],
-					"locked_bgcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
-					"stripecolor" : [ 0.796078431372549, 0.207843137254902, 1.0, 1.0 ],
-					"textcolor" : [ 0.129412, 0.129412, 0.129412, 1.0 ]
+
 				}
 ,
 				"parentstyle" : "",
