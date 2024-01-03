@@ -754,8 +754,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 1323.177978515625, 378.0, 119.0, 22.0 ],
-					"text" : "metro 500 @active 1"
+					"patching_rect" : [ 1323.177978515625, 378.0, 63.0, 22.0 ],
+					"text" : "metro 500"
 				}
 
 			}
