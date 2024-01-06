@@ -54,8 +54,8 @@ int tcaAddress[3][3][2] = {
     },  // satellite controller, 2 is oled
     {
       {1,1},
-      {1,2},
-      {1,3}
+      {1,6},
+      {1,7}
     }  // satellite controller with tca multiplexer, 0 is oled
 };
 
@@ -244,10 +244,11 @@ const int buttonPin[3][2] = {
   {4, 5}
 };
 
-const int ledPin[3][2] = {
+const int ledPin[4][2] = {
   {8, 9},
   {10, 11},
-  {12, 13}
+  {12, 15} //,
+ // {21, 14}  // rewired pin 13 to 21 due to being on when used
 };
 
 // Led, buttonstate variables
@@ -268,7 +269,7 @@ int currentButtonState[3][2] = {
 }; // the current state of button
 
 // Test variables
-int ledPinTeensy = 13;
+// int ledPinTeensy = 13;
 // int analogPin = A0;  // potentiometer wiper (middle terminal) connected to analog pin 3
 // int val = 0;         // variable to store the value read
 // int pitch;
@@ -283,8 +284,10 @@ void tcaSelect(int tcaAddress[2]) {
   int wire = tcaAddress[0];
   int channel = tcaAddress[1];
 
-  if (channel > 7) return;
+  // if (channel > 7) return;
   if (wire == 0) {
+    Wire.setClock(1000000);
+    Wire1.setClock(1000000);
     Wire.beginTransmission(TCAADDR);
     Wire.write(1 << channel);
     Wire.endTransmission();
@@ -368,7 +371,7 @@ void oscAddressParser(char oscDeviceName[4], int deviceNumber, char oscParamName
 void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
   // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
-  for (int x = 0; x <= 1; x++)  { // Loop over each /c controller
+  for (int x = 0; x <= 2; x++)  { // Loop over each /c controller
     for (int i = 0; i <= 2; i++)  { // Loop over each /p oscAddress
       oscAddressParser(oscParam[0], x, oscParam[1], i, "/offset");
       if (oscMessage.checkOscAddress(oscAddress)) {
@@ -438,11 +441,11 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   }
 
   // Basic Test reset led on Teensy
-  if (oscMessage.checkOscAddress("/led")) {  // IF THE ADDRESS IS /led
-    int newValue = oscMessage.nextAsInt();   // GET NEW VALUE AS INT
-    digitalWrite(ledPinTeensy, newValue);         // SET LED OUTPUT TO VALUE (DIGITAL: OFF/ON)
-    Serial.write("led on");
-  }
+  // if (oscMessage.checkOscAddress("/led")) {  // IF THE ADDRESS IS /led
+  //   int newValue = oscMessage.nextAsInt();   // GET NEW VALUE AS INT
+  //   digitalWrite(ledPinTeensy, newValue);         // SET LED OUTPUT TO VALUE (DIGITAL: OFF/ON)
+  //   Serial.write("led on");
+  // }
 }
 
 int16_t sliderLength = 37;
@@ -535,15 +538,17 @@ void slice(const char* str, char* result, size_t start, size_t end) {
 void setup() {
   Wire.begin();  //i2c for tca on main board
   Wire1.begin(); //i2c for tca on satellite board
-  Serial.begin(115200);
-  
+  Wire.setClock(1000000);
+  Wire1.setClock(1000000);
+  //Serial.begin(115200);
+  Serial.begin(1000000);
   Serial.println(__FILE__);
   Serial.print("AS5600_LIB_VERSION: ");
   Serial.println(AS5600_LIB_VERSION);
   
   // Check which channel is connected to TCA on wire and wire1
   Serial.println("\nTCAScanner ready");
-  for (int w = 0; w <=0; w++) {
+  for (int w = 0; w <=1; w++) {
     for (uint8_t t = 0; t < 8; t++) {
       int tcaList[2] = {w, t};
       tcaSelect(tcaList);
@@ -576,7 +581,7 @@ void setup() {
   }
 
   // Initiate Magnectic Encoders
-  for (int x = 0; x <= 1; x++) {  // For each cntrl
+  for (int x = 0; x <= 2; x++) {  // For each cntrl
     for (int i = 0; i <= 2; i++) {  // for each of 3 magnetic encoders
       tcaSelect(tcaAddress[x][i]);
       as5600List[x][i][0].begin();
@@ -657,7 +662,7 @@ void setup() {
 ************************/
 void loop() {   
   // Loop over button states and display for each controller. displays are split to address wire, wire1 
-  for (int x = 0; x <= 1; x++){    // cntrl 1,2
+  for (int x = 0; x <= 2; x++){    // cntrl 1,2
     updateDisplay(displayList[x][0], x, tcaDisplayAddress[x]);
     for (int i = 0; i <= 1; i++) { // button 1,2
       buttonState(oscParam[0], x, oscParam[2], i);
@@ -669,7 +674,7 @@ void loop() {
   
   // Loop over as5600 instances and /pot1, /pot2, ...
   if (millis() - myChronoStart >= 50) {   // IF 50 MS HAVE ELLAPSED
-    for (int x = 0; x <= 1; x++){         // Loop over ctrl 1,2
+    for (int x = 0; x <= 2; x++){         // Loop over ctrl 1,2
       for (int i = 0; i <= 2; i++){       // Loop over magnectic encoder 1,2,3
         sendValueMagneticEncoder(oscParam[0], x, as5600List[x][i][0], i, oscParam[1], tcaAddress[x][i]);
       }
