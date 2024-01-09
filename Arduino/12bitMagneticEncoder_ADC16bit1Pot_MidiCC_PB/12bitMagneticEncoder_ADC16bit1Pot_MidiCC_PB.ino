@@ -13,7 +13,7 @@
 // THE NUMBER 128 BETWEEN THE < > SYMBOLS  BELOW IS THE MAXIMUM NUMBER OF BYTES RESERVED FOR INCOMMING MESSAGES.
 // MAKE SURE THIS NUMBER OF BYTES CAN HOLD THE SIZE OF THE MESSAGE YOUR ARE RECEIVING IN ARDUINO.
 // OUTGOING MESSAGES ARE WRITTEN DIRECTLY TO THE OUTPUT AND DO NOT NEED ANY RESERVED BYTES.
-MicroOscSlip<512> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
+MicroOscSlip<128> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
 
@@ -577,15 +577,16 @@ void slice(const char* str, char* result, size_t start, size_t end) {
 /****************
   SETUP
 *****************/
-void setup() {
-  Wire.setClock(1000000);
-  Wire1.setClock(1000000);
-  
+void setup() {  
   Wire.begin();  //i2c for tca on main board
   Wire1.begin(); //i2c for tca on satellite board
   
+  Wire.setClock(1000000);
+  Wire1.setClock(1000000);
+
   Serial.begin(1000000);
-  
+  // Serial.setTimeout(1);
+
   Serial.println(__FILE__);
   Serial.print("AS5600_LIB_VERSION: ");
   Serial.println(AS5600_LIB_VERSION);
@@ -593,7 +594,7 @@ void setup() {
   // Check which channel is connected to TCA on wire and wire1
   Serial.println("\nTCAScanner ready");
   for (int w = 0; w <=1; w++) {
-    for (uint8_t t = 0; t < 8; t++) {
+    for (uint8_t t = 0; t <= 7; t++) {
       int tcaList[2] = {w, t};
       tcaSelect(tcaList);
       for (uint8_t addr = 0; addr <= 127; addr++) {
@@ -657,7 +658,7 @@ void setup() {
       for (;;)
         ;  // Don't proceed, loop forever
     }
-    delay(100);
+    delay(10);
     displayList[c][0].clearDisplay();
   }
   
@@ -718,8 +719,8 @@ void loop() {
   myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION
   
   // Loop over as5600 instances and /pot1, /pot2, ...
-  if (millis() - myChronoStart >= 50) {   // IF 50 MS HAVE ELLAPSED
-    if(Serial.availableForWrite() > 50)
+  if (millis() - myChronoStart >= 10) {   // IF 50 MS HAVE ELLAPSED
+    if(Serial.availableForWrite() > 10)
       {
         for (int c = 0; c <= 3; c++){         // Loop over ctrl 1,2,3,4
           for (int i = 0; i <= 2; i++){       // Loop over magnectic encoder 1,2,3
