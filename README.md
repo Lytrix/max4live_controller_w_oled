@@ -4,7 +4,7 @@ This repository contain the files to be able to create a Max4live 4 controller w
 
 This setup can easily be extended to a 4 units by using jumper cables on the same pcb together with the headers on the boards to maximize a 5 panel order from jlcpcb.
 
-![Image](Images/m4live_final_controllers.png)
+![Image](Images/m4live_final_controllers.png) ![Image](Images/m4live_side.png)
 ### History ###
 
 After using excelent Eurorack Droid system and having created my own Launchpad type solution on it, I wanted to have more hands on controllers also for my VST plugins within Ableton.
