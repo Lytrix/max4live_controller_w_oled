@@ -428,6 +428,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/value"); 
       if (oscMessage.checkOscAddress(oscAddress)) {
         strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString());
+        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
       }
 
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/slidervalue");
@@ -478,9 +479,10 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
           //currentButtonState[i]= HIGH;
           ledState[c][b]=LOW; 
         }
+        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
       }
     } 
-    updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);  
+      
   }
 
   // Basic Test reset led on Teensy
@@ -659,8 +661,8 @@ void setup() {
       for (;;)
         ;  // Don't proceed, loop forever
     }
-    delay(10);
     displayList[c][0].clearDisplay();
+    displayList[c][0].display(); // show empty display, else noise will show.
   }
   
   // For testing
@@ -708,16 +710,11 @@ void setup() {
   Main Loop
 ************************/
 void loop() {   
-  // Loop over button states and display for each controller. displays are split to address wire, wire1 
-  //for (int c = 0; c <= 3; c++){    // Loop over ctrl module 1,2,3,4
-  //  updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
-  //}
-  
   // Receive all osc messages
-  myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION
+  myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   
   // Loop over as5600 instances and /pot1, /pot2, ...
-  if (micros() - myChronoStart >= 50000 && Serial.availableForWrite() > 20) {
+  if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
     for (int c = 0; c <= 3; c++){         // Loop over ctrl 1,2,3,4
       for (int i = 0; i <= 2; i++){       // Loop over magnectic encoder 1,2,3
         sendValueMagneticEncoder(oscParam[0], c, as5600List[c][i][0], i, oscParam[1], tcaAddress[c][i]);
@@ -726,7 +723,7 @@ void loop() {
         buttonState(oscParam[0], c, oscParam[2], i);
       }
     }
-    myChronoStart = micros(); // update delay
+    myChronoStart = millis(); // update delay
   } else {
     // do not print
   }
