@@ -479,7 +479,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
           ledState[c][b]=LOW; 
         }
       }
-    }   
+    } 
+    updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);  
   }
 
   // Basic Test reset led on Teensy
@@ -581,10 +582,10 @@ void setup() {
   Wire.begin();  //i2c for tca on main board
   Wire1.begin(); //i2c for tca on satellite board
   
-  Wire.setClock(1000000);
-  Wire1.setClock(1000000);
+  //Wire.setClock(1000000);
+  //Wire1.setClock(1000000);
 
-  Serial.begin(1000000);
+  Serial.begin(115200);
   // Serial.setTimeout(1);
 
   Serial.println(__FILE__);
@@ -708,34 +709,28 @@ void setup() {
 ************************/
 void loop() {   
   // Loop over button states and display for each controller. displays are split to address wire, wire1 
-  for (int c = 0; c <= 3; c++){    // Loop over ctrl module 1,2,3,4
-    updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
-    for (int i = 0; i <= 1; i++) { // Loop over button 1,2 of each module
-      buttonState(oscParam[0], c, oscParam[2], i);
-    }
-  }
-
+  //for (int c = 0; c <= 3; c++){    // Loop over ctrl module 1,2,3,4
+  //  updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
+  //}
+  
   // Receive all osc messages
   myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION
   
   // Loop over as5600 instances and /pot1, /pot2, ...
-  if (millis() - myChronoStart >= 10) {   // IF 50 MS HAVE ELLAPSED
-    if(Serial.availableForWrite() > 10)
-      {
-        for (int c = 0; c <= 3; c++){         // Loop over ctrl 1,2,3,4
-          for (int i = 0; i <= 2; i++){       // Loop over magnectic encoder 1,2,3
-            sendValueMagneticEncoder(oscParam[0], c, as5600List[c][i][0], i, oscParam[1], tcaAddress[c][i]);
-        myChronoStart = millis(); // update delay
+  if (micros() - myChronoStart >= 50000 && Serial.availableForWrite() > 20) {
+    for (int c = 0; c <= 3; c++){         // Loop over ctrl 1,2,3,4
+      for (int i = 0; i <= 2; i++){       // Loop over magnectic encoder 1,2,3
+        sendValueMagneticEncoder(oscParam[0], c, as5600List[c][i][0], i, oscParam[1], tcaAddress[c][i]);
+      }
+      for (int i = 0; i <= 1; i++) { // Loop over button 1,2 of each module
+        buttonState(oscParam[0], c, oscParam[2], i);
       }
     }
-      }
-    else
-    {
-      // do not print
-    }
-    
-  }   
-  
+    myChronoStart = micros(); // update delay
+  } else {
+    // do not print
+  }
+
   //Example send single osc message without loop
   //sendValueMagneticEncoder(as5600_0, 0, "/pot1");
   
