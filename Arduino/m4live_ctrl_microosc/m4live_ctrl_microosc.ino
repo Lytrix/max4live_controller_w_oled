@@ -88,7 +88,7 @@ int tcaDisplayAddress[4][2] = {
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
-#define I2C_SPEED 800000
+#define I2C_SPEED 400000
 #define I2C_BUSS1 &Wire  
 #define I2C_BUSS2 &Wire1
 
@@ -584,8 +584,8 @@ void setup() {
   Wire.begin();  //i2c for tca on main board
   Wire1.begin(); //i2c for tca on satellite board
   
-  //Wire.setClock(1000000);
-  //Wire1.setClock(1000000);
+  Wire.setClock(1000000);
+  Wire1.setClock(1000000);
 
   Serial.begin(115200);
   // Serial.setTimeout(1);
