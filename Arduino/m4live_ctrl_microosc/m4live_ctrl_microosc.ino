@@ -3,8 +3,6 @@
 #include <MicroOscSlip.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <stdio.h>
-#include <string.h>
 
 // #include "ADS1X15.h"
 // #include "MIDIUSB.h"
@@ -90,7 +88,7 @@ int tcaDisplayAddress[4][2] = {
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
-#define I2C_SPEED 1000000
+#define I2C_SPEED 800000
 #define I2C_BUSS1 &Wire  
 #define I2C_BUSS2 &Wire1
 
@@ -328,8 +326,6 @@ void tcaSelect(int tcaAddress[2]) {
 
   // if (channel > 7) return;
   if (wire == 0) {
-    Wire.setClock(1000000);
-    Wire1.setClock(1000000);
     Wire.beginTransmission(TCAADDR);
     Wire.write(1 << channel);
     Wire.endTransmission();
@@ -431,19 +427,22 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
       }
 
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/slidervalue");
+      oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
       if (oscMessage.checkOscAddress(oscAddress)) {
-        sliderValue[c][p]=oscMessage.nextAsFloat(); 
+        sliderValue[c][p]=oscMessage.nextAsFloat();
+        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
 
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
       if (oscMessage.checkOscAddress(oscAddress)) { 
         strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString());
+        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
       
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/type");
       if (oscMessage.checkOscAddress(oscAddress)) { 
         strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString());
+        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
     }
     
@@ -451,6 +450,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     oscAddressParser(oscParam[0], c, oscParam[1], 0, "/title");
     if (oscMessage.checkOscAddress(oscAddress)) {  
       strcpy(displayTxtController[c], oscMessage.nextAsString());
+      updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
     }
 
     // Receive VST button state to set led state AND set led on/off
@@ -710,8 +710,6 @@ void setup() {
   Main Loop
 ************************/
 void loop() {   
-  // Receive all osc messages
-  myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   
   // Loop over as5600 instances and /pot1, /pot2, ...
   if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
@@ -726,6 +724,9 @@ void loop() {
     myChronoStart = millis(); // update delay
   } else {
     // do not print
+     // Receive all osc messages
+    myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
+ 
   }
 
   //Example send single osc message without loop
