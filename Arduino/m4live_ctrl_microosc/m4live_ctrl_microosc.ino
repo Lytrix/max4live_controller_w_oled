@@ -88,7 +88,7 @@ int tcaDisplayAddress[4][2] = {
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
-#define I2C_SPEED 400000
+#define I2C_SPEED 1000000
 #define I2C_BUSS1 &Wire  
 #define I2C_BUSS2 &Wire1
 
@@ -198,28 +198,29 @@ float parameterSliderValue11 = 0.0;
 float parameterSliderValue12 = 0.0;
 
 // List of parameter values to iterate over in OSC addresses
-char *displayTxtKnob[4][3][3] = {
-  {
-    {parameterName1, parameterValue1, parameterType1},
-    {parameterName2, parameterValue2, parameterType2},
-    {parameterName3, parameterValue3, parameterType3}
-  },
-  {
-    {parameterName4, parameterValue4, parameterType4},
-    {parameterName5, parameterValue5, parameterType5},
-    {parameterName6, parameterValue6, parameterType6}
-  },
-  {
-    {parameterName7, parameterValue7, parameterType7},
-    {parameterName8, parameterValue8, parameterType8},
-    {parameterName9, parameterValue9, parameterType9}
-  },
-  {
-    {parameterName10, parameterValue10, parameterType10},
-    {parameterName11, parameterValue11, parameterType11},
-    {parameterName12, parameterValue12, parameterType12}
-  }
-};
+String displayTxtKnob[4][3][3];
+//  = {
+//   {
+//     {parameterName1, parameterValue1, parameterType1},
+//     {parameterName2, parameterValue2, parameterType2},
+//     {parameterName3, parameterValue3, parameterType3}
+//   },
+//   {
+//     {parameterName4, parameterValue4, parameterType4},
+//     {parameterName5, parameterValue5, parameterType5},
+//     {parameterName6, parameterValue6, parameterType6}
+//   },
+//   {
+//     {parameterName7, parameterValue7, parameterType7},
+//     {parameterName8, parameterValue8, parameterType8},
+//     {parameterName9, parameterValue9, parameterType9}
+//   },
+//   {
+//     {parameterName10, parameterValue10, parameterType10},
+//     {parameterName11, parameterValue11, parameterType11},
+//     {parameterName12, parameterValue12, parameterType12}
+//   }
+// };
 
 char *displayTxtController[4] = {
   displayTitle1, 
@@ -423,7 +424,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/value"); 
       if (oscMessage.checkOscAddress(oscAddress)) {
-        strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString());
+        displayTxtKnob[c][p][1]= oscMessage.nextAsString();
+        //strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString());
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
       }
 
@@ -435,13 +437,15 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
       if (oscMessage.checkOscAddress(oscAddress)) { 
-        strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString());
+        //strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString());
+        displayTxtKnob[c][p][0]= oscMessage.nextAsString();
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
       
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/type");
       if (oscMessage.checkOscAddress(oscAddress)) { 
-        strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString());
+        displayTxtKnob[c][p][2]= oscMessage.nextAsString();
+        //strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString());
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
     }
@@ -539,9 +543,9 @@ void buttonState(char oscDevice[4], int deviceNumber, char oscParam[4], int para
 
   if(lastButtonState[deviceNumber][parameterNumber] == HIGH && currentButtonState[deviceNumber][parameterNumber] == LOW) {
     char oscButtonAddress[24];
-    Serial.print("Button");
-    Serial.print(parameterNumber);
-    Serial.println(" is pressed");
+    //Serial.print("Button");
+    //Serial.print(parameterNumber);
+    //Serial.println(" is pressed");
     
     // invert state of LED
     ledState[deviceNumber][parameterNumber] = !ledState[deviceNumber][parameterNumber];
@@ -584,8 +588,8 @@ void setup() {
   Wire.begin();  //i2c for tca on main board
   Wire1.begin(); //i2c for tca on satellite board
   
-  Wire.setClock(1000000);
-  Wire1.setClock(1000000);
+  //Wire.setClock(1000000);
+  //Wire1.setClock(1000000);
 
   Serial.begin(115200);
   // Serial.setTimeout(1);
