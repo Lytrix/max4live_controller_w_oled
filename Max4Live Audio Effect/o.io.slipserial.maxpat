@@ -40,19 +40,6 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-5",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "OSCTimeTag" ],
-					"patching_rect" : [ 164.0, 175.0, 113.0, 22.0 ],
-					"style" : "default",
-					"text" : "OpenSoundControl"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-20",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -268,11 +255,23 @@
 
 							}
  ],
-						"bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ],
-						"editing_bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ]
+						"saved_attribute_attributes" : 						{
+							"default_plcolor" : 							{
+								"expression" : ""
+							}
+
+						}
+
 					}
 ,
 					"patching_rect" : [ 473.515167000000019, 69.0, 93.0, 21.0 ],
+					"saved_attribute_attributes" : 					{
+						"default_plcolor" : 						{
+							"expression" : ""
+						}
+
+					}
+,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -570,11 +569,23 @@
 
 											}
  ],
-										"bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ],
-										"editing_bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ]
+										"saved_attribute_attributes" : 										{
+											"default_plcolor" : 											{
+												"expression" : ""
+											}
+
+										}
+
 									}
 ,
 									"patching_rect" : [ 175.0, 90.0, 58.0, 22.0 ],
+									"saved_attribute_attributes" : 									{
+										"default_plcolor" : 										{
+											"expression" : ""
+										}
+
+									}
+,
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -1028,11 +1039,23 @@
 
 							}
  ],
-						"bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ],
-						"editing_bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ]
+						"saved_attribute_attributes" : 						{
+							"default_plcolor" : 							{
+								"expression" : ""
+							}
+
+						}
+
 					}
 ,
 					"patching_rect" : [ 745.260558999999944, 556.0, 366.0, 21.0 ],
+					"saved_attribute_attributes" : 					{
+						"default_plcolor" : 						{
+							"expression" : ""
+						}
+
+					}
+,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -1174,11 +1197,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-37",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "FullPacket" ],
 					"patching_rect" : [ 418.0, 32.0, 25.0, 25.0 ]
 				}
 
@@ -1215,7 +1238,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-30",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1227,7 +1250,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-18",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -1254,7 +1277,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-33",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1557,15 +1580,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-5", 0 ],
-					"source" : [ "obj-46", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
-					"source" : [ "obj-46", 2 ]
+					"source" : [ "obj-46", 0 ]
 				}
 
 			}
@@ -1671,39 +1687,13 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "OpenSoundControl.mxo",
-				"type" : "iLaX"
+		"saved_attribute_attributes" : 		{
+			"default_plcolor" : 			{
+				"expression" : ""
 			}
-, 			{
-				"name" : "o.if.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.pack.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.righttoleft.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/odot/patchers/ordering",
-				"patcherrelativepath" : "../../../../../../../Documents/Max 8/Packages/odot/patchers/ordering",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "o.route.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.union.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "slipOSC.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0
+
+		}
+
 	}
 
 }

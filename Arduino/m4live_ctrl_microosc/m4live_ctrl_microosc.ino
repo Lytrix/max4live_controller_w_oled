@@ -584,8 +584,8 @@ void setup() {
   Wire.begin();  //i2c for tca on main board
   Wire1.begin(); //i2c for tca on satellite board
   
-  Wire.setClock(1000000);
-  Wire1.setClock(1000000);
+  //Wire.setClock(1000000);
+  //Wire1.setClock(1000000);
 
   Serial.begin(115200);
   // Serial.setTimeout(1);
