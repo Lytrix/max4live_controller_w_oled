@@ -5,9 +5,6 @@
 			"1" : 			{
 				"id" : 1,
 				"data" : 				{
-					"serial::baud" : [ "115200" ],
-					"serial::port" : [ 2 ],
-					"load_vst::save_selected_vst" : [ 1 ],
 					"ctrl1::Parameter_2[1]::save_osc_address" : [ "/c/1/p/1" ],
 					"ctrl1::Parameter_2[1]::parameter_menu::save_selected_parameter" : [ 13 ],
 					"ctrl1::Parameter_2::save_osc_address" : [ "/c/1/p/2" ],
@@ -47,7 +44,8 @@
 					"ctrl1[3]::Parameter_4::save_osc_address" : [ "/c/4/b/1" ],
 					"ctrl1[3]::Parameter_4::parameter_menu::save_selected_parameter" : [ 21 ],
 					"ctrl1[3]::Parameter_4[1]::save_osc_address" : [ "/c/4/b/2" ],
-					"ctrl1[3]::Parameter_4[1]::parameter_menu::save_selected_parameter" : [ 23 ]
+					"ctrl1[3]::Parameter_4[1]::parameter_menu::save_selected_parameter" : [ 23 ],
+					"load_vst::save_selected_vst" : [ 1 ]
 				}
 
 			}
@@ -55,9 +53,6 @@
 			"2" : 			{
 				"id" : 2,
 				"data" : 				{
-					"serial::baud" : [ "1000000" ],
-					"serial::port" : [ 0 ],
-					"load_vst::save_selected_vst" : [ 1 ],
 					"ctrl1::Parameter_2[1]::save_osc_address" : [ "/c/1/p/1" ],
 					"ctrl1::Parameter_2[1]::parameter_menu::save_selected_parameter" : [ 13 ],
 					"ctrl1::Parameter_2::save_osc_address" : [ "/c/1/p/2" ],
@@ -97,7 +92,8 @@
 					"ctrl1[3]::Parameter_4::save_osc_address" : [ "/c/4/b/2" ],
 					"ctrl1[3]::Parameter_4::parameter_menu::save_selected_parameter" : [ 0 ],
 					"ctrl1[3]::Parameter_4[1]::save_osc_address" : [ "/c/4/b/2" ],
-					"ctrl1[3]::Parameter_4[1]::parameter_menu::save_selected_parameter" : [ 0 ]
+					"ctrl1[3]::Parameter_4[1]::parameter_menu::save_selected_parameter" : [ 0 ],
+					"load_vst::save_selected_vst" : [ 1 ]
 				}
 
 			}
