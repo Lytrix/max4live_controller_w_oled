@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 82.0, 158.0, 943.0, 691.0 ],
+		"rect" : [ 122.0, 172.0, 943.0, 691.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,60 +40,14 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
-					"id" : "obj-5",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "OSCTimeTag" ],
-					"patching_rect" : [ 164.0, 175.0, 113.0, 22.0 ],
-					"style" : "default",
-					"text" : "OpenSoundControl"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-20",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 105.0, 94.0, 109.0, 22.0 ],
-					"text" : "print osc_message"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-19",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "OSCTimeTag" ],
-					"patching_rect" : [ 271.0, 498.0, 125.0, 22.0 ],
+					"patching_rect" : [ 64.0, 457.0, 125.0, 22.0 ],
 					"style" : "default",
 					"text" : "slipOSC"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-3",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 100.0, 520.0, 130.0, 22.0 ],
-					"text" : "print converted_to_osc"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-13",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 309.0, 445.0, 136.0, 22.0 ],
-					"text" : "print received_message"
 				}
 
 			}
@@ -104,32 +58,24 @@
 					"numinlets" : 2,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "OSCTimeTag" ],
-					"patching_rect" : [ 286.0, 246.0, 53.0, 22.0 ],
+					"patching_rect" : [ 77.0, 223.0, 53.0, 22.0 ],
 					"text" : "slipOSC"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-6",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 197.0, 313.0, 117.0, 22.0 ],
-					"text" : "print send_message"
-				}
-
-			}
-, 			{
-				"box" : 				{
+					"bgcolor" : [ 0.243137254901961, 0.219607843137255, 0.219607843137255, 1.0 ],
 					"id" : "obj-4",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 260.5, 34.681815999999998, 150.0, 20.0 ],
+					"patching_rect" : [ 47.0, 11.681815999999998, 156.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ -1.5, -0.5, 150.0, 20.0 ],
-					"text" : "o.io.slipserial"
+					"presentation_rect" : [ -1.5, -0.5, 152.0, 20.0 ],
+					"style" : "bubble text",
+					"text" : "o.io.slipserial",
+					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
 
 			}
@@ -268,11 +214,23 @@
 
 							}
  ],
-						"bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ],
-						"editing_bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ]
+						"saved_attribute_attributes" : 						{
+							"default_plcolor" : 							{
+								"expression" : ""
+							}
+
+						}
+
 					}
 ,
-					"patching_rect" : [ 473.515167000000019, 69.0, 93.0, 21.0 ],
+					"patching_rect" : [ 264.515167000000019, 46.0, 93.0, 21.0 ],
+					"saved_attribute_attributes" : 					{
+						"default_plcolor" : 						{
+							"expression" : ""
+						}
+
+					}
+,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -295,7 +253,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 473.515167000000019, 32.0, 93.0, 21.0 ],
+					"patching_rect" : [ 264.515167000000019, 9.0, 93.0, 21.0 ],
 					"text" : "patcherargs"
 				}
 
@@ -309,7 +267,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "FullPacket", "FullPacket" ],
-					"patching_rect" : [ 418.0, 152.0, 334.0, 21.0 ],
+					"patching_rect" : [ 209.0, 129.0, 334.0, 21.0 ],
 					"text" : "o.if exists(/port)"
 				}
 
@@ -323,7 +281,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "open" ],
-					"patching_rect" : [ 430.333327999999995, 306.0, 50.0, 21.0 ],
+					"patching_rect" : [ 221.333327999999995, 283.0, 50.0, 21.0 ],
 					"text" : "t 1 open"
 				}
 
@@ -337,7 +295,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "close", "int" ],
-					"patching_rect" : [ 490.333312999999976, 306.0, 51.0, 21.0 ],
+					"patching_rect" : [ 281.333312999999976, 283.0, 51.0, 21.0 ],
 					"text" : "t close 0"
 				}
 
@@ -570,11 +528,23 @@
 
 											}
  ],
-										"bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ],
-										"editing_bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ]
+										"saved_attribute_attributes" : 										{
+											"default_plcolor" : 											{
+												"expression" : ""
+											}
+
+										}
+
 									}
 ,
 									"patching_rect" : [ 175.0, 90.0, 58.0, 22.0 ],
+									"saved_attribute_attributes" : 									{
+										"default_plcolor" : 										{
+											"expression" : ""
+										}
+
+									}
+,
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -1028,11 +998,23 @@
 
 							}
  ],
-						"bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ],
-						"editing_bgcolor" : [ 0.407843137254902, 0.407843137254902, 0.407843137254902, 1.0 ]
+						"saved_attribute_attributes" : 						{
+							"default_plcolor" : 							{
+								"expression" : ""
+							}
+
+						}
+
 					}
 ,
-					"patching_rect" : [ 745.260558999999944, 556.0, 366.0, 21.0 ],
+					"patching_rect" : [ 536.260558999999944, 533.0, 366.0, 21.0 ],
+					"saved_attribute_attributes" : 					{
+						"default_plcolor" : 						{
+							"expression" : ""
+						}
+
+					}
+,
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -1055,20 +1037,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 8,
 					"outlettype" : [ "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 229.0, 94.0, 106.0, 21.0 ],
+					"patching_rect" : [ 20.0, 71.0, 106.0, 21.0 ],
 					"text" : "o.righttoleft"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-55",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 480.015136999999982, 569.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -1081,7 +1051,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "int", "", "int" ],
-					"patching_rect" : [ 418.0, 185.0, 56.0, 21.0 ],
+					"patching_rect" : [ 209.0, 162.0, 56.0, 21.0 ],
 					"text" : "t b 1 l 0"
 				}
 
@@ -1095,7 +1065,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "bang", "bang", "" ],
-					"patching_rect" : [ 430.333327999999995, 267.0, 139.0, 21.0 ],
+					"patching_rect" : [ 221.333327999999995, 244.0, 139.0, 21.0 ],
 					"text" : "sel 1 0"
 				}
 
@@ -1109,7 +1079,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 331.0, 369.0, 45.0, 21.0 ],
+					"patching_rect" : [ 122.0, 346.0, 45.0, 21.0 ],
 					"text" : "getport"
 				}
 
@@ -1123,7 +1093,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 389.166655999999989, 369.0, 32.0, 21.0 ],
+					"patching_rect" : [ 180.166655999999989, 346.0, 32.0, 21.0 ],
 					"text" : "print"
 				}
 
@@ -1137,7 +1107,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 8,
 					"outlettype" : [ "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 509.515152, 494.0, 114.0, 21.0 ],
+					"patching_rect" : [ 300.515152, 509.0, 114.0, 21.0 ],
 					"text" : "o.righttoleft"
 				}
 
@@ -1151,7 +1121,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 418.0, 115.363647, 47.0, 21.0 ],
+					"patching_rect" : [ 209.0, 92.363647, 47.0, 21.0 ],
 					"text" : "o.union"
 				}
 
@@ -1165,7 +1135,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "FullPacket" ],
-					"patching_rect" : [ 733.0, 331.0, 211.0, 21.0 ],
+					"patching_rect" : [ 524.0, 308.0, 211.0, 21.0 ],
 					"text" : "o.route /port /baud"
 				}
 
@@ -1174,12 +1144,12 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-37",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 418.0, 32.0, 25.0, 25.0 ]
+					"patching_rect" : [ 209.0, 9.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -1192,7 +1162,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 297.0, 892.0, 50.0, 21.0 ],
+					"patching_rect" : [ 88.0, 869.0, 50.0, 21.0 ],
 					"text" : "b"
 				}
 
@@ -1206,7 +1176,7 @@
 					"numinlets" : 5,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 745.260558999999944, 612.0, 366.0, 21.0 ],
+					"patching_rect" : [ 536.260558999999944, 589.0, 366.0, 21.0 ],
 					"text" : "o.pack /port /rate/output /rate/input /mediansize/received /baud"
 				}
 
@@ -1215,11 +1185,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-30",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 745.260558999999944, 653.0, 25.0, 25.0 ]
+					"patching_rect" : [ 536.260558999999944, 630.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -1227,12 +1197,12 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-18",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 229.0, 32.181815999999998, 25.0, 25.0 ]
+					"patching_rect" : [ 20.0, 9.181816, 25.0, 25.0 ]
 				}
 
 			}
@@ -1245,7 +1215,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 829.0, 369.0, 78.0, 21.0 ],
+					"patching_rect" : [ 620.0, 346.0, 78.0, 21.0 ],
 					"text" : "prepend baud"
 				}
 
@@ -1254,11 +1224,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-33",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 460.515152, 653.0, 25.0, 25.0 ]
+					"patching_rect" : [ 251.515152, 630.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -1271,7 +1241,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 580.333312999999976, 32.0, 303.0, 80.0 ],
+					"patching_rect" : [ 371.333312999999976, 9.0, 303.0, 80.0 ],
 					"text" : "o.io.slipserial\n\nRead and Write  OSC  SLIP wrapped serial USB messages\nfrom serial port devices such as the Arduino or Teensy\n\nAdrian Freed and Jeff Lubow"
 				}
 
@@ -1285,7 +1255,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 733.0, 369.0, 73.0, 21.0 ],
+					"patching_rect" : [ 524.0, 346.0, 73.0, 21.0 ],
 					"text" : "prepend port"
 				}
 
@@ -1298,7 +1268,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 430.333327999999995, 227.0, 22.0, 22.0 ]
+					"patching_rect" : [ 221.333327999999995, 204.0, 22.0, 22.0 ]
 				}
 
 			}
@@ -1311,8 +1281,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 522.333312999999976, 369.0, 46.0, 21.0 ],
-					"text" : "metro 5"
+					"patching_rect" : [ 340.515152000000057, 335.0, 46.0, 21.0 ],
+					"text" : "metro 3"
 				}
 
 			}
@@ -1325,7 +1295,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "" ],
-					"patching_rect" : [ 461.333327999999995, 428.0, 246.0, 21.0 ],
+					"patching_rect" : [ 252.333327999999995, 405.0, 246.0, 21.0 ],
 					"text" : "serial @bufsize 1024 @chunk 512 @autoopen 0"
 				}
 
@@ -1339,7 +1309,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 690.333312999999976, 457.0, 360.187836000000004, 21.0 ],
+					"patching_rect" : [ 481.333312999999976, 434.0, 360.187836000000004, 21.0 ],
 					"text" : "route port read"
 				}
 
@@ -1557,22 +1527,15 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-5", 0 ],
+					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-46", 1 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-7", 0 ],
-					"source" : [ "obj-46", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-73", 3 ],
-					"midpoints" : [ 300.64285714285711, 144.0, 1101.76055899999983, 144.0 ],
+					"midpoints" : [ 91.642857142857139, 121.0, 892.760558999999944, 121.0 ],
 					"source" : [ "obj-46", 5 ]
 				}
 
@@ -1580,15 +1543,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-33", 0 ],
-					"order" : 1,
-					"source" : [ "obj-47", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-55", 0 ],
-					"order" : 0,
 					"source" : [ "obj-47", 0 ]
 				}
 
@@ -1671,39 +1625,99 @@
 
 			}
  ],
-		"dependency_cache" : [ 			{
-				"name" : "OpenSoundControl.mxo",
-				"type" : "iLaX"
+		"styles" : [ 			{
+				"name" : "bubble text",
+				"default" : 				{
+					"fontname" : [ "Arial" ],
+					"fontsize" : [ 12.0 ]
+				}
+,
+				"parentstyle" : "",
+				"multi" : 0
 			}
 , 			{
-				"name" : "o.if.mxo",
-				"type" : "iLaX"
+				"name" : "caption text",
+				"default" : 				{
+					"fontface" : [ 2 ],
+					"fontsize" : [ 11.0 ]
+				}
+,
+				"parentstyle" : "",
+				"multi" : 0
 			}
 , 			{
-				"name" : "o.pack.mxo",
-				"type" : "iLaX"
+				"name" : "rnbodefault",
+				"default" : 				{
+					"accentcolor" : [ 0.343034118413925, 0.506230533123016, 0.86220508813858, 1.0 ],
+					"bgcolor" : [ 0.031372549019608, 0.125490196078431, 0.211764705882353, 1.0 ],
+					"bgfillcolor" : 					{
+						"angle" : 270.0,
+						"autogradient" : 0.0,
+						"color" : [ 0.031372549019608, 0.125490196078431, 0.211764705882353, 1.0 ],
+						"color1" : [ 0.031372549019608, 0.125490196078431, 0.211764705882353, 1.0 ],
+						"color2" : [ 0.263682, 0.004541, 0.038797, 1.0 ],
+						"proportion" : 0.39,
+						"type" : "color"
+					}
+,
+					"color" : [ 0.929412, 0.929412, 0.352941, 1.0 ],
+					"elementcolor" : [ 0.357540726661682, 0.515565991401672, 0.861786782741547, 1.0 ],
+					"fontname" : [ "Lato" ],
+					"fontsize" : [ 12.0 ],
+					"stripecolor" : [ 0.258338063955307, 0.352425158023834, 0.511919498443604, 1.0 ],
+					"textcolor_inverse" : [ 0.968627, 0.968627, 0.968627, 1 ]
+				}
+,
+				"parentstyle" : "",
+				"multi" : 0
 			}
 , 			{
-				"name" : "o.righttoleft.maxpat",
-				"bootpath" : "~/Documents/Max 8/Packages/odot/patchers/ordering",
-				"patcherrelativepath" : "../../../../../../../Documents/Max 8/Packages/odot/patchers/ordering",
-				"type" : "JSON",
-				"implicit" : 1
+				"name" : "rnbomonokai",
+				"default" : 				{
+					"accentcolor" : [ 0.501960784313725, 0.501960784313725, 0.501960784313725, 1.0 ],
+					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor" : 					{
+						"angle" : 270.0,
+						"autogradient" : 0.0,
+						"color" : [ 0.0, 0.0, 0.0, 1.0 ],
+						"color1" : [ 0.031372549019608, 0.125490196078431, 0.211764705882353, 1.0 ],
+						"color2" : [ 0.263682, 0.004541, 0.038797, 1.0 ],
+						"proportion" : 0.39,
+						"type" : "color"
+					}
+,
+					"clearcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
+					"color" : [ 0.611764705882353, 0.125490196078431, 0.776470588235294, 1.0 ],
+					"editing_bgcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
+					"elementcolor" : [ 0.749019607843137, 0.83921568627451, 1.0, 1.0 ],
+					"fontname" : [ "Lato" ],
+					"locked_bgcolor" : [ 0.976470588235294, 0.96078431372549, 0.917647058823529, 1.0 ],
+					"stripecolor" : [ 0.796078431372549, 0.207843137254902, 1.0, 1.0 ],
+					"textcolor" : [ 0.129412, 0.129412, 0.129412, 1.0 ]
+				}
+,
+				"parentstyle" : "",
+				"multi" : 0
 			}
 , 			{
-				"name" : "o.route.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.union.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "slipOSC.mxo",
-				"type" : "iLaX"
+				"name" : "titles",
+				"default" : 				{
+					"fontface" : [ 1 ],
+					"fontname" : [ "Arial" ],
+					"fontsize" : [ 20.0 ]
+				}
+,
+				"parentstyle" : "",
+				"multi" : 0
 			}
  ],
-		"autosave" : 0
+		"saved_attribute_attributes" : 		{
+			"default_plcolor" : 			{
+				"expression" : ""
+			}
+
+		}
+
 	}
 
 }
