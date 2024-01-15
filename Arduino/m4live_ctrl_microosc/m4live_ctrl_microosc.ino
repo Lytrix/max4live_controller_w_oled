@@ -88,7 +88,7 @@ int tcaDisplayAddress[4][2] = {
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
-#define I2C_SPEED 1000000
+#define I2C_SPEED 800000
 #define I2C_BUSS1 &Wire  
 #define I2C_BUSS2 &Wire1
 
@@ -116,134 +116,84 @@ Adafruit_SSD1306 *displayList[4]= {
 /***********************
      Set Variables
 ************************/
-char parameterName1[36] ="";
-char parameterValue1[10]="";
+char parameterName1[12] ="";
+char parameterValue1[12]="";
 char parameterType1[3] ="";
 
-char parameterName2[36]="";
-char parameterValue2[10]="";
+char parameterName2[12]="";
+char parameterValue2[12]="";
 char parameterType2[3]="";
 
-char parameterName3[36]="";
-char parameterValue3[10]="";
+char parameterName3[12]="";
+char parameterValue3[12]="";
 char parameterType3[3]="";
 
-char parameterName4[36] ="";
-char parameterValue4[10]="";
+char parameterName4[12] ="";
+char parameterValue4[12]="";
 char parameterType4[3] ="";
 
-char parameterName5[36]="";
-char parameterValue5[10]="";
+char parameterName5[12]="";
+char parameterValue5[12]="";
 char parameterType5[3]="";
 
-char parameterName6[36]="";
-char parameterValue6[10]="";
+char parameterName6[12]="";
+char parameterValue6[12]="";
 char parameterType6[3]="";
 
-char parameterName7[36]="";
-char parameterValue7[10]="";
+char parameterName7[12]="";
+char parameterValue7[12]="";
 char parameterType7[3]="";
 
-char parameterName8[36]="";
-char parameterValue8[10]="";
+char parameterName8[12]="";
+char parameterValue8[12]="";
 char parameterType8[3]="";
 
-char parameterName9[36]="";
-char parameterValue9[10]="";
+char parameterName9[12]="";
+char parameterValue9[12]="";
 char parameterType9[3]="";
 
-char parameterName10[36]="";
-char parameterValue10[10]="";
+char parameterName10[12]="";
+char parameterValue10[12]="";
 char parameterType10[3]="";
 
-char parameterName11[36]="";
-char parameterValue11[10]="";
+char parameterName11[12]="";
+char parameterValue11[12]="";
 char parameterType11[3]="";
 
-char parameterName12[36]="";
-char parameterValue12[10]="";
+char parameterName12[12]="";
+char parameterValue12[12]="";
 char parameterType12[3]="";
 
-char buttonValue1[16]="";
-char buttonValue2[16]="";
-
-char buttonValue3[16]="";
-char buttonValue4[16]="";
-
-char buttonValue5[16]="";
-char buttonValue6[16]="";
-
-char buttonValue7[16]="";
-char buttonValue8[16]="";
-
-char displayTitle1[36]="";
-char displayTitle2[36]="";
-char displayTitle3[36]="";
-char displayTitle4[36]="";
-
-float parameterSliderValue1 = 0.0;
-float parameterSliderValue2 = 0.0;
-float parameterSliderValue3 = 0.0;
-
-float parameterSliderValue4 = 0.0;
-float parameterSliderValue5 = 0.0;
-float parameterSliderValue6 = 0.0;
-
-float parameterSliderValue7 = 0.0;
-float parameterSliderValue8 = 0.0;
-float parameterSliderValue9 = 0.0;
-
-float parameterSliderValue10 = 0.0;
-float parameterSliderValue11 = 0.0;
-float parameterSliderValue12 = 0.0;
-
-// List of parameter values to iterate over in OSC addresses
-String displayTxtKnob[4][3][3];
-//  = {
-//   {
-//     {parameterName1, parameterValue1, parameterType1},
-//     {parameterName2, parameterValue2, parameterType2},
-//     {parameterName3, parameterValue3, parameterType3}
-//   },
-//   {
-//     {parameterName4, parameterValue4, parameterType4},
-//     {parameterName5, parameterValue5, parameterType5},
-//     {parameterName6, parameterValue6, parameterType6}
-//   },
-//   {
-//     {parameterName7, parameterValue7, parameterType7},
-//     {parameterName8, parameterValue8, parameterType8},
-//     {parameterName9, parameterValue9, parameterType9}
-//   },
-//   {
-//     {parameterName10, parameterValue10, parameterType10},
-//     {parameterName11, parameterValue11, parameterType11},
-//     {parameterName12, parameterValue12, parameterType12}
-//   }
-// };
-
-char *displayTxtController[4] = {
-  displayTitle1, 
-  displayTitle2,
-  displayTitle3,
-  displayTitle4
-  };
-
-// List of parameter values to iterate over in OSC addresses
-char *displayTxtButton[4][2] = {
-  {buttonValue1, buttonValue2},
-  {buttonValue3, buttonValue4},
-  {buttonValue5, buttonValue6},
-  {buttonValue7, buttonValue8}
+// Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
+char *displayTxtKnob[4][3][3]= {
+  {
+    {parameterName1, parameterValue1, parameterType1},
+    {parameterName2, parameterValue2, parameterType2},
+    {parameterName3, parameterValue3, parameterType3}
+  },
+  {
+    {parameterName4, parameterValue4, parameterType4},
+    {parameterName5, parameterValue5, parameterType5},
+    {parameterName6, parameterValue6, parameterType6}
+  },
+  {
+    {parameterName7, parameterValue7, parameterType7},
+    {parameterName8, parameterValue8, parameterType8},
+    {parameterName9, parameterValue9, parameterType9}
+  },
+  {
+    {parameterName10, parameterValue10, parameterType10},
+    {parameterName11, parameterValue11, parameterType11},
+    {parameterName12, parameterValue12, parameterType12}
+  }
 };
 
+char displayTxtController[4][16];
 
-float sliderValue[4][3] = {
-  {parameterSliderValue1, parameterSliderValue2, parameterSliderValue3},
-  {parameterSliderValue4, parameterSliderValue5, parameterSliderValue6},
-  {parameterSliderValue7, parameterSliderValue8, parameterSliderValue9}, 
-  {parameterSliderValue10, parameterSliderValue11, parameterSliderValue12} 
-};
+char displayTxtButton[4][2][16];
+
+// List for storing each received OSC message for setting the slider width
+float sliderValue[4][3];
 
 // For creating OSC address to receive on
 char oscAddress[24];
@@ -405,88 +355,63 @@ void oscAddressParser(char oscDeviceName[4], int deviceNumber, char oscParamName
   // Serial.print("created OSCadress: ");
   // Serial.println(oscAddress); // /c1/p1/value
 }
-
+char *temp;
 // OSC MESSAGE LISTENER
 void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
-  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
+  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
   for (int c = 0; c <= 3; c++)  { // Loop over each of the 4 /c controllers
-    for (int p = 0; p <= 2; p++)  { // Loop over each of 3 /p oscAddresses
+    for (int p = 0; p <= 3; p++)  { // Loop over each of 3 /p oscAddresses
+      oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
+      if (oscMessage.checkOscAddress(oscAddress, "sf")) {
+        strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString()); // "12.0"
+        sliderValue[c][p]=oscMessage.nextAsFloat();                 // 0.12345
+        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
+      }
+
+      oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
+      if (oscMessage.checkOscAddress(oscAddress, "ss")) { 
+        strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString()); // "FREQ"
+        strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString()); // "kHz"
+      }
+      
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/offset");
       if (oscMessage.checkOscAddress(oscAddress)) {
-        int parameterOffset = oscMessage.nextAsInt();
+        int parameterOffset = oscMessage.nextAsInt();               // 2056
         //Serial.print("parameterOffset: ");
         //Serial.print(oscAddress);
         //Serial.print(": ");
         //Serial.println(parameterOffset);
         setOffsetMagneticEncoder(oscParam[0], c, as5600List[c][p][0], p, parameterOffset, tcaAddress[c][p], oscParam[1]); //channel 0, instance as5600_0
-      }
-
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/value"); 
-      if (oscMessage.checkOscAddress(oscAddress)) {
-        displayTxtKnob[c][p][1]= oscMessage.nextAsString();
-        //strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString());
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
-      }
-
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
-      if (oscMessage.checkOscAddress(oscAddress)) {
-        sliderValue[c][p]=oscMessage.nextAsFloat();
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
-      }
-
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
-      if (oscMessage.checkOscAddress(oscAddress)) { 
-        //strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString());
-        displayTxtKnob[c][p][0]= oscMessage.nextAsString();
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
-      }
-      
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/type");
-      if (oscMessage.checkOscAddress(oscAddress)) { 
-        displayTxtKnob[c][p][2]= oscMessage.nextAsString();
-        //strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString());
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
-      }
+      }    
     }
     
+    // Receive VST button state to set led state AND set led on/off
+    for (int b = 0; b <= 1; b++)  { 
+      oscAddressParser(oscParam[0], c, oscParam[2], b, "/state");
+      if (oscMessage.checkOscAddress(oscAddress, "fs")) {  // IF THE ADDRESS IS /b1/state
+      
+        int newValue = oscMessage.nextAsFloat(); // 1. or 0.
+        if (newValue > 0.5){
+          digitalWrite(ledPin[c][b], HIGH);
+          ledState[c][b]=HIGH;
+          
+        }
+        if (newValue < 0.5){
+          digitalWrite(ledPin[c][b], LOW);
+          ledState[c][b]=LOW; 
+          
+        }
+        strcpy(displayTxtButton[c][b], oscMessage.nextAsString());  // "IN" 
+        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
+      }
+    }
+   
     // Select name from first magnetic encoder parameter /p (i=0)
     oscAddressParser(oscParam[0], c, oscParam[1], 0, "/title");
     if (oscMessage.checkOscAddress(oscAddress)) {  
-      strcpy(displayTxtController[c], oscMessage.nextAsString());
-      updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
+      strcpy(displayTxtController[c], oscMessage.nextAsString()); 
     }
-
-    // Receive VST button state to set led state AND set led on/off
-    for (int b = 0; b <= 1; b++)  { 
-      oscAddressParser(oscParam[0], c, oscParam[2], b, "/value");
-      if (oscMessage.checkOscAddress(oscAddress)) {  // IF THE ADDRESS IS /b1/value
-        strcpy(displayTxtButton[c][b], oscMessage.nextAsString());
-      }
-
-      oscAddressParser(oscParam[0], c, oscParam[2], b, "/state");
-      // Serial.println(oscAddress);
-      if (oscMessage.checkOscAddress(oscAddress)) {  // IF THE ADDRESS IS /b1/state
-      
-        int newValue = oscMessage.nextAsInt(); 
-        // Serial.println(newValue);
-        //ledState[i] = newValue;
-        if (newValue == 1){
-          digitalWrite(ledPin[c][b], HIGH);
-          //lastButtonState[i] = HIGH;
-          //currentButtonState[i]= HIGH;
-          ledState[c][b]=HIGH;
-        }
-        if (newValue == 0){
-          digitalWrite(ledPin[c][b], LOW);
-          //lastButtonState[i] = HIGH;  
-          //currentButtonState[i]= HIGH;
-          ledState[c][b]=LOW; 
-        }
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
-      }
-    } 
-      
   }
 
   // Basic Test reset led on Teensy
@@ -500,13 +425,12 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 int16_t sliderLength = 37;
 int16_t sliderHeight = 5;
 int16_t fillLength;
-int16_t length = 0;
-int16_t center = 0;
 
 // Clear and push display with updated values in void Loop()
-void updateDisplay(Adafruit_SSD1306 &display, int displayArray, int tcaDisplayAddress[2]) {
+void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
+  //if (millis() - displayStart >= 50) {
   tcaSelect(tcaDisplayAddress);
-  
+
   display.clearDisplay();
   display.setTextSize(1);  // Draw 1X-scale text
   display.setTextColor(SSD1306_WHITE);
@@ -515,22 +439,28 @@ void updateDisplay(Adafruit_SSD1306 &display, int displayArray, int tcaDisplayAd
   for (int row = 0; row <= 2; row++) { // loop over each display row
     for (int col = 0; col <= 2; col++) { // loop over each display element
       display.setCursor(displayPos[row][col][0], displayPos[row][col][1]);
-      display.println(displayTxtKnob[displayArray][row][col]);
+      display.println(displayTxtKnob[c][row][col]);
     }
-    display.drawRect(33, displayPos[row][0][1]+2, round(sliderValue[displayArray][row] * sliderLength), sliderHeight, SSD1306_WHITE);
+    display.drawRect(33, displayPos[row][0][1]+2, round(sliderValue[c][row] * sliderLength), sliderHeight, SSD1306_WHITE);
   }
 
   // Button 1 & 2 info
   for (int b = 0; b<=1; b++) {
     display.setCursor(displayPos[0][b][0], 56);
-    display.println(displayTxtButton[displayArray][b]);
+    display.println(displayTxtButton[c][b]);
   }
 
+
+  // Variables for getTextBounds function to center text
+  int16_t x1;
+  int16_t y1;
+  uint16_t width;
+  uint16_t height;
   // center title text
-  length = sizeof(displayTxtController[displayArray])/sizeof(char);
-  center = SCREEN_WIDTH/2 - round(length/2);
-  display.setCursor(center, 0);
-  display.println(displayTxtController[displayArray]);
+  display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
+  //int length = round(sizeof(displayTxtController[c])/sizeof(char));
+  display.setCursor((SCREEN_WIDTH - width) / 2, 0);
+  display.println(displayTxtController[c]);
 
   display.display();
 }
@@ -592,14 +522,13 @@ void setup() {
   //Wire1.setClock(1000000);
 
   Serial.begin(115200);
-  // Serial.setTimeout(1);
-
-  Serial.println(__FILE__);
-  Serial.print("AS5600_LIB_VERSION: ");
-  Serial.println(AS5600_LIB_VERSION);
+ 
+  Serial.println(F(__FILE__));
+  Serial.print(F("AS5600_LIB_VERSION: "));
+  Serial.println(F(AS5600_LIB_VERSION));
   
   // Check which channel is connected to TCA on wire and wire1
-  Serial.println("\nTCAScanner ready");
+  Serial.println(F("\nTCAScanner ready"));
   for (int w = 0; w <=1; w++) {
     for (uint8_t t = 0; t <= 7; t++) {
       int tcaList[2] = {w, t};
@@ -609,22 +538,22 @@ void setup() {
         if (w == 0) {
           Wire.beginTransmission(addr);
           if (!Wire.endTransmission()) {
-            Serial.print("Wire ");
+            Serial.print(F("Wire "));
             Serial.print(w);
-            Serial.print(", Chn ");
+            Serial.print(F(", Chn "));
             Serial.print(t);
-            Serial.print(", I2C 0x");
+            Serial.print(F(", I2C 0x"));
             Serial.println(addr, HEX);
           }
         }
         if (w == 1) {
           Wire1.beginTransmission(addr);
           if (!Wire1.endTransmission()) {
-            Serial.print("Wire ");
+            Serial.print(F("Wire "));
             Serial.print(w);
-            Serial.print(", Channel ");
+            Serial.print(F(", Channel "));
             Serial.print(t);
-            Serial.print(", Found I2C 0x");
+            Serial.print(F(", Found I2C 0x"));
             Serial.println(addr, HEX);
           }
         }
@@ -643,12 +572,12 @@ void setup() {
       } else {
         as5600List[c][i][0].setDirection(AS5600_COUNTERCLOCK_WISE);
       }
-      Serial.print("Ctrl ");
+      Serial.print(F("Ctrl "));
       Serial.print(c+1);
-      Serial.print(", as5600_");
+      Serial.print(F(", as5600_"));
       Serial.print(i);
-      Serial.print(": ");
-      Serial.println(as5600List[c][i][0].isConnected() ? "true" : "false");
+      Serial.print(F(": "));
+      Serial.println(as5600List[c][i][0].isConnected() ? F("true") : F("false"));
     }
     
     for (int b = 0; b <= 1; b++) {
@@ -673,9 +602,6 @@ void setup() {
   // pinMode(ledPin, OUTPUT);  // LED: DIGITAL OUTPUT
   
   // ADS.begin();
-
-  //Wire.setClock(3400000);
-  //Wire1.setClock(3400000);
 
   // Set number of readings to smooth
   // mySensor.begin(SMOOTHED_AVERAGE, 5);
@@ -727,12 +653,10 @@ void loop() {
     }
     myChronoStart = millis(); // update delay
   } else {
-    // do not print
-     // Receive all osc messages
+    // Receive all osc messages
     myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
- 
   }
-
+ 
   //Example send single osc message without loop
   //sendValueMagneticEncoder(as5600_0, 0, "/pot1");
   
@@ -760,14 +684,7 @@ void loop() {
   //  display.println(String(parameterType));
   // display.display();
   //}
-
-  //  myMicroOsc.sendInt("/pot", analogRead(myPotPin) );  // SEND POTENTIOMETER
-  // Serial.println(analogRead(myPotPin));
-
-  // myMicroOsc.sendInt("/photo", analogRead(myPhotoPin) );  // SEND PHOTOCELL
-
-  // myMicroOsc.sendInt("/button", digitalRead(myButtonPin));  // SEND BUTTON
-
+ 
   //val = analogRead(analogPin);  // read the input pin
   //Serial.println(val);          // debug value
 
