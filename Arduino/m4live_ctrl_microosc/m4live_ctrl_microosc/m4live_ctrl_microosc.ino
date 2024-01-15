@@ -181,8 +181,13 @@ char displayTitle2[36]="";
 char displayTitle3[36]="";
 char displayTitle4[36]="";
 
-// Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
+// Variables for getTextBounds function to center text
+int16_t x1;
+int16_t y1;
+uint16_t width;
+uint16_t height;
 
+// Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
 char *displayTxtKnob[4][3][3]= {
   {
     {parameterName1, parameterValue1, parameterType1},
@@ -213,8 +218,6 @@ char *displayTxtController[4] = {
   displayTitle4
   };
 
-
-
 char *displayTxtButton[4][2] = {
   {buttonValue1, buttonValue2},
   {buttonValue3, buttonValue4},
@@ -222,6 +225,7 @@ char *displayTxtButton[4][2] = {
   {buttonValue7, buttonValue8}
 };
 
+// List for storing each received OSC message for setting the slider width
 float sliderValue[4][3];
 
 // For creating OSC address to receive on
@@ -388,9 +392,9 @@ char *temp;
 // OSC MESSAGE LISTENER
 void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
-  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
+  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
   for (int c = 0; c <= 3; c++)  { // Loop over each of the 4 /c controllers
-    for (int p = 2; p >= 0; p--)  { // Loop over each of 3 /p oscAddresses
+    for (int p = 0; p <= 3; p++)  { // Loop over each of 3 /p oscAddresses
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
       if (oscMessage.checkOscAddress(oscAddress, "sf")) {
         strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString()); // "12.0"
@@ -412,8 +416,13 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
         //Serial.print(": ");
         //Serial.println(parameterOffset);
         setOffsetMagneticEncoder(oscParam[0], c, as5600List[c][p][0], p, parameterOffset, tcaAddress[c][p], oscParam[1]); //channel 0, instance as5600_0
-      }
-      
+      }    
+    }
+     // Select name from first magnetic encoder parameter /p (i=0)
+    oscAddressParser(oscParam[0], c, oscParam[1], 0, "/title");
+    if (oscMessage.checkOscAddress(oscAddress)) {  
+      strcpy(displayTxtController[c], oscMessage.nextAsString()); 
+      updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
     }
 
     // Receive VST button state to set led state AND set led on/off
@@ -436,11 +445,6 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
       }
     } 
-     // Select name from first magnetic encoder parameter /p (i=0)
-    oscAddressParser(oscParam[0], c, oscParam[1], 0, "/title");
-    if (oscMessage.checkOscAddress(oscAddress)) {  
-      strcpy(displayTxtController[c], oscMessage.nextAsString()); 
-    }
   }
 
   // Basic Test reset led on Teensy
@@ -454,8 +458,6 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 int16_t sliderLength = 37;
 int16_t sliderHeight = 5;
 int16_t fillLength;
-int16_t length = 0;
-int16_t center = 0;
 
 // Clear and push display with updated values in void Loop()
 void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
@@ -482,9 +484,9 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
   }
 
   // center title text
-  length = sizeof(displayTxtController[c])/sizeof(char);
-  center = SCREEN_WIDTH/2 - (length+length/2);
-  display.setCursor(center, 0);
+  display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
+  //int length = round(sizeof(displayTxtController[c])/sizeof(char));
+  display.setCursor((SCREEN_WIDTH - width) / 2, 0);
   display.println(displayTxtController[c]);
 
   display.display();
