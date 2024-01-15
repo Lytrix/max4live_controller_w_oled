@@ -68,12 +68,8 @@ int tcaAddress[4][3][2] = {
 };
 
 // Encoder direction per controller, per magnetic encoder. 1 is clockwise, 0 is counterclockwise
-int as5600_rotation[4][3] = {
-  {1,1,0},
-  {1,1,0},
-  {1,1,1},
-  {1,1,0}
-};
+int as5600_rotation[4][3];
+
 
 // List of Multiplexer wire and channel number for each display
 int tcaDisplayAddress[4][2] = {
@@ -370,9 +366,14 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
       }
 
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
-      if (oscMessage.checkOscAddress(oscAddress, "ss")) { 
+      if (oscMessage.checkOscAddress(oscAddress, "ssi")) { 
         strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString()); // "FREQ"
         strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString()); // "kHz"
+        if (oscMessage.nextAsInt() == 0) {  // 0 or 1
+          as5600List[c][p][0].setDirection(AS5600_CLOCK_WISE);
+        } else {
+          as5600List[c][p][0].setDirection(AS5600_COUNTERCLOCK_WISE);
+        }
       }
       
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/offset");
@@ -450,7 +451,6 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
     display.println(displayTxtButton[c][b]);
   }
 
-
   // Variables for getTextBounds function to center text
   int16_t x1;
   int16_t y1;
@@ -458,7 +458,6 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
   uint16_t height;
   // center title text
   display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
-  //int length = round(sizeof(displayTxtController[c])/sizeof(char));
   display.setCursor((SCREEN_WIDTH - width) / 2, 0);
   display.println(displayTxtController[c]);
 
@@ -567,11 +566,6 @@ void setup() {
       tcaSelect(tcaAddress[c][i]);
       as5600List[c][i][0].begin();
       
-      if (as5600_rotation[c][i] == 1) {
-        as5600List[c][i][0].setDirection(AS5600_CLOCK_WISE);
-      } else {
-        as5600List[c][i][0].setDirection(AS5600_COUNTERCLOCK_WISE);
-      }
       Serial.print(F("Ctrl "));
       Serial.print(c+1);
       Serial.print(F(", as5600_"));
