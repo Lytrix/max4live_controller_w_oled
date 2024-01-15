@@ -198,6 +198,7 @@ char displayTitle4[36]="";
 // float parameterSliderValue12 = 0.0;
 
 // List of parameter values to iterate over in OSC addresses
+// String displayTxtKnob[4][3][3];
 char *displayTxtKnob[4][3][3]= {
   {
     {parameterName1, parameterValue1, parameterType1},
@@ -417,9 +418,9 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     for (int p = 2; p >= 0; p--)  { // Loop over each of 3 /p oscAddresses
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
       if (oscMessage.checkOscAddress(oscAddress, "sf")) {
-        //displayTxtKnob[c][p][1] = oscMessage.nextAsString();
+        //displayTxtKnob[c][p][1] = oscMessage.nextAsString();   
         strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString());
-        sliderValue[c][p]=oscMessage.nextAsFloat();
+        sliderValue[c][p]=oscMessage.nextAsFloat();     
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
 
@@ -436,15 +437,9 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
       // }
 
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
-      if (oscMessage.checkOscAddress(oscAddress)) { 
+      if (oscMessage.checkOscAddress(oscAddress, "ss")) { 
         //displayTxtKnob[c][p][0] = oscMessage.nextAsString();
         strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString());
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
-      }
-      
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/type");
-      if (oscMessage.checkOscAddress(oscAddress)) { 
-        //displayTxtKnob[c][p][2] = oscMessage.nextAsString();
         strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString());
         //updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
@@ -722,7 +717,8 @@ void setup() {
   //usbMIDI.setHandlePitchChange(myPitchChange);
   //myPitchChange(2,0);
 }
-
+String olderValue;
+//String Value;
 /***********************
   Main Loop
 ************************/
@@ -742,10 +738,20 @@ void loop() {
   } else {
     // do not print
      // Receive all osc messages
-    myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
- 
+     myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
+  //if (displayTxtKnob[0][0][1] != currentValue) {
+  //String newValue = displayTxtKnob[0][0][1];
+  //delay(1);
+  //if (newValue != olderValue){
+  //Serial.print("displayValue: ");
+  //Serial.println(newValue);
+  //olderValue = newValue;
+  //delay(1);
+ // }
+  
   }
-
+  //currentValue = newValue;
+  //}
   //Example send single osc message without loop
   //sendValueMagneticEncoder(as5600_0, 0, "/pot1");
   
