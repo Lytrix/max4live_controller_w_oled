@@ -418,35 +418,20 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     for (int p = 2; p >= 0; p--)  { // Loop over each of 3 /p oscAddresses
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
       if (oscMessage.checkOscAddress(oscAddress, "sf")) {
-        //displayTxtKnob[c][p][1] = oscMessage.nextAsString();   
-        strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString());
-        sliderValue[c][p]=oscMessage.nextAsFloat();     
+        strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString()); // "12.0"
+        sliderValue[c][p]=oscMessage.nextAsFloat();                 // 0.12345
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
       }
 
-      // oscAddressParser(oscParam[0], c, oscParam[1], p, "/value"); 
-      // if (oscMessage.checkOscAddress(oscAddress)) {
-      //   strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString());
-      //   updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
-      // }
-
-      // oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
-      // if (oscMessage.checkOscAddress(oscAddress)) {
-      //   sliderValue[c][p]=oscMessage.nextAsFloat();
-      //   updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
-      // }
-
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
       if (oscMessage.checkOscAddress(oscAddress, "ss")) { 
-        //displayTxtKnob[c][p][0] = oscMessage.nextAsString();
-        strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString());
-        strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString());
-        //updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
+        strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString()); // "FREQ"
+        strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString()); // "kHz"
       }
       
       oscAddressParser(oscParam[0], c, oscParam[1], p, "/offset");
       if (oscMessage.checkOscAddress(oscAddress)) {
-        int parameterOffset = oscMessage.nextAsInt();
+        int parameterOffset = oscMessage.nextAsInt();               // 2056
         //Serial.print("parameterOffset: ");
         //Serial.print(oscAddress);
         //Serial.print(": ");
@@ -458,39 +443,28 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
 
     // Receive VST button state to set led state AND set led on/off
     for (int b = 0; b <= 1; b++)  { 
-      // oscAddressParser(oscParam[0], c, oscParam[2], b, "/value");
-      // if (oscMessage.checkOscAddress(oscAddress)) {  // IF THE ADDRESS IS /b1/value
-      //   strcpy(displayTxtButton[c][b], oscMessage.nextAsString()); 
-      // }
       oscAddressParser(oscParam[0], c, oscParam[2], b, "/state");
       if (oscMessage.checkOscAddress(oscAddress, "fs")) {  // IF THE ADDRESS IS /b1/state
       
-        int newValue = oscMessage.nextAsFloat(); 
-        // Serial.println(newValue);
-        //ledState[i] = newValue;
+        int newValue = oscMessage.nextAsFloat(); // 1. or 0.
         if (newValue > 0.5){
           digitalWrite(ledPin[c][b], HIGH);
-          //lastButtonState[i] = HIGH;
-          //currentButtonState[i]= HIGH;
           ledState[c][b]=HIGH;
           
         }
         if (newValue < 0.5){
           digitalWrite(ledPin[c][b], LOW);
-          //lastButtonState[i] = HIGH;  
-          //currentButtonState[i]= HIGH;
           ledState[c][b]=LOW; 
           
         }
-        displayTxtButton[c][b]=oscMessage.nextAsString();
+        displayTxtButton[c][b]=oscMessage.nextAsString();   // "IN"
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
       }
     } 
      // Select name from first magnetic encoder parameter /p (i=0)
     oscAddressParser(oscParam[0], c, oscParam[1], 0, "/title");
     if (oscMessage.checkOscAddress(oscAddress)) {  
-      strcpy(displayTxtController[c], oscMessage.nextAsString());
-      // updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
+      strcpy(displayTxtController[c], oscMessage.nextAsString()); 
     }
   }
 
@@ -539,8 +513,6 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
   display.println(displayTxtController[c]);
 
   display.display();
-  //displayStart = millis();
-  //}
 }
 
 // Button state function to send ledState update (0 or 1) to Max when Pin goes from High to Low. 
@@ -600,8 +572,7 @@ void setup() {
   //Wire1.setClock(1000000);
 
   Serial.begin(115200);
-  // Serial.setTimeout(1);
-
+ 
   Serial.println(F(__FILE__));
   Serial.print(F("AS5600_LIB_VERSION: "));
   Serial.println(F(AS5600_LIB_VERSION));
@@ -682,9 +653,6 @@ void setup() {
   
   // ADS.begin();
 
-  //Wire.setClock(3400000);
-  //Wire1.setClock(3400000);
-
   // Set number of readings to smooth
   // mySensor.begin(SMOOTHED_AVERAGE, 5);
   
@@ -717,8 +685,7 @@ void setup() {
   //usbMIDI.setHandlePitchChange(myPitchChange);
   //myPitchChange(2,0);
 }
-String olderValue;
-//String Value;
+
 /***********************
   Main Loop
 ************************/
@@ -736,22 +703,10 @@ void loop() {
     }
     myChronoStart = millis(); // update delay
   } else {
-    // do not print
-     // Receive all osc messages
-     myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
-  //if (displayTxtKnob[0][0][1] != currentValue) {
-  //String newValue = displayTxtKnob[0][0][1];
-  //delay(1);
-  //if (newValue != olderValue){
-  //Serial.print("displayValue: ");
-  //Serial.println(newValue);
-  //olderValue = newValue;
-  //delay(1);
- // }
-  
+    // Receive all osc messages
+    myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   }
-  //currentValue = newValue;
-  //}
+ 
   //Example send single osc message without loop
   //sendValueMagneticEncoder(as5600_0, 0, "/pot1");
   
@@ -779,14 +734,7 @@ void loop() {
   //  display.println(String(parameterType));
   // display.display();
   //}
-
-  //  myMicroOsc.sendInt("/pot", analogRead(myPotPin) );  // SEND POTENTIOMETER
-  // Serial.println(analogRead(myPotPin));
-
-  // myMicroOsc.sendInt("/photo", analogRead(myPhotoPin) );  // SEND PHOTOCELL
-
-  // myMicroOsc.sendInt("/button", digitalRead(myButtonPin));  // SEND BUTTON
-
+ 
   //val = analogRead(analogPin);  // read the input pin
   //Serial.println(val);          // debug value
 
