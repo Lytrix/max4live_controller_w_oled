@@ -14,7 +14,7 @@
 MicroOscSlip<128> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
-unsigned long displayStart = 0; 
+
 // Set address of first and second I2C multiplexer
 #define TCAADDR 0x70
 
@@ -181,24 +181,8 @@ char displayTitle2[36]="";
 char displayTitle3[36]="";
 char displayTitle4[36]="";
 
-// float parameterSliderValue1 = 0.0;
-// float parameterSliderValue2 = 0.0;
-// float parameterSliderValue3 = 0.0;
+// Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
 
-// float parameterSliderValue4 = 0.0;
-// float parameterSliderValue5 = 0.0;
-// float parameterSliderValue6 = 0.0;
-
-// float parameterSliderValue7 = 0.0;
-// float parameterSliderValue8 = 0.0;
-// float parameterSliderValue9 = 0.0;
-
-// float parameterSliderValue10 = 0.0;
-// float parameterSliderValue11 = 0.0;
-// float parameterSliderValue12 = 0.0;
-
-// List of parameter values to iterate over in OSC addresses
-// String displayTxtKnob[4][3][3];
 char *displayTxtKnob[4][3][3]= {
   {
     {parameterName1, parameterValue1, parameterType1},
@@ -229,24 +213,15 @@ char *displayTxtController[4] = {
   displayTitle4
   };
 
-// List of parameter values to iterate over in OSC addresses
-String displayTxtButton[4][2];
 
 
-// char *displayTxtButton[4][2] = {
-//   {buttonValue1, buttonValue2},
-//   {buttonValue3, buttonValue4},
-//   {buttonValue5, buttonValue6},
-//   {buttonValue7, buttonValue8}
-// };
+char *displayTxtButton[4][2] = {
+  {buttonValue1, buttonValue2},
+  {buttonValue3, buttonValue4},
+  {buttonValue5, buttonValue6},
+  {buttonValue7, buttonValue8}
+};
 
-
-// float sliderValue[4][3] = {
-//   {parameterSliderValue1, parameterSliderValue2, parameterSliderValue3},
-//   {parameterSliderValue4, parameterSliderValue5, parameterSliderValue6},
-//   {parameterSliderValue7, parameterSliderValue8, parameterSliderValue9}, 
-//   {parameterSliderValue10, parameterSliderValue11, parameterSliderValue12} 
-// };
 float sliderValue[4][3];
 
 // For creating OSC address to receive on
@@ -457,7 +432,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
           ledState[c][b]=LOW; 
           
         }
-        displayTxtButton[c][b]=oscMessage.nextAsString();   // "IN"
+        strcpy(displayTxtButton[c][b], oscMessage.nextAsString());  // "IN" 
         updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
       }
     } 
