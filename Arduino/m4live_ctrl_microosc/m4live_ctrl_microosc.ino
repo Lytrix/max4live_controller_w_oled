@@ -11,7 +11,7 @@
 // THE NUMBER 128 BETWEEN THE < > SYMBOLS  BELOW IS THE MAXIMUM NUMBER OF BYTES RESERVED FOR INCOMMING MESSAGES.
 // MAKE SURE THIS NUMBER OF BYTES CAN HOLD THE SIZE OF THE MESSAGE YOUR ARE RECEIVING IN ARDUINO.
 // OUTGOING MESSAGES ARE WRITTEN DIRECTLY TO THE OUTPUT AND DO NOT NEED ANY RESERVED BYTES.
-MicroOscSlip<1024> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
+MicroOscSlip<512> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
 
@@ -589,7 +589,7 @@ void loop() {
   myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   
   // Loop over as5600 instances and /pot1, /pot2, ...
-  if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
+  if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 10) {
     for (int c = 0; c <= 3; c++){         // Loop over ctrl 1,2,3,4
       for (int i = 0; i <= 2; i++){       // Loop over magnectic encoder 1,2,3
         sendValueMagneticEncoder(oscParam[0], c, as5600List[c][i][0], i, oscParam[1], tcaAddress[c][i]);
