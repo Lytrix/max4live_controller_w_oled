@@ -170,10 +170,10 @@ char displayTxtButton[4][2][16];
 float sliderValue[4][3];
 
 // For creating OSC address to receive on
-char oscAddress[24];
-char oscParam[3][4] = {"/c", "/p", "/b"}; // controller, potentiometer, button
-char strDeviceNumber[3];
-char strParamNumber[3];
+// char oscAddress[24];
+// char oscParam[3][4] = {"/c", "/p", "/b"}; // controller, potentiometer, button
+// char strDeviceNumber[3];
+// char strParamNumber[3];
 
 // Store old and new send value for each TCA channel in a list to reduce number of serial sends
 int lastEncoderValue[4][3];
@@ -354,10 +354,10 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // It will offset the encoder to the new value if the current value is less or more then 5 out of range.
   // For example: /offset 1 2 4096"
   if (oscMessage.checkOscAddressAndTypeTags("/offset", "iii")) { 
-    int ctrl = oscMessage.nextAsInt();
-    int pot = oscMessage.nextAsInt();
+    int ctrl = oscMessage.nextAsInt() -1;
+    int pot = oscMessage.nextAsInt() -1;
     int parameterOffset = oscMessage.nextAsInt();
-    setOffsetMagneticEncoder(ctrl, as5600List[ctrl-1][pot-1][0], pot, parameterOffset, tcaAddress[ctrl-1][pot-1], lastEncoderValue[ctrl-1][pot-1]); // cntr 1, channel 0, offset 4096, instance as5600_0
+    setOffsetMagneticEncoder(ctrl, as5600List[ctrl][pot][0], pot, parameterOffset, tcaAddress[ctrl][pot], lastEncoderValue[ctrl][pot]); // cntr 1, channel 0, offset 4096, instance as5600_0
   } else
   
   // Receive VST button state to set led state AND set led on/off
@@ -415,19 +415,57 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
   display.setTextColor(SSD1306_WHITE);
   
   // Generate 1 of 3 rows of display information using the prefilled array.
-  for (int row = 0; row <= 2; row++) { // loop over each display row
-    for (int col = 0; col <= 2; col++) { // loop over each display element
-      display.setCursor(displayPos[row][col][0], displayPos[row][col][1]);
-      display.println(displayTxtKnob[c][row][col]);
-    }
-    display.drawRect(33, displayPos[row][0][1]+2, round(sliderValue[c][row] * sliderLength), sliderHeight, SSD1306_WHITE);
-  }
+  //for (int row = 0; row <= 2; row++) { // loop over each display row
+    //for (int col = 0; col <= 2; col++) { // loop over each display element
+  // Row 1
+    // Column 1: Name  
+      display.setCursor(displayPos[0][0][0], displayPos[0][0][1]);
+      display.println(displayTxtKnob[c][0][0]);
+    // Column 3: Value  
+      display.setCursor(displayPos[0][1][0], displayPos[0][1][1]);
+      display.println(displayTxtKnob[c][0][1]);
+    // Column 4: Units
+      display.setCursor(displayPos[0][2][0], displayPos[0][2][1]);
+      display.println(displayTxtKnob[c][0][2]);
+    // Column 2: Slider
+      display.drawRect(33, displayPos[0][0][1]+2, sliderValue[c][0] * sliderLength, sliderHeight, SSD1306_WHITE);
+
+  // Row 2
+    // Column 1: Name  
+      display.setCursor(displayPos[1][0][0], displayPos[1][0][1]);
+      display.println(displayTxtKnob[c][1][0]);
+    // Column 3: Value  
+      display.setCursor(displayPos[1][1][0], displayPos[1][1][1]);
+      display.println(displayTxtKnob[c][1][1]);
+    // Column 4: Units
+      display.setCursor(displayPos[1][2][0], displayPos[1][2][1]);
+      display.println(displayTxtKnob[c][1][2]);
+    // Column 2: Slider
+      display.drawRect(33, displayPos[1][0][1]+2, sliderValue[c][1] * sliderLength, sliderHeight, SSD1306_WHITE);
+
+  // Row 3
+    // Column 1: Name  
+      display.setCursor(displayPos[2][0][0], displayPos[2][0][1]);
+      display.println(displayTxtKnob[c][2][0]);
+    // Column 3: Value  
+      display.setCursor(displayPos[2][1][0], displayPos[2][1][1]);
+      display.println(displayTxtKnob[c][2][1]);
+    // Column 4: Units
+      display.setCursor(displayPos[2][2][0], displayPos[2][2][1]);
+      display.println(displayTxtKnob[c][2][2]);
+    // Column 2: Slider
+      display.drawRect(33, displayPos[2][0][1]+2, sliderValue[c][2] * sliderLength, sliderHeight, SSD1306_WHITE);
+
+//  }
 
   // Button 1 & 2 info
-  for (int b = 0; b<=1; b++) {
-    display.setCursor(displayPos[0][b][0], 56);
-    display.println(displayTxtButton[c][b]);
-  }
+  //for (int b = 0; b<=1; b++) {
+    display.setCursor(2, 56);
+    display.println(displayTxtButton[c][0]);
+
+    display.setCursor(75, 56);
+    display.println(displayTxtButton[c][1]);
+  //}
 
   // Variables for getTextBounds function to center text
   int16_t x1;
@@ -444,14 +482,14 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
 
 // Button state function to send ledState update (0 or 1) to Max when Pin goes from High to Low. 
 // The Led is turned on/off only via receiving OSCmessages to have one master being the VST itself.
-void buttonState(char *oscAddress, int deviceNumber, int parameterNumber) {
-  lastButtonState[deviceNumber][parameterNumber] = currentButtonState[deviceNumber][parameterNumber];      // save the last state
-  currentButtonState[deviceNumber][parameterNumber] = digitalRead(buttonPin[deviceNumber][parameterNumber]); // read new state
+void buttonState(char *oscAddress, int ctrl, int btn) {
+  lastButtonState[ctrl][btn] = currentButtonState[ctrl][btn];      // save the last state
+  currentButtonState[ctrl][btn] = digitalRead(buttonPin[ctrl][btn]); // read new state
 
-  if(lastButtonState[deviceNumber][parameterNumber] == HIGH && currentButtonState[deviceNumber][parameterNumber] == LOW) {
+  if(lastButtonState[ctrl][btn] == HIGH && currentButtonState[ctrl][btn] == LOW) {
     // invert state of LED
-    ledState[deviceNumber][parameterNumber] = !ledState[deviceNumber][parameterNumber];
-    myMicroOsc.sendFloat(oscAddress, (float)ledState[deviceNumber][parameterNumber]);
+    //ledState[ctrl][parameterNumber] = !ledState[ctrl][btn];
+    myMicroOsc.sendFloat(oscAddress, ledState[ctrl][btn]);
   }
 }
 
@@ -595,7 +633,7 @@ void loop() {
   myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   
   // Loop over as5600 instances and /pot1, /pot2, ...
-  if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 10) {
+  if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
     // Loop over ctrl 1,2,3,4
     // Loop over magnectic encoder 1,2,3
     sendValueMagneticEncoder("/c/1/p/1", as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
