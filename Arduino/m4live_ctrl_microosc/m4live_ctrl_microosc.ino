@@ -364,33 +364,32 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // it uses floats as states to also cater for continuous values > or < 0.5
   // For example: /button 1 2 0. "Off"
   if (oscMessage.checkOscAddress("/button", "iisfi")) {  
-    int ctrl = oscMessage.nextAsInt();
-    int pot = oscMessage.nextAsInt();
-    char *value = oscMessage.nextAsString();
+    int ctrl = oscMessage.nextAsInt() -1;
+    int pot = oscMessage.nextAsInt() -1;
+    const char *buttonValue = oscMessage.nextAsString();
     int state = oscMessage.nextAsInt(); // 1. or 0.
-    invertButton[ctrl-1][pot-1] = oscMessage.nextAsInt();
+    invertButton[ctrl][pot] = oscMessage.nextAsInt();
 
-    strcpy(displayTxtButton[ctrl-1][pot-1], value);  // "IN" 
-    updateDisplay(displayList[ctrl-1][0], ctrl-1, tcaDisplayAddress[ctrl-1]);
-    if (invertButton[ctrl-1][pot-1] == 1) {
+    strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
+
+    if (invertButton[ctrl][pot] == 1) {
       if (state > 0.5){
-        digitalWrite(ledPin[ctrl-1][pot-1], LOW);
-        ledState[ctrl-1][pot-1]=HIGH; 
-      }
-      if (state < 0.5){
-        digitalWrite(ledPin[ctrl-1][pot-1], HIGH);
-        ledState[ctrl-1][pot-1]=LOW;
+        digitalWrite(ledPin[ctrl][pot], LOW);
+        ledState[ctrl][pot]=HIGH; 
+      } else {
+        digitalWrite(ledPin[ctrl][pot], HIGH);
+        ledState[ctrl][pot]=LOW;
       }
     } else  {
       if (state > 0.5){
-        digitalWrite(ledPin[ctrl-1][pot-1], HIGH);
-        ledState[ctrl-1][pot-1]=HIGH;
+        digitalWrite(ledPin[ctrl][pot], HIGH);
+        ledState[ctrl][pot]=HIGH;
       }  else {
-        digitalWrite(ledPin[ctrl-1][pot-1], LOW);
-        ledState[ctrl-1][pot-1]=LOW; 
+        digitalWrite(ledPin[ctrl][pot], LOW);
+        ledState[ctrl][pot]=LOW; 
       }  
     }
-    
+    updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
   }
  
 
