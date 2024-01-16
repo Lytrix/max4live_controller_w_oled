@@ -603,8 +603,8 @@ void loop() {
     sendValueMagneticEncoder(oscPotentiometerAddress[0][2], as5600List[0][2][0], lastEncoderValue[0][2], tcaAddress[0][2]);
 
     sendValueMagneticEncoder(oscPotentiometerAddress[1][0], as5600List[1][0][0], lastEncoderValue[1][0], tcaAddress[1][0]);
-    sendValueMagneticEncoder(oscPotentiometerAddress[1][1], as5600List[1][0][0], lastEncoderValue[1][1], tcaAddress[1][1]);
-    sendValueMagneticEncoder(oscPotentiometerAddress[1][2], as5600List[1][0][0], lastEncoderValue[1][2], tcaAddress[1][2]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[1][1], as5600List[1][1][0], lastEncoderValue[1][1], tcaAddress[1][1]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[1][2], as5600List[1][2][0], lastEncoderValue[1][2], tcaAddress[1][2]);
 
     sendValueMagneticEncoder(oscPotentiometerAddress[2][0], as5600List[2][0][0], lastEncoderValue[2][0], tcaAddress[2][0]);
     sendValueMagneticEncoder(oscPotentiometerAddress[2][1], as5600List[2][1][0], lastEncoderValue[2][1], tcaAddress[2][1]);
