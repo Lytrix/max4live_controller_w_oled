@@ -309,45 +309,45 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // No display update need, because update display is triggered by /name when selecting potentiometer 1
   // For example /title 1 2 "LMF"
   if (oscMessage.checkOscAddress("/title", "iis")) {  
-    int ctrl = oscMessage.nextAsInt();
+    int ctrl = oscMessage.nextAsInt() -1;
     int pot = oscMessage.nextAsInt();
-    strcpy(displayTxtController[ctrl-1], oscMessage.nextAsString()); 
+    strcpy(displayTxtController[ctrl], oscMessage.nextAsString()); 
   } else 
 
   // Receive the selected 4 chars parameter name for each controller (1,2,3,4) and potentiometer (1,2,3)
   // Along with corresponding unit names, optionally with the set inverse of potentiometer
   // For example: /value 1 2 "FREQ" "kHz" 0
   if (oscMessage.checkOscAddress("/name", "iissi")) { 
-    int ctrl = oscMessage.nextAsInt();
-    int pot = oscMessage.nextAsInt();
+    int ctrl = oscMessage.nextAsInt() -1;
+    int pot = oscMessage.nextAsInt() -1;
     char *name = oscMessage.nextAsString();
     char *units = oscMessage.nextAsString();
     int invert = oscMessage.nextAsInt(); 
 
     // copy values to display buffer
-    strcpy(displayTxtKnob[ctrl-1][pot-1][0], name); 
-    strcpy(displayTxtKnob[ctrl-1][pot-1][2], units);
+    strcpy(displayTxtKnob[ctrl][pot][0], name); 
+    strcpy(displayTxtKnob[ctrl][pot][2], units);
       
     if (invert == 0) {  // 0 or 1 to inverse potentiometer direction
-      as5600List[ctrl-1][pot-1][0].setDirection(AS5600_CLOCK_WISE);
+      as5600List[ctrl][pot][0].setDirection(AS5600_CLOCK_WISE);
     } else {
-      as5600List[ctrl-1][pot-1][0].setDirection(AS5600_COUNTERCLOCK_WISE);
+      as5600List[ctrl][pot][0].setDirection(AS5600_COUNTERCLOCK_WISE);
     }
-    updateDisplay(displayList[ctrl-1][0], ctrl-1, tcaDisplayAddress[ctrl-1]); 
+    updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]); 
   } else
   
   // Receive string value and float to display real world value
   // and the 0-1 float value to set the slider width 
   // For example: /value 1 2 "12.0" 0.860321
   if (oscMessage.checkOscAddress("/value", "iisf")) { 
-    int ctrl = oscMessage.nextAsInt();
-    int pot = oscMessage.nextAsInt();
+    int ctrl = oscMessage.nextAsInt() -1;
+    int pot = oscMessage.nextAsInt() -1;
     char *value = oscMessage.nextAsString();
     float slider = oscMessage.nextAsFloat();
 
-    strcpy(displayTxtKnob[ctrl-1][pot-1][1], value); // "12.0"
-    sliderValue[ctrl-1][pot-1] = slider;               // 0.12345
-    updateDisplay(displayList[ctrl-1][0], ctrl-1, tcaDisplayAddress[ctrl-1]); 
+    strcpy(displayTxtKnob[ctrl][pot][1], value); // "12.0"
+    sliderValue[ctrl][pot] = slider;               // 0.12345
+    updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]); 
   } else 
   
   // Sync encoder value to VST value by receiving VST value as new offset value as 0-4096 int
