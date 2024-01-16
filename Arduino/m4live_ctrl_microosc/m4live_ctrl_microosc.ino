@@ -11,7 +11,7 @@
 // THE NUMBER 128 BETWEEN THE < > SYMBOLS  BELOW IS THE MAXIMUM NUMBER OF BYTES RESERVED FOR INCOMMING MESSAGES.
 // MAKE SURE THIS NUMBER OF BYTES CAN HOLD THE SIZE OF THE MESSAGE YOUR ARE RECEIVING IN ARDUINO.
 // OUTGOING MESSAGES ARE WRITTEN DIRECTLY TO THE OUTPUT AND DO NOT NEED ANY RESERVED BYTES.
-MicroOscSlip<128> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
+MicroOscSlip<1024> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
 
@@ -70,6 +70,8 @@ int tcaAddress[4][3][2] = {
 // Encoder direction per controller, per magnetic encoder. 1 is clockwise, 0 is counterclockwise
 int as5600_rotation[4][3];
 
+// Store invert button 1 or 0 for each button
+int invertButton[4][2];
 
 // List of Multiplexer wire and channel number for each display
 int tcaDisplayAddress[4][2] = {
@@ -84,7 +86,7 @@ int tcaDisplayAddress[4][2] = {
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
-#define I2C_SPEED 800000
+#define I2C_SPEED 400000
 #define I2C_BUSS1 &Wire  
 #define I2C_BUSS2 &Wire1
 
@@ -161,30 +163,31 @@ char parameterValue12[12]="";
 char parameterType12[3]="";
 
 // Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
-char *displayTxtKnob[4][3][3]= {
-  {
-    {parameterName1, parameterValue1, parameterType1},
-    {parameterName2, parameterValue2, parameterType2},
-    {parameterName3, parameterValue3, parameterType3}
-  },
-  {
-    {parameterName4, parameterValue4, parameterType4},
-    {parameterName5, parameterValue5, parameterType5},
-    {parameterName6, parameterValue6, parameterType6}
-  },
-  {
-    {parameterName7, parameterValue7, parameterType7},
-    {parameterName8, parameterValue8, parameterType8},
-    {parameterName9, parameterValue9, parameterType9}
-  },
-  {
-    {parameterName10, parameterValue10, parameterType10},
-    {parameterName11, parameterValue11, parameterType11},
-    {parameterName12, parameterValue12, parameterType12}
-  }
-};
+char displayTxtKnob[4][3][3][12];
+// = {
+//   {
+//     {parameterName1, parameterValue1, parameterType1},
+//     {parameterName2, parameterValue2, parameterType2},
+//     {parameterName3, parameterValue3, parameterType3}
+//   },
+//   {
+//     {parameterName4, parameterValue4, parameterType4},
+//     {parameterName5, parameterValue5, parameterType5},
+//     {parameterName6, parameterValue6, parameterType6}
+//   },
+//   {
+//     {parameterName7, parameterValue7, parameterType7},
+//     {parameterName8, parameterValue8, parameterType8},
+//     {parameterName9, parameterValue9, parameterType9}
+//   },
+//   {
+//     {parameterName10, parameterValue10, parameterType10},
+//     {parameterName11, parameterValue11, parameterType11},
+//     {parameterName12, parameterValue12, parameterType12}
+//   }
+// };
 
-char displayTxtController[4][16];
+char displayTxtController[5][16];
 
 char displayTxtButton[4][2][16];
 
@@ -236,24 +239,10 @@ const int ledPin[4][2] = {
 };
 
 // Led, buttonstate variables
-int ledState[4][2] = {
-  {LOW, LOW}, 
-  {LOW, LOW}, 
-  {LOW, LOW},
-  {LOW, LOW}
-};           // the current state of LED
-int lastButtonState[4][2] = {
-  {LOW, LOW}, 
-  {LOW, LOW}, 
-  {LOW, LOW},
-  {LOW, LOW}
-};    // the previous state of button
-int currentButtonState[4][2] = {
-  {LOW, LOW}, 
-  {LOW, LOW}, 
-  {LOW, LOW},
-  {LOW, LOW}
-}; // the current state of button
+float ledState[4][2];
+int lastButtonState[4][2];
+int currentButtonState[4][2];
+
 
 // Test variables
 // int ledPinTeensy = 13;
@@ -303,7 +292,8 @@ void sendValueMagneticEncoder(char oscDevice[4], int deviceNumber, AS5600 &as560
 }
 
 // Offset Magnetic Encoder // If VST value is update via mouse input, recieve updated value to calculate new offset of magnetic encoder, so it does not jump.
-void setOffsetMagneticEncoder(char oscDeviceName[4], int deviceNumber, AS5600 &as5600_reference, int channel, int parameterOffset, int tcaAddress, char oscParamName[4]) {
+void setOffsetMagneticEncoder(int deviceNumber, AS5600 &as5600_reference, int pot, int parameterOffset, int tcaAddress) {
+  int channel = pot -1;
   tcaSelect(tcaAddress);
   int readAngle = as5600_reference.readAngle();
   // Serial.print("instance");
@@ -325,12 +315,12 @@ void setOffsetMagneticEncoder(char oscDeviceName[4], int deviceNumber, AS5600 &a
     // char *oscName = "/p"; 
     newValue[channel] = as5600_reference.readAngle();
     if (newValue[channel] != oldValue[channel]) {
-      sprintf(strDeviceNumber, "/%d", deviceNumber+1);  
-      sprintf(strParamNumber, "/%d", channel+1);
+      sprintf(strDeviceNumber, "/%d", deviceNumber);  
+      sprintf(strParamNumber, "/%d", pot);
   
-      strcpy(oscAddress, oscDeviceName);
+      strcpy(oscAddress, "/c");
       strcat(oscAddress, strDeviceNumber);
-      strcat(oscAddress, oscParamName);
+      strcat(oscAddress, "/p");
       strcat(oscAddress, strParamNumber);
       myMicroOsc.sendInt(oscAddress, newValue[channel]);  // SEND MAGNETIC ENCODE
       oldValue[channel] = newValue[channel];
@@ -354,66 +344,95 @@ void oscAddressParser(char oscDeviceName[4], int deviceNumber, char oscParamName
 char *temp;
 // OSC MESSAGE LISTENER
 void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
+  
+  // Recieve the main title for each controller 
+  // No display update need, because update display is triggered by /name when selecting potentiometer 1
+  // For example /title 1 2 "LMF"
+  if (oscMessage.checkOscAddress("/title", "iis")) {  
+    int ctrl = oscMessage.nextAsInt();
+    int pot = oscMessage.nextAsInt();
+    strcpy(displayTxtController[ctrl-1], oscMessage.nextAsString()); 
+  } else 
 
-  // Loop over displayTxt and as5600List for each parameter osc address and as5600 instance.
-  for (int c = 0; c <= 3; c++)  { // Loop over each of the 4 /c controllers
-    for (int p = 0; p <= 3; p++)  { // Loop over each of 3 /p oscAddresses
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/slider");
-      if (oscMessage.checkOscAddress(oscAddress, "sf")) {
-        strcpy(displayTxtKnob[c][p][1], oscMessage.nextAsString()); // "12.0"
-        sliderValue[c][p]=oscMessage.nextAsFloat();                 // 0.12345
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]); 
-      }
+  // Receive the selected 4 chars parameter name for each controller (1,2,3,4) and potentiometer (1,2,3)
+  // Along with corresponding unit names, optionally with the set inverse of potentiometer
+  // For example: /value 1 2 "FREQ" "kHz" 0
+  if (oscMessage.checkOscAddress("/name", "iissi")) { 
+    int ctrl = oscMessage.nextAsInt();
+    int pot = oscMessage.nextAsInt();
+    char *name = oscMessage.nextAsString();
+    char *units = oscMessage.nextAsString();
+    int invert = oscMessage.nextAsInt(); 
 
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/name");
-      if (oscMessage.checkOscAddress(oscAddress, "ssi")) { 
-        strcpy(displayTxtKnob[c][p][0], oscMessage.nextAsString()); // "FREQ"
-        strcpy(displayTxtKnob[c][p][2], oscMessage.nextAsString()); // "kHz"
-        if (oscMessage.nextAsInt() == 0) {  // 0 or 1
-          as5600List[c][p][0].setDirection(AS5600_CLOCK_WISE);
-        } else {
-          as5600List[c][p][0].setDirection(AS5600_COUNTERCLOCK_WISE);
-        }
-      }
+    // copy values to display buffer
+    strcpy(displayTxtKnob[ctrl-1][pot-1][0], name); 
+    strcpy(displayTxtKnob[ctrl-1][pot-1][2], units);
       
-      oscAddressParser(oscParam[0], c, oscParam[1], p, "/offset");
-      if (oscMessage.checkOscAddress(oscAddress)) {
-        int parameterOffset = oscMessage.nextAsInt();               // 2056
-        //Serial.print("parameterOffset: ");
-        //Serial.print(oscAddress);
-        //Serial.print(": ");
-        //Serial.println(parameterOffset);
-        setOffsetMagneticEncoder(oscParam[0], c, as5600List[c][p][0], p, parameterOffset, tcaAddress[c][p], oscParam[1]); //channel 0, instance as5600_0
-      }    
+    if (invert == 0) {  // 0 or 1 to inverse potentiometer direction
+      as5600List[ctrl-1][pot-1][0].setDirection(AS5600_CLOCK_WISE);
+    } else {
+      as5600List[ctrl-1][pot-1][0].setDirection(AS5600_COUNTERCLOCK_WISE);
+    }
+    updateDisplay(displayList[ctrl-1][0], ctrl-1, tcaDisplayAddress[ctrl-1]); 
+  } else
+  
+  // Receive string value and float to display real world value
+  // and the 0-1 float value to set the slider width 
+  // For example: /value 1 2 "12.0" 0.860321
+  if (oscMessage.checkOscAddress("/value", "iisf")) { 
+    int ctrl = oscMessage.nextAsInt();
+    int pot = oscMessage.nextAsInt();
+    char *value = oscMessage.nextAsString();
+    float slider = oscMessage.nextAsFloat();
+
+    strcpy(displayTxtKnob[ctrl-1][pot-1][1], value); // "12.0"
+    sliderValue[ctrl-1][pot-1] = slider;               // 0.12345
+    updateDisplay(displayList[ctrl-1][0], ctrl-1, tcaDisplayAddress[ctrl-1]); 
+  } else 
+  
+  // Sync encoder value to VST value by receiving VST value as new offset value as 0-4096 int
+  // It will offset the encoder to the new value if the current value is less or more then 5 out of range.
+  // For example: /offset 1 2 4096"
+  if (oscMessage.checkOscAddress("/offset", "iii")) { 
+    int ctrl = oscMessage.nextAsInt();
+    int pot = oscMessage.nextAsInt();
+    int parameterOffset = oscMessage.nextAsInt();
+    setOffsetMagneticEncoder(ctrl, as5600List[ctrl-1][pot-1][0], pot, parameterOffset, tcaAddress[ctrl-1][pot-1]); // cntr 1, channel 0, offset 4096, instance as5600_0
+  } else
+  
+  // Receive VST button state to set led state AND set led on/off
+  // it uses floats as states to also cater for continuous values > or < 0.5
+  // For example: /button 1 2 0. "Off"
+  if (oscMessage.checkOscAddress("/button", "iisfi")) {  
+    int ctrl = oscMessage.nextAsInt();
+    int pot = oscMessage.nextAsInt();
+    char *value = oscMessage.nextAsString();
+    int state = oscMessage.nextAsInt(); // 1. or 0.
+    invertButton[ctrl-1][pot-1] = oscMessage.nextAsInt();
+
+    strcpy(displayTxtButton[ctrl-1][pot-1], value);  // "IN" 
+    updateDisplay(displayList[ctrl-1][0], ctrl-1, tcaDisplayAddress[ctrl-1]);
+    if (invertButton[ctrl-1][pot-1] == 1) {
+      if (state > 0.5){
+        digitalWrite(ledPin[ctrl-1][pot-1], LOW);
+        ledState[ctrl-1][pot-1]=HIGH; 
+      }
+      if (state < 0.5){
+        digitalWrite(ledPin[ctrl-1][pot-1], HIGH);
+        ledState[ctrl-1][pot-1]=LOW;
+      }
+    } else  {
+      if (state > 0.5){
+        digitalWrite(ledPin[ctrl-1][pot-1], HIGH);
+        ledState[ctrl-1][pot-1]=HIGH;
+      }  else {
+        digitalWrite(ledPin[ctrl-1][pot-1], LOW);
+        ledState[ctrl-1][pot-1]=LOW; 
+      }  
     }
     
-    // Receive VST button state to set led state AND set led on/off
-    for (int b = 0; b <= 1; b++)  { 
-      oscAddressParser(oscParam[0], c, oscParam[2], b, "/state");
-      if (oscMessage.checkOscAddress(oscAddress, "fs")) {  // IF THE ADDRESS IS /b1/state
-      
-        int newValue = oscMessage.nextAsFloat(); // 1. or 0.
-        if (newValue > 0.5){
-          digitalWrite(ledPin[c][b], HIGH);
-          ledState[c][b]=HIGH;
-          
-        }
-        if (newValue < 0.5){
-          digitalWrite(ledPin[c][b], LOW);
-          ledState[c][b]=LOW; 
-          
-        }
-        strcpy(displayTxtButton[c][b], oscMessage.nextAsString());  // "IN" 
-        updateDisplay(displayList[c][0], c, tcaDisplayAddress[c]);
-      }
-    }
-   
-    // Select name from first magnetic encoder parameter /p (i=0)
-    oscAddressParser(oscParam[0], c, oscParam[1], 0, "/title");
-    if (oscMessage.checkOscAddress(oscAddress)) {  
-      strcpy(displayTxtController[c], oscMessage.nextAsString()); 
-    }
   }
+ 
 
   // Basic Test reset led on Teensy
   // if (oscMessage.checkOscAddress("/led")) {  // IF THE ADDRESS IS /led
@@ -488,7 +507,7 @@ void buttonState(char oscDevice[4], int deviceNumber, char oscParam[4], int para
     strcat(oscButtonAddress, oscParam); // /b
     strcat(oscButtonAddress, strParamNumber); // /1
  
-    myMicroOsc.sendInt(oscButtonAddress, ledState[deviceNumber][parameterNumber]);
+    myMicroOsc.sendFloat(oscButtonAddress, (float)ledState[deviceNumber][parameterNumber]);
    
     // control LED arccoding to the toggled state
     // digitalWrite(ledPin[item], ledState[item]); 
@@ -634,6 +653,7 @@ void setup() {
   Main Loop
 ************************/
 void loop() {   
+  myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   
   // Loop over as5600 instances and /pot1, /pot2, ...
   if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
@@ -646,10 +666,7 @@ void loop() {
       }
     }
     myChronoStart = millis(); // update delay
-  } else {
-    // Receive all osc messages
-    myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
-  }
+  } 
  
   //Example send single osc message without loop
   //sendValueMagneticEncoder(as5600_0, 0, "/pot1");
