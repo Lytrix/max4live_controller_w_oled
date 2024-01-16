@@ -403,25 +403,25 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // Receive VST button state to set led state AND set led on/off
   // it uses floats as states to also cater for continuous values > or < 0.5
   // For example: /button 1 2 0. "Off"
-  if (oscMessage.checkOscAddress("/button", "iisf")) {  
+  if (oscMessage.checkOscAddress("/button", "iisfi")) {  
     int ctrl = oscMessage.nextAsInt();
     int pot = oscMessage.nextAsInt();
     char *value = oscMessage.nextAsString();
     int state = oscMessage.nextAsInt(); // 1. or 0.
-    //invertButton[ctrl-1][pot-1] = oscMessage.nextAsInt();
+    invertButton[ctrl-1][pot-1] = oscMessage.nextAsInt();
 
     strcpy(displayTxtButton[ctrl-1][pot-1], value);  // "IN" 
     updateDisplay(displayList[ctrl-1][0], ctrl-1, tcaDisplayAddress[ctrl-1]);
-    // if (invertButton[ctrl-1][pot-1] == 1) {
-    //   if (state > 0.5){
-    //     digitalWrite(ledPin[ctrl-1][pot-1], LOW);
-    //     ledState[ctrl-1][pot-1]=HIGH; 
-    //   }
-    //   if (state < 0.5){
-    //     digitalWrite(ledPin[ctrl-1][pot-1], HIGH);
-    //     ledState[ctrl-1][pot-1]=LOW;
-    //   }
-    // } else  {
+    if (invertButton[ctrl-1][pot-1] == 1) {
+      if (state > 0.5){
+        digitalWrite(ledPin[ctrl-1][pot-1], LOW);
+        ledState[ctrl-1][pot-1]=HIGH; 
+      }
+      if (state < 0.5){
+        digitalWrite(ledPin[ctrl-1][pot-1], HIGH);
+        ledState[ctrl-1][pot-1]=LOW;
+      }
+    } else  {
       if (state > 0.5){
         digitalWrite(ledPin[ctrl-1][pot-1], HIGH);
         ledState[ctrl-1][pot-1]=HIGH;
@@ -429,7 +429,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
         digitalWrite(ledPin[ctrl-1][pot-1], LOW);
         ledState[ctrl-1][pot-1]=LOW; 
       }  
-    // }
+    }
     
   }
  
