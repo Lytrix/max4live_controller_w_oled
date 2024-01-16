@@ -115,6 +115,48 @@ Adafruit_SSD1306 *displayList[4]= {
      Set Variables
 ************************/
 
+const char oscPotentiometerAddress[4][3][9] = {
+  {
+    "/c/1/p/1", 
+    "/c/1/p/2", 
+    "/c/1/p/3"
+  },
+  {
+    "/c/2/p/1", 
+    "/c/2/p/2", 
+    "/c/2/p/3"
+  },
+  {
+    "/c/3/p/1", 
+    "/c/3/p/2", 
+    "/c/3/p/3"
+  },
+  {
+    "/c/4/p/1", 
+    "/c/4/p/2", 
+    "/c/4/p/3"
+  }
+};
+
+const char oscAddressButton[4][3][9]= {
+  {
+    "/c/1/b/1",
+    "/c/1/b/2"
+  },
+  {
+    "/c/2/b/1",
+    "/c/2/b/2"
+  },
+  {
+    "/c/3/b/1",
+    "/c/3/b/2"
+  },
+  {
+    "/c/4/b/1",
+    "/c/4/b/2"
+  }
+};
+
 // Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
 char displayTxtKnob[4][3][3][12];
 
@@ -133,9 +175,8 @@ char oscParam[3][4] = {"/c", "/p", "/b"}; // controller, potentiometer, button
 char strDeviceNumber[3];
 char strParamNumber[3];
 
-// Store old and new send value for each TCA channel in a list to reduce number off serial sends
-int oldValue[2];
-int newValue[2];
+// Store old and new send value for each TCA channel in a list to reduce number of serial sends
+int lastEncoderValue[4][3];
 
 // Setup default display cursor positions to loop in updateDisplay function.
 int displayPos[3][3][2] = {
@@ -206,27 +247,20 @@ void tcaSelect(int tcaAddress[2]) {
   }
 }
 // Send OSC message when moving potentiometer for each AS5600 magnetic encoder
-void sendValueMagneticEncoder(char oscDevice[4], int deviceNumber, AS5600 &as5600_reference, int channel, char oscParamName[4], int tcaAddress) {
-  sprintf(strDeviceNumber, "/%d", deviceNumber+1);  
-  strcpy(oscAddress, oscDevice);
-  strcat(oscAddress, strDeviceNumber);
-
-  sprintf(strParamNumber, "/%d", channel+1);
-  strcat(oscAddress, oscParamName);
-  strcat(oscAddress, strParamNumber);
-
+void sendValueMagneticEncoder(char *oscAddress, AS5600 &as5600_reference, int lastEncoderValue, int tcaAddress) {
   tcaSelect(tcaAddress);
   delayMicroseconds(1);
-  newValue[channel] = as5600_reference.readAngle();
-  if (newValue[channel] != oldValue[channel]) {  
-      myMicroOsc.sendInt(oscAddress, newValue[channel]);  // SEND MAGNETIC ENCODE
-      oldValue[channel] = newValue[channel];
+  int currentEncoderValue = as5600_reference.readAngle();
+
+  if (currentEncoderValue != lastEncoderValue) {  
+      myMicroOsc.sendInt(oscAddress, currentEncoderValue);  // SEND MAGNETIC ENCODE
+      lastEncoderValue = currentEncoderValue;
   }
 }
 
 // Offset Magnetic Encoder // If VST value is update via mouse input, recieve updated value to calculate new offset of magnetic encoder, so it does not jump.
-void setOffsetMagneticEncoder(int deviceNumber, AS5600 &as5600_reference, int pot, int parameterOffset, int tcaAddress) {
-  int channel = pot -1;
+void setOffsetMagneticEncoder(int deviceNumber, AS5600 &as5600_reference, int channel, int parameterOffset, int tcaAddress, int lastEncoderValue) {
+  const char *oscAddress = oscPotentiometerAddress[deviceNumber][channel];
   tcaSelect(tcaAddress);
   int readAngle = as5600_reference.readAngle();
   // Serial.print("instance");
@@ -246,17 +280,10 @@ void setOffsetMagneticEncoder(int deviceNumber, AS5600 &as5600_reference, int po
 
     // to do: fix the code below as existing void. it currenty hangs if I put it in.
     // char *oscName = "/p"; 
-    newValue[channel] = as5600_reference.readAngle();
-    if (newValue[channel] != oldValue[channel]) {
-      sprintf(strDeviceNumber, "/%d", deviceNumber);  
-      sprintf(strParamNumber, "/%d", pot);
-  
-      strcpy(oscAddress, "/c");
-      strcat(oscAddress, strDeviceNumber);
-      strcat(oscAddress, "/p");
-      strcat(oscAddress, strParamNumber);
-      myMicroOsc.sendInt(oscAddress, newValue[channel]);  // SEND MAGNETIC ENCODE
-      oldValue[channel] = newValue[channel];
+    int currentEncoderValue = as5600_reference.readAngle();
+    if (currentEncoderValue != lastEncoderValue) {
+      myMicroOsc.sendInt(oscAddress, currentEncoderValue);  // SEND MAGNETIC ENCODE
+      lastEncoderValue = currentEncoderValue;
     }
   }
 }
@@ -274,7 +301,7 @@ void oscAddressParser(char oscDeviceName[4], int deviceNumber, char oscParamName
   // Serial.print("created OSCadress: ");
   // Serial.println(oscAddress); // /c1/p1/value
 }
-char *temp;
+
 // OSC MESSAGE LISTENER
 void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   
@@ -330,7 +357,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     int ctrl = oscMessage.nextAsInt();
     int pot = oscMessage.nextAsInt();
     int parameterOffset = oscMessage.nextAsInt();
-    setOffsetMagneticEncoder(ctrl, as5600List[ctrl-1][pot-1][0], pot, parameterOffset, tcaAddress[ctrl-1][pot-1]); // cntr 1, channel 0, offset 4096, instance as5600_0
+    setOffsetMagneticEncoder(ctrl, as5600List[ctrl-1][pot-1][0], pot, parameterOffset, tcaAddress[ctrl-1][pot-1], lastEncoderValue[ctrl-1][pot-1]); // cntr 1, channel 0, offset 4096, instance as5600_0
   } else
   
   // Receive VST button state to set led state AND set led on/off
@@ -418,34 +445,14 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
 
 // Button state function to send ledState update (0 or 1) to Max when Pin goes from High to Low. 
 // The Led is turned on/off only via receiving OSCmessages to have one master being the VST itself.
-void buttonState(char oscDevice[4], int deviceNumber, char oscParam[4], int parameterNumber) {
+void buttonState(char *oscAddress, int deviceNumber, int parameterNumber) {
   lastButtonState[deviceNumber][parameterNumber] = currentButtonState[deviceNumber][parameterNumber];      // save the last state
   currentButtonState[deviceNumber][parameterNumber] = digitalRead(buttonPin[deviceNumber][parameterNumber]); // read new state
 
   if(lastButtonState[deviceNumber][parameterNumber] == HIGH && currentButtonState[deviceNumber][parameterNumber] == LOW) {
-    char oscButtonAddress[24];
-    //Serial.print("Button");
-    //Serial.print(parameterNumber);
-    //Serial.println(" is pressed");
-    
     // invert state of LED
     ledState[deviceNumber][parameterNumber] = !ledState[deviceNumber][parameterNumber];
-    
-    // convert int to char and adding + 1 to create /b1 as oscAddress
-    sprintf(strDeviceNumber, "/%d", deviceNumber+1);  
-    sprintf(strParamNumber, "/%d", parameterNumber+1);
- 
-    strcpy(oscButtonAddress, oscDevice); // /c
-    strcat(oscButtonAddress, strDeviceNumber); // /1
-    strcat(oscButtonAddress, oscParam); // /b
-    strcat(oscButtonAddress, strParamNumber); // /1
- 
-    myMicroOsc.sendFloat(oscButtonAddress, (float)ledState[deviceNumber][parameterNumber]);
-   
-    // control LED arccoding to the toggled state
-    // digitalWrite(ledPin[item], ledState[item]); 
-    // Serial.print("Ledstate: ");
-    // Serial.println(ledState[item]);   
+    myMicroOsc.sendFloat(oscAddress, (float)ledState[deviceNumber][parameterNumber]);
   }
 }
 
@@ -590,14 +597,37 @@ void loop() {
   
   // Loop over as5600 instances and /pot1, /pot2, ...
   if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 10) {
-    for (int c = 0; c <= 3; c++){         // Loop over ctrl 1,2,3,4
-      for (int i = 0; i <= 2; i++){       // Loop over magnectic encoder 1,2,3
-        sendValueMagneticEncoder(oscParam[0], c, as5600List[c][i][0], i, oscParam[1], tcaAddress[c][i]);
-      }
-      for (int i = 0; i <= 1; i++) { // Loop over button 1,2 of each module
-        buttonState(oscParam[0], c, oscParam[2], i);
-      }
-    }
+    // Loop over ctrl 1,2,3,4
+    // Loop over magnectic encoder 1,2,3
+    sendValueMagneticEncoder(oscPotentiometerAddress[0][0], as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
+    sendValueMagneticEncoder(oscPotentiometerAddress[0][1], as5600List[0][1][0], lastEncoderValue[0][1], tcaAddress[0][1]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[0][2], as5600List[0][2][0], lastEncoderValue[0][2], tcaAddress[0][2]);
+
+    sendValueMagneticEncoder(oscPotentiometerAddress[1][0], as5600List[1][0][0], lastEncoderValue[1][0], tcaAddress[1][0]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[1][1], as5600List[1][0][0], lastEncoderValue[1][1], tcaAddress[1][1]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[1][2], as5600List[1][0][0], lastEncoderValue[1][2], tcaAddress[1][2]);
+
+    sendValueMagneticEncoder(oscPotentiometerAddress[2][0], as5600List[2][0][0], lastEncoderValue[2][0], tcaAddress[2][0]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[2][1], as5600List[2][1][0], lastEncoderValue[2][1], tcaAddress[2][1]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[2][2], as5600List[2][2][0], lastEncoderValue[2][2], tcaAddress[2][2]);
+
+    sendValueMagneticEncoder(oscPotentiometerAddress[3][0], as5600List[3][0][0], lastEncoderValue[3][0], tcaAddress[3][0]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[3][1], as5600List[3][1][0], lastEncoderValue[3][1], tcaAddress[3][1]);
+    sendValueMagneticEncoder(oscPotentiometerAddress[3][2], as5600List[3][2][0], lastEncoderValue[3][2], tcaAddress[3][2]);
+    
+    // loop over button 1, 2 for each controller
+    buttonState(oscAddressButton[0][0], 0, 0);
+    buttonState(oscAddressButton[0][1], 0, 1);
+
+    buttonState(oscAddressButton[1][0], 1, 0);
+    buttonState(oscAddressButton[1][1], 1, 1);
+    
+    buttonState(oscAddressButton[2][0], 2, 0);
+    buttonState(oscAddressButton[2][1], 2, 1);
+    
+    buttonState(oscAddressButton[3][0], 3, 0);
+    buttonState(oscAddressButton[3][1], 3, 1);
+
     myChronoStart = millis(); // update delay
   } 
  
