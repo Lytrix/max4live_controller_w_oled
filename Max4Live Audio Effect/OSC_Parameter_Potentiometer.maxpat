@@ -46,7 +46,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1005.9702160060408, 1099.129168808460236, 178.421066790819168, 33.0 ],
-					"presentation_linecount" : 2,
 					"text" : "force 1 update when changing tracks"
 				}
 
@@ -2077,7 +2076,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 1448.5, 784.050860285758972, 54.0, 23.0 ],
-					"text" : "del 150"
+					"text" : "del 100"
 				}
 
 			}
@@ -2139,7 +2138,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1548.0, 461.198332786560059, 251.0, 22.0 ],
-					"text" : "if ($i1 < ($i2-3)) || ($i1 > ($i2+3)) then 0 else 1"
+					"text" : "if ($i1 < ($i2-5)) || ($i1 > ($i2+5)) then 0 else 1"
 				}
 
 			}
@@ -3745,8 +3744,8 @@
 			}
 , 			{
 				"name" : "struplow.js",
-				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Audio Effect",
-				"patcherrelativepath" : ".",
+				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/javascript/lists+strings",
+				"patcherrelativepath" : "../../../../../../../Library/Application Support/Cycling '74/Max 8/Examples/javascript/lists+strings",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
