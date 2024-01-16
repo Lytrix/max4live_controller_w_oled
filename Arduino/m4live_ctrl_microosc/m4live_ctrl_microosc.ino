@@ -114,81 +114,14 @@ Adafruit_SSD1306 *displayList[4]= {
 /***********************
      Set Variables
 ************************/
-char parameterName1[12] ="";
-char parameterValue1[12]="";
-char parameterType1[3] ="";
-
-char parameterName2[12]="";
-char parameterValue2[12]="";
-char parameterType2[3]="";
-
-char parameterName3[12]="";
-char parameterValue3[12]="";
-char parameterType3[3]="";
-
-char parameterName4[12] ="";
-char parameterValue4[12]="";
-char parameterType4[3] ="";
-
-char parameterName5[12]="";
-char parameterValue5[12]="";
-char parameterType5[3]="";
-
-char parameterName6[12]="";
-char parameterValue6[12]="";
-char parameterType6[3]="";
-
-char parameterName7[12]="";
-char parameterValue7[12]="";
-char parameterType7[3]="";
-
-char parameterName8[12]="";
-char parameterValue8[12]="";
-char parameterType8[3]="";
-
-char parameterName9[12]="";
-char parameterValue9[12]="";
-char parameterType9[3]="";
-
-char parameterName10[12]="";
-char parameterValue10[12]="";
-char parameterType10[3]="";
-
-char parameterName11[12]="";
-char parameterValue11[12]="";
-char parameterType11[3]="";
-
-char parameterName12[12]="";
-char parameterValue12[12]="";
-char parameterType12[3]="";
 
 // Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
 char displayTxtKnob[4][3][3][12];
-// = {
-//   {
-//     {parameterName1, parameterValue1, parameterType1},
-//     {parameterName2, parameterValue2, parameterType2},
-//     {parameterName3, parameterValue3, parameterType3}
-//   },
-//   {
-//     {parameterName4, parameterValue4, parameterType4},
-//     {parameterName5, parameterValue5, parameterType5},
-//     {parameterName6, parameterValue6, parameterType6}
-//   },
-//   {
-//     {parameterName7, parameterValue7, parameterType7},
-//     {parameterName8, parameterValue8, parameterType8},
-//     {parameterName9, parameterValue9, parameterType9}
-//   },
-//   {
-//     {parameterName10, parameterValue10, parameterType10},
-//     {parameterName11, parameterValue11, parameterType11},
-//     {parameterName12, parameterValue12, parameterType12}
-//   }
-// };
 
+// List of titles for each controller
 char displayTxtController[5][16];
 
+// List of display values for each button
 char displayTxtButton[4][2][16];
 
 // List for storing each received OSC message for setting the slider width
