@@ -416,27 +416,62 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
   display.setTextSize(1);  // Draw 1X-scale text
   display.setTextColor(SSD1306_WHITE);
   
-  // Generate 1 of 3 rows of display information using the prefilled array.
-  for (int row = 0; row <= 2; row++) { // loop over each display row
-    for (int col = 0; col <= 2; col++) { // loop over each display element
-      display.setCursor(displayPos[row][col][0], displayPos[row][col][1]);
-      display.println(displayTxtKnob[c][row][col]);
-    }
-    display.drawRect(33, displayPos[row][0][1]+2, round(sliderValue[c][row] * sliderLength), sliderHeight, SSD1306_WHITE);
-  }
+// Generate 3 rows of display information using the prefilled array.
+// Row 2  
+  // Column 1 Name
+  display.setCursor(displayPos[0][0][0], displayPos[0][0][1]);
+  display.println(displayTxtKnob[c][0][0]);
+  // Column 2 Slider
+  display.drawRect(33, displayPos[0][0][1]+2, round(sliderValue[c][0] * sliderLength), sliderHeight, SSD1306_WHITE);
+  // Column 3 Value
+  display.setCursor(displayPos[0][1][0], displayPos[0][1][1]);
+  display.println(displayTxtKnob[c][0][1]);
+  // Column 4 Unit
+  display.setCursor(displayPos[0][2][0], displayPos[0][2][1]);
+  display.println(displayTxtKnob[c][0][2]);
 
-  // Button 1 & 2 info
-  for (int b = 0; b<=1; b++) {
-    display.setCursor(displayPos[0][b][0], 56);
-    display.println(displayTxtButton[c][b]);
-  }
+// Row 3  
+  // Column 1 Name
+  display.setCursor(displayPos[1][0][0], displayPos[1][0][1]);
+  display.println(displayTxtKnob[c][1][0]);
+  // Column 2 Slider
+  display.drawRect(33, displayPos[1][0][1]+2, round(sliderValue[c][1] * sliderLength), sliderHeight, SSD1306_WHITE);
+  // Column 3 Value
+  display.setCursor(displayPos[1][1][0], displayPos[1][1][1]);
+  display.println(displayTxtKnob[c][1][1]);
+  // Column 4 Unit
+  display.setCursor(displayPos[1][2][0], displayPos[1][2][1]);
+  display.println(displayTxtKnob[c][1][2]);
+  
+// Row 4  
+  // Column 1 Name
+  display.setCursor(displayPos[2][0][0], displayPos[2][0][1]);
+  display.println(displayTxtKnob[c][2][0]);
+  // Column 2 Slider
+  display.drawRect(33, displayPos[2][0][1]+2, round(sliderValue[c][2] * sliderLength), sliderHeight, SSD1306_WHITE);
+  // Column 3 Value
+  display.setCursor(displayPos[2][1][0], displayPos[2][1][1]);
+  display.println(displayTxtKnob[c][2][1]);
+  // Column 4 Unit
+  display.setCursor(displayPos[2][2][0], displayPos[2][2][1]);
+  display.println(displayTxtKnob[c][2][2]);
+   
+// Row 5
+  // Button 1 Value
+  display.setCursor(displayPos[0][0][0], 56);
+  display.println(displayTxtButton[c][0]);
 
+  // Button 2 Value
+  display.setCursor(displayPos[0][1][0], 56);
+  display.println(displayTxtButton[c][1]);
+
+// Row 1
   // Variables for getTextBounds function to center text
   int16_t x1;
   int16_t y1;
   uint16_t width;
   uint16_t height;
-  // center title text
+  
   display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
   display.setCursor((SCREEN_WIDTH - width) / 2, 0);
   display.println(displayTxtController[c]);
