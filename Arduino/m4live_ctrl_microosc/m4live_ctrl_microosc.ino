@@ -11,7 +11,7 @@
 // THE NUMBER 128 BETWEEN THE < > SYMBOLS  BELOW IS THE MAXIMUM NUMBER OF BYTES RESERVED FOR INCOMMING MESSAGES.
 // MAKE SURE THIS NUMBER OF BYTES CAN HOLD THE SIZE OF THE MESSAGE YOUR ARE RECEIVING IN ARDUINO.
 // OUTGOING MESSAGES ARE WRITTEN DIRECTLY TO THE OUTPUT AND DO NOT NEED ANY RESERVED BYTES.
-MicroOscSlip<512> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
+MicroOscSlip<1024> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
 
@@ -164,7 +164,7 @@ char displayTxtKnob[4][3][3][12];
 char displayTxtController[5][16];
 
 // List of display values for each button
-char displayTxtButton[4][2][16];
+char displayTxtButton[4][2][12];
 
 // List for storing each received OSC message for setting the slider width
 float sliderValue[4][3];
@@ -366,11 +366,12 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   if (oscMessage.checkOscAddressAndTypeTags("/button", "iisfi")) {  
     int ctrl = oscMessage.nextAsInt() -1;
     int pot = oscMessage.nextAsInt() -1;
-    const char *buttonValue = oscMessage.nextAsString();
-    int state = oscMessage.nextAsInt(); // 1. or 0.
+    char *buttonValue = oscMessage.nextAsString();
+    float state = oscMessage.nextAsFloat(); // 1. or 0.
     invertButton[ctrl][pot] = oscMessage.nextAsInt();
 
     strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
+    updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
 
     if (invertButton[ctrl][pot] == 1) {
       if (state > 0.5){
@@ -389,7 +390,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
         ledState[ctrl][pot]=LOW; 
       }  
     }
-    updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
+    
   }
  
 
@@ -417,6 +418,7 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
   // Generate 1 of 3 rows of display information using the prefilled array.
   //for (int row = 0; row <= 2; row++) { // loop over each display row
     //for (int col = 0; col <= 2; col++) { // loop over each display element
+// Controller 1  
   // Row 1
     // Column 1: Name  
       display.setCursor(displayPos[0][0][0], displayPos[0][0][1]);
@@ -456,17 +458,13 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
     // Column 2: Slider
       display.drawRect(33, displayPos[2][0][1]+2, sliderValue[c][2] * sliderLength, sliderHeight, SSD1306_WHITE);
 
-//  }
-
   // Button 1 & 2 info
-  //for (int b = 0; b<=1; b++) {
     display.setCursor(2, 56);
     display.println(displayTxtButton[c][0]);
 
     display.setCursor(75, 56);
     display.println(displayTxtButton[c][1]);
-  //}
-
+ 
   // Variables for getTextBounds function to center text
   int16_t x1;
   int16_t y1;
@@ -476,7 +474,7 @@ void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
   display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
   display.setCursor((SCREEN_WIDTH - width) / 2, 0);
   display.println(displayTxtController[c]);
-
+  
   display.display();
 }
 
@@ -488,7 +486,7 @@ void buttonState(char *oscAddress, int ctrl, int btn) {
 
   if(lastButtonState[ctrl][btn] == HIGH && currentButtonState[ctrl][btn] == LOW) {
     // invert state of LED
-    //ledState[ctrl][parameterNumber] = !ledState[ctrl][btn];
+    ledState[ctrl][btn] = !ledState[ctrl][btn];
     myMicroOsc.sendFloat(oscAddress, ledState[ctrl][btn]);
   }
 }
