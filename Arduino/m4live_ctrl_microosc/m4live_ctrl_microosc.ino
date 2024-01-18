@@ -117,6 +117,13 @@ Adafruit_SSD1306 *displayList[4]= {
      Set Variables
 ************************/
 
+const char initialDisplay[4][5] = {
+  "MAX",
+  "4",
+  "LIVE",
+  "CTRL"
+};
+
 const char oscPotentiometerAddress[4][3][9] = {
   {
     "/c/1/p/1", 
@@ -585,6 +592,23 @@ void setup() {
       for (;;)
         ;  // Don't proceed, loop forever
     }
+    displayList[c][0].clearDisplay();
+    displayList[c][0].fillScreen(SSD1306_WHITE);
+    displayList[c][0].setTextSize(5);  // Draw 1X-scale text
+    displayList[c][0].setTextColor(SSD1306_BLACK);
+    int16_t x1;
+    int16_t y1;
+    uint16_t width;
+    uint16_t height;
+    // center title text
+    displayList[c][0].getTextBounds(initialDisplay[c], 0, 0, &x1, &y1, &width, &height);
+    displayList[c][0].setCursor((SCREEN_WIDTH - width) / 2, 15);
+    displayList[c][0].println(initialDisplay[c]);
+    displayList[c][0].display(); // show initial display with white fill to test pixels.
+  }
+  delay(3000);
+  for (int c = 0; c <= 3; c++) {  // For each 4 ctrl modules
+    tcaSelect(tcaDisplayAddress[c]);
     displayList[c][0].clearDisplay();
     displayList[c][0].display(); // show empty display, else noise will show.
   }
