@@ -5,6 +5,18 @@ This repository contain the files to be able to create a Max4live 4 controller w
 This setup can easily be extended to a 4 units by using jumper cables on the same pcb together with the headers on the boards to maximize a 5 panel order from jlcpcb.
 
 ![Image](Images/m4live_final_controllers.png) ![Image](Images/m4live_side.png)
+
+
+### How to install & use ###
+
+1. Download this repo
+2. Open the Arduino code and upload to the Teensy
+3. Copy the `Max4Live Controller & Hub` folder to `/Music/Ableton/User Library/Presets/Audio Effects`
+4. Open Ableton and place the `Max4live Serial Hub OSC.amxd` to the master channel and select your Teensy device.
+5. Place `Max4live Controller OSC.amxd` on to the track you want to control
+6. Select the VST device in the pull down menu which you want to control
+7. Select the parameters for each potentiometer and button row.
+
 ### History ###
 
 After using excelent Eurorack Droid system and having created my own Launchpad type solution on it, I wanted to have more hands on controllers also for my VST plugins within Ableton.
