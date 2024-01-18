@@ -14,6 +14,8 @@
 MicroOscSlip<1024> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR SLIP MESSAGES
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
+unsigned long timeCnt = 0;
+const long SCREEN_TIMEOUT = 60000;
 
 // Set address of first and second I2C multiplexer
 #define TCAADDR 0x70
@@ -44,7 +46,7 @@ AS5600 *as5600List[4][3]= {
 }; 
 
 // List of Multiplexer wire and channel number for each magnetic encoder
-int tcaAddress[4][3][2] = {
+unsigned int tcaAddress[4][3][2] = {
     {
       {0,1},
       {0,6},
@@ -68,13 +70,13 @@ int tcaAddress[4][3][2] = {
 };
 
 // Encoder direction per controller, per magnetic encoder. 1 is clockwise, 0 is counterclockwise
-int as5600_rotation[4][3];
+unsigned int as5600_rotation[4][3];
 
 // Store invert button 1 or 0 for each button
-int invertButton[4][2];
+unsigned int invertButton[4][2];
 
 // List of Multiplexer wire and channel number for each display
-int tcaDisplayAddress[4][2] = {
+unsigned int tcaDisplayAddress[4][2] = {
   {0, 7},
   {0, 2}, // ctrl1, ctrl2 on wire (=0)
   {1, 0},
@@ -176,10 +178,10 @@ float sliderValue[4][3];
 // char strParamNumber[3];
 
 // Store old and new send value for each TCA channel in a list to reduce number of serial sends
-int lastEncoderValue[4][3];
+unsigned int lastEncoderValue[4][3];
 
 // Setup default display cursor positions to loop in updateDisplay function.
-int displayPos[3][3][2] = {
+unsigned int displayPos[3][3][2] = {
   { // display row 2
     {2, 12},
     {75,12},
@@ -198,14 +200,14 @@ int displayPos[3][3][2] = {
 };
 
 // Button and led pin numbers per ctrl module 
-const int buttonPin[4][2] = {
+const unsigned int buttonPin[4][2] = {
   {0, 1},
   {2, 3},
   {4, 5},
   {6, 7}
 };
 
-const int ledPin[4][2] = {
+const unsigned int ledPin[4][2] = {
   {8, 9},
   {10, 11},
   {12, 15},
@@ -214,8 +216,8 @@ const int ledPin[4][2] = {
 
 // Led, buttonstate variables
 float ledState[4][2];
-int lastButtonState[4][2];
-int currentButtonState[4][2];
+unsigned int lastButtonState[4][2];
+unsigned int currentButtonState[4][2];
 
 
 // Test variables
@@ -230,9 +232,9 @@ int currentButtonState[4][2];
 ************************/
 
 // Channel and Wire select on each Multiplexer via tcaAddress array
-void tcaSelect(int tcaAddress[2]) {
-  int wire = tcaAddress[0];
-  int channel = tcaAddress[1];
+void tcaSelect(unsigned int tcaAddress[2]) {
+  unsigned int wire = tcaAddress[0];
+  unsigned int channel = tcaAddress[1];
 
   // if (channel > 7) return;
   if (wire == 0) {
@@ -247,7 +249,7 @@ void tcaSelect(int tcaAddress[2]) {
   }
 }
 // Send OSC message when moving potentiometer for each AS5600 magnetic encoder
-void sendValueMagneticEncoder(char *oscAddress, AS5600 &as5600_reference, int lastEncoderValue, int tcaAddress) {
+void sendValueMagneticEncoder(const char *oscAddress, AS5600 &as5600_reference, unsigned int lastEncoderValue, unsigned int tcaAddress) {
   tcaSelect(tcaAddress);
   delayMicroseconds(1);
   int currentEncoderValue = as5600_reference.readAngle();
@@ -259,10 +261,10 @@ void sendValueMagneticEncoder(char *oscAddress, AS5600 &as5600_reference, int la
 }
 
 // Offset Magnetic Encoder // If VST value is update via mouse input, recieve updated value to calculate new offset of magnetic encoder, so it does not jump.
-void setOffsetMagneticEncoder(int deviceNumber, AS5600 &as5600_reference, int channel, int parameterOffset, int tcaAddress, int lastEncoderValue) {
+void setOffsetMagneticEncoder(unsigned int deviceNumber, AS5600 &as5600_reference, unsigned int channel, unsigned int parameterOffset, unsigned int tcaAddress, unsigned int lastEncoderValue) {
   const char *oscAddress = oscPotentiometerAddress[deviceNumber][channel];
   tcaSelect(tcaAddress);
-  int readAngle = as5600_reference.readAngle();
+  unsigned int readAngle = as5600_reference.readAngle();
   // Serial.print("instance");
   // Serial.println(readAngle);
   // Serial.print("parameterOffset");
@@ -280,7 +282,7 @@ void setOffsetMagneticEncoder(int deviceNumber, AS5600 &as5600_reference, int ch
 
     // to do: fix the code below as existing void. it currenty hangs if I put it in.
     // char *oscName = "/p"; 
-    int currentEncoderValue = as5600_reference.readAngle();
+    unsigned int currentEncoderValue = as5600_reference.readAngle();
     if (currentEncoderValue != lastEncoderValue) {
       myMicroOsc.sendInt(oscAddress, currentEncoderValue);  // SEND MAGNETIC ENCODE
       lastEncoderValue = currentEncoderValue;
@@ -308,9 +310,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // Recieve the main title for each controller 
   // No display update need, because update display is triggered by /name when selecting potentiometer 1
   // For example /title 1 2 "LMF"
-  if (oscMessage.checkOscAddressAndTypeTags("/title", "iis")) {  
-    int ctrl = oscMessage.nextAsInt() -1;
-    int pot = oscMessage.nextAsInt();
+  if (oscMessage.checkOscAddressAndTypeTags("/title", "is")) {  
+    unsigned int ctrl = oscMessage.nextAsInt() -1;
     strcpy(displayTxtController[ctrl], oscMessage.nextAsString()); 
   } else 
 
@@ -318,11 +319,11 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // Along with corresponding unit names, optionally with the set inverse of potentiometer
   // For example: /value 1 2 "FREQ" "kHz" 0
   if (oscMessage.checkOscAddressAndTypeTags("/name", "iissi")) { 
-    int ctrl = oscMessage.nextAsInt() -1;
-    int pot = oscMessage.nextAsInt() -1;
-    char *name = oscMessage.nextAsString();
-    char *units = oscMessage.nextAsString();
-    int invert = oscMessage.nextAsInt(); 
+    unsigned int ctrl = oscMessage.nextAsInt() -1;
+    unsigned int pot = oscMessage.nextAsInt() -1;
+    const char *name = oscMessage.nextAsString();
+    const char *units = oscMessage.nextAsString();
+    unsigned int invert = oscMessage.nextAsInt(); 
 
     // copy values to display buffer
     strcpy(displayTxtKnob[ctrl][pot][0], name); 
@@ -340,23 +341,25 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // and the 0-1 float value to set the slider width 
   // For example: /value 1 2 "12.0" 0.860321
   if (oscMessage.checkOscAddressAndTypeTags("/value", "iisf")) { 
-    int ctrl = oscMessage.nextAsInt() -1;
-    int pot = oscMessage.nextAsInt() -1;
-    char *value = oscMessage.nextAsString();
+    unsigned int ctrl = oscMessage.nextAsInt() -1;
+    unsigned int pot = oscMessage.nextAsInt() -1;
+    const char *value = oscMessage.nextAsString();
     float slider = oscMessage.nextAsFloat();
-
-    strcpy(displayTxtKnob[ctrl][pot][1], value); // "12.0"
+    if (displayTxtKnob[ctrl][pot][1] != value) {
+      strcpy(displayTxtKnob[ctrl][pot][1], value); // "12.0"
+      timeCnt = millis();                          // Reset time for screensaver 
+    } 
     sliderValue[ctrl][pot] = slider;               // 0.12345
-    updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]); 
+    updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
   } else 
   
   // Sync encoder value to VST value by receiving VST value as new offset value as 0-4096 int
   // It will offset the encoder to the new value if the current value is less or more then 5 out of range.
   // For example: /offset 1 2 4096"
   if (oscMessage.checkOscAddressAndTypeTags("/offset", "iii")) { 
-    int ctrl = oscMessage.nextAsInt() -1;
-    int pot = oscMessage.nextAsInt() -1;
-    int parameterOffset = oscMessage.nextAsInt();
+    unsigned int ctrl = oscMessage.nextAsInt() -1;
+    unsigned int pot = oscMessage.nextAsInt() -1;
+    unsigned int parameterOffset = oscMessage.nextAsInt();
     setOffsetMagneticEncoder(ctrl, as5600List[ctrl][pot][0], pot, parameterOffset, tcaAddress[ctrl][pot], lastEncoderValue[ctrl][pot]); // cntr 1, channel 0, offset 4096, instance as5600_0
   } else
   
@@ -364,15 +367,16 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // it uses floats as states to also cater for continuous values > or < 0.5
   // For example: /button 1 2 0. "Off"
   if (oscMessage.checkOscAddressAndTypeTags("/button", "iisfi")) {  
-    int ctrl = oscMessage.nextAsInt() -1;
-    int pot = oscMessage.nextAsInt() -1;
-    char *buttonValue = oscMessage.nextAsString();
+    unsigned int ctrl = oscMessage.nextAsInt() -1;
+    unsigned int pot = oscMessage.nextAsInt() -1;
+    const char *buttonValue = oscMessage.nextAsString();
     float state = oscMessage.nextAsFloat(); // 1. or 0.
     invertButton[ctrl][pot] = oscMessage.nextAsInt();
 
     strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
     updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
-
+    timeCnt = millis(); // reset time for screensaver
+    
     if (invertButton[ctrl][pot] == 1) {
       if (state > 0.5){
         digitalWrite(ledPin[ctrl][pot], LOW);
@@ -390,7 +394,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
         ledState[ctrl][pot]=LOW; 
       }  
     }
-    
+   
   }
  
 
@@ -407,80 +411,79 @@ int16_t sliderHeight = 5;
 int16_t fillLength;
 
 // Clear and push display with updated values in void Loop()
-void updateDisplay(Adafruit_SSD1306 &display, int c, int tcaDisplayAddress[2]) {
-  //if (millis() - displayStart >= 50) {
-  tcaSelect(tcaDisplayAddress);
+void updateDisplay(Adafruit_SSD1306 &display, unsigned int c, unsigned int tcaDisplayAddress[2]) {
+    tcaSelect(tcaDisplayAddress);
 
-  display.clearDisplay();
-  display.setTextSize(1);  // Draw 1X-scale text
-  display.setTextColor(SSD1306_WHITE);
+    display.clearDisplay();
+    display.setTextSize(1);  // Draw 1X-scale text
+    display.setTextColor(SSD1306_WHITE);
+    
+    // Generate 1 of 3 rows of display information using the prefilled array.
+    //for (int row = 0; row <= 2; row++) { // loop over each display row
+      //for (int col = 0; col <= 2; col++) { // loop over each display element
+  // Controller 1  
+    // Row 1
+      // Column 1: Name  
+        display.setCursor(displayPos[0][0][0], displayPos[0][0][1]);
+        display.println(displayTxtKnob[c][0][0]);
+      // Column 3: Value  
+        display.setCursor(displayPos[0][1][0], displayPos[0][1][1]);
+        display.println(displayTxtKnob[c][0][1]);
+      // Column 4: Units
+        display.setCursor(displayPos[0][2][0], displayPos[0][2][1]);
+        display.println(displayTxtKnob[c][0][2]);
+      // Column 2: Slider
+        display.drawRect(33, displayPos[0][0][1]+2, sliderValue[c][0] * sliderLength, sliderHeight, SSD1306_WHITE);
+
+    // Row 2
+      // Column 1: Name  
+        display.setCursor(displayPos[1][0][0], displayPos[1][0][1]);
+        display.println(displayTxtKnob[c][1][0]);
+      // Column 3: Value  
+        display.setCursor(displayPos[1][1][0], displayPos[1][1][1]);
+        display.println(displayTxtKnob[c][1][1]);
+      // Column 4: Units
+        display.setCursor(displayPos[1][2][0], displayPos[1][2][1]);
+        display.println(displayTxtKnob[c][1][2]);
+      // Column 2: Slider
+        display.drawRect(33, displayPos[1][0][1]+2, sliderValue[c][1] * sliderLength, sliderHeight, SSD1306_WHITE);
+
+    // Row 3
+      // Column 1: Name  
+        display.setCursor(displayPos[2][0][0], displayPos[2][0][1]);
+        display.println(displayTxtKnob[c][2][0]);
+      // Column 3: Value  
+        display.setCursor(displayPos[2][1][0], displayPos[2][1][1]);
+        display.println(displayTxtKnob[c][2][1]);
+      // Column 4: Units
+        display.setCursor(displayPos[2][2][0], displayPos[2][2][1]);
+        display.println(displayTxtKnob[c][2][2]);
+      // Column 2: Slider
+        display.drawRect(33, displayPos[2][0][1]+2, sliderValue[c][2] * sliderLength, sliderHeight, SSD1306_WHITE);
+
+    // Button 1 & 2 info
+      display.setCursor(2, 56);
+      display.println(displayTxtButton[c][0]);
+
+      display.setCursor(75, 56);
+      display.println(displayTxtButton[c][1]);
   
-  // Generate 1 of 3 rows of display information using the prefilled array.
-  //for (int row = 0; row <= 2; row++) { // loop over each display row
-    //for (int col = 0; col <= 2; col++) { // loop over each display element
-// Controller 1  
-  // Row 1
-    // Column 1: Name  
-      display.setCursor(displayPos[0][0][0], displayPos[0][0][1]);
-      display.println(displayTxtKnob[c][0][0]);
-    // Column 3: Value  
-      display.setCursor(displayPos[0][1][0], displayPos[0][1][1]);
-      display.println(displayTxtKnob[c][0][1]);
-    // Column 4: Units
-      display.setCursor(displayPos[0][2][0], displayPos[0][2][1]);
-      display.println(displayTxtKnob[c][0][2]);
-    // Column 2: Slider
-      display.drawRect(33, displayPos[0][0][1]+2, sliderValue[c][0] * sliderLength, sliderHeight, SSD1306_WHITE);
-
-  // Row 2
-    // Column 1: Name  
-      display.setCursor(displayPos[1][0][0], displayPos[1][0][1]);
-      display.println(displayTxtKnob[c][1][0]);
-    // Column 3: Value  
-      display.setCursor(displayPos[1][1][0], displayPos[1][1][1]);
-      display.println(displayTxtKnob[c][1][1]);
-    // Column 4: Units
-      display.setCursor(displayPos[1][2][0], displayPos[1][2][1]);
-      display.println(displayTxtKnob[c][1][2]);
-    // Column 2: Slider
-      display.drawRect(33, displayPos[1][0][1]+2, sliderValue[c][1] * sliderLength, sliderHeight, SSD1306_WHITE);
-
-  // Row 3
-    // Column 1: Name  
-      display.setCursor(displayPos[2][0][0], displayPos[2][0][1]);
-      display.println(displayTxtKnob[c][2][0]);
-    // Column 3: Value  
-      display.setCursor(displayPos[2][1][0], displayPos[2][1][1]);
-      display.println(displayTxtKnob[c][2][1]);
-    // Column 4: Units
-      display.setCursor(displayPos[2][2][0], displayPos[2][2][1]);
-      display.println(displayTxtKnob[c][2][2]);
-    // Column 2: Slider
-      display.drawRect(33, displayPos[2][0][1]+2, sliderValue[c][2] * sliderLength, sliderHeight, SSD1306_WHITE);
-
-  // Button 1 & 2 info
-    display.setCursor(2, 56);
-    display.println(displayTxtButton[c][0]);
-
-    display.setCursor(75, 56);
-    display.println(displayTxtButton[c][1]);
- 
-  // Variables for getTextBounds function to center text
-  int16_t x1;
-  int16_t y1;
-  uint16_t width;
-  uint16_t height;
-  // center title text
-  display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
-  display.setCursor((SCREEN_WIDTH - width) / 2, 0);
-  display.println(displayTxtController[c]);
-  
-  display.display();
-}
+    // Variables for getTextBounds function to center text
+    int16_t x1;
+    int16_t y1;
+    uint16_t width;
+    uint16_t height;
+    // center title text
+    display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
+    display.setCursor((SCREEN_WIDTH - width) / 2, 0);
+    display.println(displayTxtController[c]);
+    
+    display.display();
+  }
 
 // Button state function to send ledState update (0 or 1) to Max when Pin goes from High to Low. 
 // The Led is turned on/off only via receiving OSCmessages to have one master being the VST itself.
-void buttonState(char *oscAddress, int ctrl, int btn) {
+void buttonState(const char *oscAddress, unsigned int ctrl, unsigned int btn) {
   lastButtonState[ctrl][btn] = currentButtonState[ctrl][btn];      // save the last state
   currentButtonState[ctrl][btn] = digitalRead(buttonPin[ctrl][btn]); // read new state
 
@@ -492,9 +495,9 @@ void buttonState(char *oscAddress, int ctrl, int btn) {
 }
 
 // Slicer function used to limit parameter names on display.
-void slice(const char* str, char* result, size_t start, size_t end) {
-    strncpy(result, str + start, end - start);
-}
+// void slice(const char* str, char* result, size_t start, size_t end) {
+//     strncpy(result, str + start, end - start);
+// }
 
 // void myPitchChange(byte channel, int pitch) {
 //   digitalWrite(ledPin, HIGH);
@@ -523,10 +526,10 @@ void setup() {
   // Check which channel is connected to TCA on wire and wire1
   Serial.println(F("\nTCAScanner ready"));
   for (int w = 0; w <=1; w++) {
-    for (uint8_t t = 0; t <= 7; t++) {
+    for (int t = 0; t <= 7; t++) {
       int tcaList[2] = {w, t};
       tcaSelect(tcaList);
-      for (uint8_t addr = 0; addr <= 127; addr++) {
+      for (int addr = 0; addr <= 127; addr++) {
         if (addr == TCAADDR) continue;
         if (w == 0) {
           Wire.beginTransmission(addr);
@@ -628,6 +631,8 @@ void setup() {
   Main Loop
 ************************/
 void loop() {   
+ 
+
   myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   
   // Loop over as5600 instances and /pot1, /pot2, ...
@@ -665,7 +670,35 @@ void loop() {
 
     myChronoStart = millis(); // update delay
   } 
- 
+  if (millis() > (timeCnt + SCREEN_TIMEOUT))
+  {
+    // Activate Screensaver
+    tcaSelect(tcaDisplayAddress[0]);
+    displayList[0][0].clearDisplay();
+    displayList[0][0].display();
+    
+    tcaSelect(tcaDisplayAddress[1]);
+    displayList[1][0].clearDisplay();
+    displayList[1][0].display();
+    
+    tcaSelect(tcaDisplayAddress[2]);
+    displayList[2][0].clearDisplay();
+    displayList[2][0].display();
+    
+    tcaSelect(tcaDisplayAddress[3]);
+    displayList[3][0].clearDisplay();
+    displayList[3][0].display();
+    
+    digitalWrite(ledPin[0][0], LOW);
+    digitalWrite(ledPin[0][1], LOW);
+    digitalWrite(ledPin[1][0], LOW);
+    digitalWrite(ledPin[1][1], LOW);
+    digitalWrite(ledPin[2][0], LOW);
+    digitalWrite(ledPin[2][1], LOW);
+    digitalWrite(ledPin[3][0], LOW);
+    digitalWrite(ledPin[3][1], LOW);
+  }
+
   //Example send single osc message without loop
   //sendValueMagneticEncoder(as5600_0, 0, "/pot1");
   
