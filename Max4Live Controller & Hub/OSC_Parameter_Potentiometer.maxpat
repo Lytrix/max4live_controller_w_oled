@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 209.0, 106.0, 612.0, 829.0 ],
+		"rect" : [ 269.0, 113.0, 612.0, 829.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -129,7 +129,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 995.612048975058997, 1072.129168808460236, 123.0, 22.0 ],
-					"text" : "/value 0 0 s 0."
+					"text" : "/value 1 1 s 0."
 				}
 
 			}
@@ -141,7 +141,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 854.612048975058997, 1072.129168808460236, 123.0, 22.0 ],
-					"text" : "/value 0 0 s 0."
+					"text" : "/value 1 1 s 0."
 				}
 
 			}
@@ -177,7 +177,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 511.337916276284659, 1216.629168808460236, 132.0, 22.0 ],
-					"text" : "/name 1 1 PARA \" \" 0"
+					"text" : "/name 1 1 PARA \" \" 1"
 				}
 
 			}
@@ -299,7 +299,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 567.35714536053797, 785.0, 130.0, 22.0 ],
-					"restore" : [ 0.0 ],
+					"restore" : [ 1.0 ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -335,7 +335,10 @@
 			}
 , 			{
 				"box" : 				{
+					"annotation" : "Invert",
 					"annotation_name" : "Reverse",
+					"appearance" : 1,
+					"hint" : "Invert",
 					"id" : "obj-22",
 					"maxclass" : "live.toggle",
 					"numinlets" : 1,
@@ -349,6 +352,7 @@
 						"valueof" : 						{
 							"parameter_annotation_name" : "Reverse",
 							"parameter_enum" : [ "off", "on" ],
+							"parameter_info" : "Invert",
 							"parameter_longname" : "live.toggle.reverse1",
 							"parameter_mmax" : 1.0,
 							"parameter_shortname" : "live.toggle.reverse1",
@@ -1016,11 +1020,13 @@
 			}
 , 			{
 				"box" : 				{
+					"annotation" : "Select Parameter",
 					"bgmode" : 0,
 					"border" : 0,
 					"clickthrough" : 0,
 					"enablehscroll" : 0,
 					"enablevscroll" : 0,
+					"hint" : "Select Parameter",
 					"id" : "obj-212",
 					"lockeddragscroll" : 0,
 					"lockedsize" : 0,
@@ -1205,9 +1211,14 @@
 			}
 , 			{
 				"box" : 				{
+					"annotation" : "OSC Address",
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"border" : 1.0,
+					"bordercolor" : [ 0.96078431372549, 0.647058823529412, 0.266666666666667, 1.0 ],
+					"hint" : "OSC Address",
 					"id" : "obj-66",
+					"keymode" : 1,
+					"lines" : 1,
 					"maxclass" : "textedit",
 					"numinlets" : 1,
 					"numoutlets" : 4,
@@ -1216,9 +1227,20 @@
 					"patching_rect" : [ 68.0, 603.0, 57.0, 18.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 2.572007711444598, 4.292045831680298, 50.832148070846301, 22.330155611038208 ],
+					"rounded" : 0.0,
+					"saved_attribute_attributes" : 					{
+						"bordercolor" : 						{
+							"expression" : "themecolor.live_lcd_control_fg"
+						}
+
+					}
+,
+					"tabmode" : 0,
 					"text" : "/c/1/p/1",
 					"textcolor" : [ 0.870588235294118, 0.870588235294118, 0.870588235294118, 1.0 ],
-					"varname" : "textedit[1]"
+					"textjustification" : 1,
+					"varname" : "textedit[1]",
+					"wordwrap" : 0
 				}
 
 			}
@@ -1416,16 +1438,18 @@
 			}
 , 			{
 				"box" : 				{
+					"annotation" : "Unit",
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor2" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor_angle" : 270.0,
 					"bgfillcolor_autogradient" : 0.0,
-					"bgfillcolor_color" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_color" : [ 0.0, 0.0, 0.0, 0.0 ],
 					"bgfillcolor_color1" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor_color2" : [ 0.8, 0.8, 0.8, 1.0 ],
 					"bgfillcolor_proportion" : 0.5,
 					"bgfillcolor_type" : "color",
 					"gradient" : 1,
+					"hint" : "Unit",
 					"id" : "obj-128",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -2311,16 +2335,18 @@
 			}
 , 			{
 				"box" : 				{
+					"annotation" : "Value",
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgcolor2" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor_angle" : 270.0,
 					"bgfillcolor_autogradient" : 0.0,
-					"bgfillcolor_color" : [ 0.0, 0.0, 0.0, 1.0 ],
+					"bgfillcolor_color" : [ 0.0, 0.0, 0.0, 0.0 ],
 					"bgfillcolor_color1" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"bgfillcolor_color2" : [ 0.8, 0.8, 0.8, 1.0 ],
 					"bgfillcolor_proportion" : 0.5,
 					"bgfillcolor_type" : "color",
 					"gradient" : 1,
+					"hint" : "Value",
 					"id" : "obj-185",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -2328,9 +2354,10 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 951.5, 837.998987168073654, 57.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 294.036585330963135, 4.292045831680298, 62.462215117045844, 22.0 ],
+					"presentation_rect" : [ 294.036585330963135, 4.292045831680298, 59.462215117045844, 22.0 ],
 					"text" : "\"0.89\"",
-					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ]
+					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ],
+					"textjustification" : 2
 				}
 
 			}
@@ -2453,21 +2480,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.258823529411765, 0.258823529411765, 0.258823529411765, 1.0 ],
-					"id" : "obj-21",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ -25.0, 167.0, 150.0, 34.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ -1.065929540566003, 0.292045831680298, 403.576925098896027, 34.0 ],
-					"text" : "\n",
-					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-163",
 					"maxclass" : "number",
 					"numinlets" : 1,
@@ -2475,6 +2487,30 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 1520.0, 368.49624799999998, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"angle" : 270.0,
+					"bgcolor" : [ 0.086274509803922, 0.086274509803922, 0.086274509803922, 1.0 ],
+					"id" : "obj-76",
+					"maxclass" : "panel",
+					"mode" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 347.628449484705925, 81.916993923485279, 128.0, 128.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 294.036585330963135, 4.292045831680298, 104.482214048504829, 22.466405898332596 ],
+					"proportion" : 0.39,
+					"rounded" : 0,
+					"saved_attribute_attributes" : 					{
+						"bgfillcolor" : 						{
+							"expression" : "themecolor.live_lcd_bg"
+						}
+
+					}
+
 				}
 
 			}
@@ -3764,14 +3800,14 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "Menu_Select_Parameter.maxpat",
-				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Audio Effect",
+				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Controller & Hub",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "struplow.js",
-				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Audio Effect",
+				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Controller & Hub",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
