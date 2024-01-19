@@ -59,7 +59,7 @@ And created one function to parse to each specific OSC address recieving part.
 - 1 Teensy 4.0 with headers
 - 4-16 [AS5600 magnetic angle sensors](https://www.tinytronics.nl/shop/en/sensors/magnetic-field/as5600-magnetic-angle-sensor-encoder-module)
 - 4-16 [EC11 rotary encoders](https://www.tinytronics.nl/shop/en/switches/manual-switches/rotary-encoders/rotary-encoder-ec11-20mm)
-- 1-4 [25mm wide SSD1306 Oled Screens](https://www.gadgetbouw.nl/shop/0-96inch-128x64-i2c-oled-scherm-ssd1306-wit-of-blauw/)
+- 1-4 [25mm wide SSD1306 Oled Screens](https://www.ebay.com/itm/145136236774), or [Gadgetbouw.nl](https://www.gadgetbouw.nl/shop/0-96inch-128x64-i2c-oled-scherm-ssd1306-wit-of-blauw/) Check if they are really 25mm in width visible by the mounting holes being directly to the end of the pcb on both sides. Most cheap SSD1306 Oleds are 27mm.
 - 1-5 PCB boards from jlcpcb
 - 1-5 Alu front panels from jlcpcb
 - Header pins and sockets
