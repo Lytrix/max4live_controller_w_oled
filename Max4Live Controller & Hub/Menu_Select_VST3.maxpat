@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 107.0, 155.0, 949.0, 586.0 ],
+		"rect" : [ 156.0, 352.0, 949.0, 586.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -207,6 +207,9 @@
 			}
 , 			{
 				"box" : 				{
+					"fontface" : 0,
+					"fontname" : "Ableton Sans Bold",
+					"fontsize" : 12.0,
 					"id" : "obj-124",
 					"items" : [ "Select VST3 plugin", ",", "SSL 4K B", ",", "SSL 4K E", ",", "SSL Native Channel Strip 2" ],
 					"maxclass" : "umenu",
@@ -216,7 +219,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 305.0, 331.5, 192.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, -1.5, 290.0, 23.0 ],
+					"presentation_rect" : [ 0.0, -1.5, 301.0, 23.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "Select VST3 plugin", "SSL 4K B", "SSL 4K E", "SSL Native Channel Strip 2" ],
