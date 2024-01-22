@@ -2,10 +2,9 @@
 	"pattrstorage" : 	{
 		"name" : "u603006327",
 		"slots" : 		{
-			"1" : 			{
-				"id" : 1,
+			"1001" : 			{
+				"id" : 1001,
 				"data" : 				{
-					"load_vst::save_selected_vst" : [ 1 ],
 					"ctrl1::Parameter_2[1]::save_osc_address" : [ "/c/1/p/1" ],
 					"ctrl1::Parameter_2[1]::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_2[1]::parameter_menu::save_selected_parameter" : [ 23 ],
@@ -70,10 +69,9 @@
 
 			}
 ,
-			"2" : 			{
-				"id" : 2,
+			"1002" : 			{
+				"id" : 1002,
 				"data" : 				{
-					"load_vst::save_selected_vst" : [ 2 ],
 					"ctrl1::Parameter_2[1]::save_osc_address" : [ "/c/1/p/1" ],
 					"ctrl1::Parameter_2[1]::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_2[1]::parameter_menu::save_selected_parameter" : [ 11 ],
