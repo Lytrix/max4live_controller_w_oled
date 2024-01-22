@@ -219,7 +219,7 @@
 					"parameter_enable" : 1,
 					"patching_rect" : [ 305.0, 331.5, 192.0, 23.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 0.0, -1.5, 301.0, 23.0 ],
+					"presentation_rect" : [ 0.0, -1.5, 220.0, 23.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "Select VST3 plugin", "SSL 4K B", "SSL 4K E", "SSL Native Channel Strip 2" ],
