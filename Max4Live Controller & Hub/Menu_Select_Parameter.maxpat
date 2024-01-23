@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 7,
+			"revision" : 6,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 95.0, 286.0, 793.0, 483.0 ],
+		"rect" : [ 158.0, 254.0, 793.0, 483.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,14 +40,133 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-20",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "int", "" ],
+					"patching_rect" : [ 472.389999999999986, 358.95999999999998, 63.0, 22.0 ],
+					"text" : "unpack i s"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-17",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 352.0, 396.0, 50.0, 22.0 ],
+					"text" : "103 AB"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-15",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 346.5, 346.59375, 84.0, 22.0 ],
+					"text" : "regexp /d+ AB"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-8",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 526.452499999999986, 403.179103970527649, 97.0, 33.0 ],
+					"text" : "index for AB switch logic"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-46",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 514.0, 148.0, 48.0, 22.0 ],
+					"text" : "del 100"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-30",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 460.0625, 124.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-27",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 472.389999999999986, 441.179103970527649, 102.0, 22.0 ],
+					"text" : "s ---switch_AB_id"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-21",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 472.389999999999986, 403.179103970527649, 50.0, 22.0 ],
+					"text" : "103"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 452.0, 302.0, 69.0, 22.0 ],
+					"text" : "route dump"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-11",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 460.0625, 177.0, 39.0, 22.0 ],
+					"text" : "dump"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"comment" : "",
 					"id" : "obj-9",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 221.5, 184.5, 30.0, 30.0 ]
+					"patching_rect" : [ 331.5, 102.5, 30.0, 30.0 ]
 				}
 
 			}
@@ -58,7 +177,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 273.0, 269.0, 118.0, 22.0 ],
+					"patching_rect" : [ 407.5625, 92.0, 118.0, 22.0 ],
 					"text" : "r ---load_parameters"
 				}
 
@@ -83,7 +202,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 138.5625, 231.0, 24.0, 24.0 ]
+					"patching_rect" : [ 248.5625, 149.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -94,7 +213,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 60.0, 174.0, 81.0, 22.0 ],
+					"patching_rect" : [ 170.0, 92.0, 81.0, 22.0 ],
 					"text" : "r ---reconnect"
 				}
 
@@ -106,8 +225,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
-					"patching_rect" : [ 10.0625, 298.15384578704834, 174.0, 22.0 ],
-					"restore" : [ 0 ],
+					"patching_rect" : [ 120.0625, 216.15384578704834, 174.0, 22.0 ],
+					"restore" : [ 103 ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -124,7 +243,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 308.0625, 351.59375, 97.0, 20.0 ],
+					"patching_rect" : [ 418.0625, 269.59375, 97.0, 20.0 ],
 					"text" : "parameter name"
 				}
 
@@ -133,11 +252,11 @@
 				"box" : 				{
 					"comment" : "Parameter Name",
 					"id" : "obj-4",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 271.0625, 346.59375, 30.0, 30.0 ],
+					"patching_rect" : [ 381.0625, 264.59375, 30.0, 30.0 ],
 					"varname" : "parameter_name"
 				}
 
@@ -146,13 +265,13 @@
 				"box" : 				{
 					"fontname" : "Ableton Sans Medium",
 					"id" : "obj-3",
-					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Analogue VCA", ",", "Output Trim", ",", "Width", ",", "Width Mode", ",", "Width Frequency", ",", "Pan", ",", "Filters In", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ Colour", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Compressor Fast Attack", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Fast Attack", ",", "Gate Expander", ",", "S/C Listen", ",", "GroupSense", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Analogue VCA", ",", "Output Trim", ",", "Width", ",", "Width Mode", ",", "Width Frequency", ",", "Pan", ",", "Filters In", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ Colour", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Compressor Fast Attack", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Fast Attack", ",", "Gate Expander", ",", "S/C Listen", ",", "GroupSense", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Analogue VCA", ",", "Output Trim", ",", "Width", ",", "Width Mode", ",", "Width Frequency", ",", "Pan", ",", "Filters In", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ Colour", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Compressor Fast Attack", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Fast Attack", ",", "Gate Expander", ",", "S/C Listen", ",", "GroupSense", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Analogue VCA", ",", "Output Trim", ",", "Width", ",", "Width Mode", ",", "Width Frequency", ",", "Pan", ",", "Filters In", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ Colour", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Compressor Fast Attack", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Fast Attack", ",", "Gate Expander", ",", "S/C Listen", ",", "GroupSense", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Analogue VCA", ",", "Output Trim", ",", "Width", ",", "Width Mode", ",", "Width Frequency", ",", "Pan", ",", "Filters In", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ Colour", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Compressor Fast Attack", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Fast Attack", ",", "Gate Expander", ",", "S/C Listen", ",", "GroupSense" ],
+					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "AB" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 201.0625, 302.0, 159.0, 24.0 ],
+					"patching_rect" : [ 311.0625, 220.0, 159.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 0.0625, -2.0, 220.0, 24.0 ],
 					"style" : "rnbohighcontrast",
@@ -167,7 +286,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 102.0625, 351.59375, 97.0, 20.0 ],
+					"patching_rect" : [ 212.0625, 269.59375, 97.0, 20.0 ],
 					"text" : "parameter index"
 				}
 
@@ -176,11 +295,11 @@
 				"box" : 				{
 					"comment" : "Parameter Index",
 					"id" : "obj-122",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 201.0625, 346.59375, 30.0, 30.0 ],
+					"patching_rect" : [ 311.0625, 264.59375, 30.0, 30.0 ],
 					"varname" : "parameter_index"
 				}
 
@@ -196,6 +315,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
+					"order" : 1,
+					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-30", 0 ],
+					"order" : 0,
 					"source" : [ "obj-10", 0 ]
 				}
 
@@ -209,6 +337,59 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-17", 1 ],
+					"order" : 1,
+					"source" : [ "obj-15", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-20", 0 ],
+					"order" : 0,
+					"source" : [ "obj-15", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-15", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-21", 1 ],
+					"order" : 0,
+					"source" : [ "obj-20", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-21", 0 ],
+					"order" : 1,
+					"source" : [ "obj-20", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-27", 0 ],
+					"source" : [ "obj-21", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-122", 0 ],
 					"source" : [ "obj-3", 0 ]
 				}
@@ -216,8 +397,29 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-19", 0 ],
+					"source" : [ "obj-3", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
 					"source" : [ "obj-3", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-46", 0 ],
+					"source" : [ "obj-30", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"source" : [ "obj-46", 0 ]
 				}
 
 			}
@@ -243,8 +445,6 @@
 
 			}
  ],
-		"dependency_cache" : [  ],
-		"autosave" : 1,
 		"styles" : [ 			{
 				"name" : "rnbohighcontrast",
 				"default" : 				{
@@ -275,7 +475,14 @@
 				"parentstyle" : "",
 				"multi" : 0
 			}
- ]
+ ],
+		"saved_attribute_attributes" : 		{
+			"default_plcolor" : 			{
+				"expression" : ""
+			}
+
+		}
+
 	}
 
 }
