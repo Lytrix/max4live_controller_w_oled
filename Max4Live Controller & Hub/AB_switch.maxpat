@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 385.0, 91.0, 73.0, 22.0 ],
+					"text" : "r ---load_vst"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-87",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -79,7 +91,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 53.857142857142776, 153.805264413356781, 144.0, 47.0 ],
+					"patching_rect" : [ 53.857142857142776, 153.805264413356781, 147.0, 47.0 ],
 					"text" : "AB switch, get id which will send the value below, or id _ float value to set.",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -129,7 +141,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 97.857142857142776, 332.277498126029968, 50.0, 22.0 ],
-					"text" : "103"
+					"text" : "1"
 				}
 
 			}
@@ -172,13 +184,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-88",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 66.857142857142776, 466.277498126029968, 50.0, 35.0 ],
-					"text" : "103 0. <A"
+					"patching_rect" : [ 66.857142857142776, 466.277498126029968, 50.0, 22.0 ],
+					"text" : "1 0. <A"
 				}
 
 			}
@@ -329,6 +340,13 @@
 			}
  ],
 		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-18", 0 ],
+					"source" : [ "obj-1", 0 ]
+				}
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ "obj-88", 0 ],
 					"source" : [ "obj-106", 0 ]
@@ -534,22 +552,13 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-12" : [ "live.tab[1]", "live.tab", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
+		"saved_attribute_attributes" : 		{
+			"default_plcolor" : 			{
+				"expression" : ""
 			}
-,
-			"inherited_shortname" : 1
+
 		}
-,
-		"dependency_cache" : [  ],
-		"autosave" : 0
+
 	}
 
 }
