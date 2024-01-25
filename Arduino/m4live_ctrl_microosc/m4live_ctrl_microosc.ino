@@ -126,43 +126,43 @@ const char initialDisplay[4][5] = {
 
 const char oscPotentiometerAddress[4][3][9] = {
    {
-    "/c/0/p/0", 
-    "/c/0/p/1", 
-    "/c/0/p/2"
-  },
-  {
-    "/c/1/p/0", 
     "/c/1/p/1", 
-    "/c/1/p/2"
+    "/c/1/p/2", 
+    "/c/1/p/3"
   },
   {
-    "/c/2/p/0", 
     "/c/2/p/1", 
-    "/c/2/p/2"
+    "/c/2/p/2", 
+    "/c/2/p/3"
   },
   {
-    "/c/3/p/0", 
     "/c/3/p/1", 
-    "/c/3/p/2"
+    "/c/3/p/2", 
+    "/c/3/p/3"
+  },
+  {
+    "/c/4/p/1", 
+    "/c/4/p/2", 
+    "/c/4/p/3"
   }
 };
 
 const char oscAddressButton[4][3][9]= {
   {
-    "/c/0/b/0",
-    "/c/0/b/1"
+    "/c/1/b/1",
+    "/c/1/b/2"
   },
   {
-    "/c/1/b/0",
-    "/c/1/b/1"
+    "/c/2/b/1",
+    "/c/2/b/2"
   },
   {
-    "/c/2/b/0",
-    "/c/2/b/1"
+    "/c/3/b/1",
+    "/c/3/b/2"
   },
   {
-    "/c/3/b/0",
-    "/c/3/b/1"
+    "/c/4/b/1",
+    "/c/4/b/2"
   }
 };
 
@@ -666,34 +666,34 @@ void loop() {
   if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
     // Loop over ctrl 1,2,3,4
     // Loop over magnectic encoder 1,2,3
-    sendValueMagneticEncoder("/c/0/p/0", as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
-    sendValueMagneticEncoder("/c/0/p/1", as5600List[0][1][0], lastEncoderValue[0][1], tcaAddress[0][1]);
-    sendValueMagneticEncoder("/c/0/p/2", as5600List[0][2][0], lastEncoderValue[0][2], tcaAddress[0][2]);
+    sendValueMagneticEncoder("/c/1/p/1", as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
+    sendValueMagneticEncoder("/c/1/p/2", as5600List[0][1][0], lastEncoderValue[0][1], tcaAddress[0][1]);
+    sendValueMagneticEncoder("/c/1/p/3", as5600List[0][2][0], lastEncoderValue[0][2], tcaAddress[0][2]);
 
-    sendValueMagneticEncoder("/c/1/p/0", as5600List[1][0][0], lastEncoderValue[1][0], tcaAddress[1][0]);
-    sendValueMagneticEncoder("/c/1/p/1", as5600List[1][1][0], lastEncoderValue[1][1], tcaAddress[1][1]);
-    sendValueMagneticEncoder("/c/1/p/2", as5600List[1][2][0], lastEncoderValue[1][2], tcaAddress[1][2]);
+    sendValueMagneticEncoder("/c/2/p/1", as5600List[1][0][0], lastEncoderValue[1][0], tcaAddress[1][0]);
+    sendValueMagneticEncoder("/c/2/p/2", as5600List[1][1][0], lastEncoderValue[1][1], tcaAddress[1][1]);
+    sendValueMagneticEncoder("/c/2/p/3", as5600List[1][2][0], lastEncoderValue[1][2], tcaAddress[1][2]);
 
-    sendValueMagneticEncoder("/c/2/p/0", as5600List[2][0][0], lastEncoderValue[2][0], tcaAddress[2][0]);
-    sendValueMagneticEncoder("/c/2/p/1", as5600List[2][1][0], lastEncoderValue[2][1], tcaAddress[2][1]);
-    sendValueMagneticEncoder("/c/2/p/2", as5600List[2][2][0], lastEncoderValue[2][2], tcaAddress[2][2]);
+    sendValueMagneticEncoder("/c/3/p/1", as5600List[2][0][0], lastEncoderValue[2][0], tcaAddress[2][0]);
+    sendValueMagneticEncoder("/c/3/p/2", as5600List[2][1][0], lastEncoderValue[2][1], tcaAddress[2][1]);
+    sendValueMagneticEncoder("/c/3/p/3", as5600List[2][2][0], lastEncoderValue[2][2], tcaAddress[2][2]);
 
-    sendValueMagneticEncoder("/c/3/p/0", as5600List[3][0][0], lastEncoderValue[3][0], tcaAddress[3][0]);
-    sendValueMagneticEncoder("/c/3/p/1", as5600List[3][1][0], lastEncoderValue[3][1], tcaAddress[3][1]);
-    sendValueMagneticEncoder("/c/3/p/2", as5600List[3][2][0], lastEncoderValue[3][2], tcaAddress[3][2]);
+    sendValueMagneticEncoder("/c/4/p/1", as5600List[3][0][0], lastEncoderValue[3][0], tcaAddress[3][0]);
+    sendValueMagneticEncoder("/c/4/p/2", as5600List[3][1][0], lastEncoderValue[3][1], tcaAddress[3][1]);
+    sendValueMagneticEncoder("/c/4/p/3", as5600List[3][2][0], lastEncoderValue[3][2], tcaAddress[3][2]);
     
     // loop over button 1, 2 for each controller
-    buttonState("/c/0/b/0", 0, 0);
-    buttonState("/c/0/b/1", 0, 1);
+    buttonState("/c/1/b/1", 0, 0);
+    buttonState("/c/1/b/2", 0, 1);
 
-    buttonState("/c/1/b/0", 1, 0);
-    buttonState("/c/1/b/1", 1, 1);
+    buttonState("/c/2/b/1", 1, 0);
+    buttonState("/c/2/b/2", 1, 1);
     
-    buttonState("/c/2/b/0", 2, 0);
-    buttonState("/c/2/b/1", 2, 1);
+    buttonState("/c/3/b/1", 2, 0);
+    buttonState("/c/3/b/2", 2, 1);
     
-    buttonState("/c/3/b/0", 3, 0);
-    buttonState("/c/3/b/1", 3, 1);
+    buttonState("/c/4/b/1", 3, 0);
+    buttonState("/c/4/b/2", 3, 1);
 
     myChronoStart = millis(); // update delay
   } 
