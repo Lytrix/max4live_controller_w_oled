@@ -167,16 +167,16 @@ const char oscAddressButton[4][3][9]= {
 };
 
 // Lists of parameter values to store OSC message values as a buffer for storing and taking display values from.
-char displayTxtKnob[4][3][3][12];
+volatile char displayTxtKnob[4][3][3][12];
 
 // List of titles for each controller
-char displayTxtController[4][16];
+volatile char displayTxtController[4][16];
 
 // List of display values for each button
-char displayTxtButton[4][2][12];
+volatile char displayTxtButton[4][2][12];
 
 // List for storing each received OSC message for setting the slider width
-float sliderValue[4][3];
+volatile float sliderValue[4][3];
 
 // For creating OSC address to receive on
 // char oscAddress[24];
@@ -433,50 +433,64 @@ void updateDisplay(Adafruit_SSD1306 &display, unsigned int c, unsigned int tcaDi
       //for (int col = 0; col <= 2; col++) { // loop over each display element
   // Controller 1  
     // Row 1
-      // Column 1: Name  
+      // Column 1: Name 
+        const char *name1 = displayTxtKnob[c][0][0];
         display.setCursor(displayPos[0][0][0], displayPos[0][0][1]);
-        display.println(displayTxtKnob[c][0][0]);
+        display.println(name1);
       // Column 3: Value  
+        const char *value1 = displayTxtKnob[c][0][1];
         display.setCursor(displayPos[0][1][0], displayPos[0][1][1]);
-        display.println(displayTxtKnob[c][0][1]);
+        display.println(value1);
       // Column 4: Units
+        const char *units1 = displayTxtKnob[c][0][2];
         display.setCursor(displayPos[0][2][0], displayPos[0][2][1]);
-        display.println(displayTxtKnob[c][0][2]);
+        display.println(units1);
       // Column 2: Slider
-        display.drawRect(33, displayPos[0][0][1]+2, sliderValue[c][0] * sliderLength, sliderHeight, SSD1306_WHITE);
+        float slide1 = sliderValue[c][0];
+        display.drawRect(33, displayPos[0][0][1]+2, slide1 * sliderLength, sliderHeight, SSD1306_WHITE);
 
     // Row 2
       // Column 1: Name  
+       const char *name2 = displayTxtKnob[c][1][0];
         display.setCursor(displayPos[1][0][0], displayPos[1][0][1]);
-        display.println(displayTxtKnob[c][1][0]);
+        display.println(name2);
       // Column 3: Value  
+        const char *value2 = displayTxtKnob[c][1][1];
         display.setCursor(displayPos[1][1][0], displayPos[1][1][1]);
-        display.println(displayTxtKnob[c][1][1]);
+        display.println(value2);
       // Column 4: Units
+        const char *units2 = displayTxtKnob[c][1][2];
         display.setCursor(displayPos[1][2][0], displayPos[1][2][1]);
-        display.println(displayTxtKnob[c][1][2]);
+        display.println(units2);
       // Column 2: Slider
-        display.drawRect(33, displayPos[1][0][1]+2, sliderValue[c][1] * sliderLength, sliderHeight, SSD1306_WHITE);
+        float slide2 = sliderValue[c][1];
+        display.drawRect(33, displayPos[1][0][1]+2, slide2 * sliderLength, sliderHeight, SSD1306_WHITE);
 
     // Row 3
       // Column 1: Name  
+        const char *name3 = displayTxtKnob[c][2][0];
         display.setCursor(displayPos[2][0][0], displayPos[2][0][1]);
-        display.println(displayTxtKnob[c][2][0]);
+        display.println(name3);
       // Column 3: Value  
+        const char *value3 = displayTxtKnob[c][2][1];
         display.setCursor(displayPos[2][1][0], displayPos[2][1][1]);
-        display.println(displayTxtKnob[c][2][1]);
+        display.println(value3);
       // Column 4: Units
+        const char *units3 = displayTxtKnob[c][2][2];
         display.setCursor(displayPos[2][2][0], displayPos[2][2][1]);
-        display.println(displayTxtKnob[c][2][2]);
+        display.println(units3);
       // Column 2: Slider
-        display.drawRect(33, displayPos[2][0][1]+2, sliderValue[c][2] * sliderLength, sliderHeight, SSD1306_WHITE);
+        float slide3 = sliderValue[c][2];
+        display.drawRect(33, displayPos[2][0][1]+2, slide3 * sliderLength, sliderHeight, SSD1306_WHITE);
 
     // Button 1 & 2 info
+      const char *button1 = displayTxtButton[c][0];
       display.setCursor(2, 56);
-      display.println(displayTxtButton[c][0]);
-
+      display.println(button1);
+      
+      const char *button2 = displayTxtButton[c][1];
       display.setCursor(75, 56);
-      display.println(displayTxtButton[c][1]);
+      display.println(button2);
   
     // Variables for getTextBounds function to center text
     int16_t x1;
@@ -484,9 +498,10 @@ void updateDisplay(Adafruit_SSD1306 &display, unsigned int c, unsigned int tcaDi
     uint16_t width;
     uint16_t height;
     // center title text
-    display.getTextBounds(displayTxtController[c], 0, 0, &x1, &y1, &width, &height);
+    const char *title = displayTxtController[c];
+    display.getTextBounds(title, 0, 0, &x1, &y1, &width, &height);
     display.setCursor((SCREEN_WIDTH - width) / 2, 0);
-    display.println(displayTxtController[c]);
+    display.println(title);
     
     display.display();
   }
