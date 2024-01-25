@@ -258,7 +258,6 @@ void tcaSelect(unsigned int tcaAddress[2]) {
 // Send OSC message when moving potentiometer for each AS5600 magnetic encoder
 void sendValueMagneticEncoder(const char *oscAddress, AS5600 &as5600_reference, unsigned int lastEncoderValue, unsigned int tcaAddress) {
   tcaSelect(tcaAddress);
-  delayMicroseconds(1);
   int currentEncoderValue = as5600_reference.readAngle();
 
   if (currentEncoderValue != lastEncoderValue) {  
