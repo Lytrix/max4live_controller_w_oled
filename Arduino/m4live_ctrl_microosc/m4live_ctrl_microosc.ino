@@ -170,7 +170,7 @@ const char oscAddressButton[4][3][9]= {
 char displayTxtKnob[4][3][3][12];
 
 // List of titles for each controller
-char displayTxtController[5][16];
+char displayTxtController[4][16];
 
 // List of display values for each button
 char displayTxtButton[4][2][12];
@@ -328,11 +328,11 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // For example: /value 1 2 "FREQ" "kHz" 0
   if (oscMessage.checkOscAddressAndTypeTags("/name", "iissi")) { 
 
-    int ctrl = oscMessage.nextAsInt();
-    int pot = oscMessage.nextAsInt();
+    unsigned int ctrl = oscMessage.nextAsInt() -1;
+    unsigned int pot = oscMessage.nextAsInt() -1;
     char *name = oscMessage.nextAsString();
     char *units = oscMessage.nextAsString();
-    int invert = oscMessage.nextAsInt(); 
+    unsigned int invert = oscMessage.nextAsInt(); 
 
     // copy values to display buffer
     strcpy(displayTxtKnob[ctrl][pot][0], name); 
@@ -350,8 +350,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // and the 0-1 float value to set the slider width 
   // For example: /value 1 2 "12.0" 0.860321
   if (oscMessage.checkOscAddressAndTypeTags("/value", "iisf")) { 
-    int ctrl = oscMessage.nextAsInt();
-    int pot = oscMessage.nextAsInt();
+    unsigned int ctrl = oscMessage.nextAsInt() -1;
+    unsigned int pot = oscMessage.nextAsInt() -1;
     char *value = oscMessage.nextAsString();
     float slider = oscMessage.nextAsFloat();
 
