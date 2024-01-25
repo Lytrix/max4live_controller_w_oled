@@ -67,7 +67,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 173.5, 18.305264413356781, 119.0, 22.0 ],
+					"patching_rect" : [ 164.0, 47.305264413356781, 119.0, 22.0 ],
 					"text" : "r ---vst_control_input"
 				}
 
@@ -79,7 +79,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 53.857142857142776, 153.805264413356781, 147.0, 47.0 ],
+					"patching_rect" : [ 45.357142857142776, 130.805264413356781, 147.0, 47.0 ],
 					"text" : "AB switch, get id which will send the value below, or id _ float value to set.",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
@@ -92,7 +92,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 254.055568933486938, 166.305264413356781, 42.0, 22.0 ],
+					"patching_rect" : [ 245.555568933486938, 143.305264413356781, 42.0, 22.0 ],
 					"text" : "route i"
 				}
 
@@ -104,7 +104,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 274.055568933486938, 112.0, 100.0, 22.0 ],
+					"patching_rect" : [ 265.555568933486938, 89.0, 100.0, 22.0 ],
 					"text" : "r ---switch_AB_id"
 				}
 
@@ -140,7 +140,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 211.5, 166.305264413356781, 30.0, 22.0 ],
+					"patching_rect" : [ 203.0, 143.305264413356781, 30.0, 22.0 ],
 					"text" : "sel i"
 				}
 
@@ -152,7 +152,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "int" ],
-					"patching_rect" : [ 173.5, 112.0, 63.0, 22.0 ],
+					"patching_rect" : [ 165.0, 89.0, 63.0, 22.0 ],
 					"text" : "unpack s i"
 				}
 
