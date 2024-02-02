@@ -15,6 +15,8 @@ MicroOscSlip<1024> myMicroOsc(&Serial);  // CREATE AN INSTANCE OF MicroOsc FOR S
 
 unsigned long myChronoStart = 0;  // VARIABLE USED TO LIMIT THE SPEED OF THE loop() FUNCTION.
 unsigned long timeCnt = 0;
+unsigned long heartBeat = 0;
+
 const long SCREEN_TIMEOUT = 60000;
 
 // Set address of first and second I2C multiplexer
@@ -675,7 +677,7 @@ void loop() {
  
 
   myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
-  
+ 
   // Loop over as5600 instances and /pot1, /pot2, ...
   if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
     // Loop over ctrl 1,2,3,4
@@ -738,6 +740,11 @@ void loop() {
     digitalWrite(ledPin[2][1], LOW);
     digitalWrite(ledPin[3][0], LOW);
     digitalWrite(ledPin[3][1], LOW);
+  }
+
+  if (millis() - heartBeat >= 250) {
+    myMicroOsc.sendInt("/heartbeat", 1);
+    heartBeat = millis();
   }
 
   //Example send single osc message without loop
