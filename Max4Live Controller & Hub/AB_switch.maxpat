@@ -56,7 +56,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 304.0, 396.277498126029968, 119.0, 22.0 ],
+					"patching_rect" : [ 244.555568933486938, 392.277498126029968, 119.0, 22.0 ],
 					"text" : "s ---switch_AB_state"
 				}
 
@@ -232,29 +232,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-64",
-					"maxclass" : "button",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 244.555568933486938, 395.277498126029968, 24.0, 24.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-44",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 244.555568933486938, 466.277498126029968, 127.0, 22.0 ],
-					"text" : "s ---trigger_AB_switch"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-18",
 					"maxclass" : "message",
 					"numinlets" : 2,
@@ -342,16 +319,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-64", 0 ],
-					"order" : 2,
-					"source" : [ "obj-12", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-71", 1 ],
-					"order" : 4,
+					"order" : 3,
 					"source" : [ "obj-12", 0 ]
 				}
 
@@ -359,7 +328,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-86", 0 ],
-					"order" : 3,
+					"order" : 2,
 					"source" : [ "obj-12", 0 ]
 				}
 
