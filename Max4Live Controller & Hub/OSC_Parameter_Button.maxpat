@@ -53,13 +53,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-35",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 877.0, 984.0, 50.0, 35.0 ],
-					"text" : "Regular"
+					"patching_rect" : [ 877.0, 984.0, 50.0, 22.0 ],
+					"text" : "<A"
 				}
 
 			}
@@ -752,7 +751,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 640.434916892221963, 1175.04914665222168, 127.0, 22.0 ],
-					"text" : "/button 2 2 s 0. 0"
+					"text" : "/button 4 1 <A 0. 0"
 				}
 
 			}
@@ -776,7 +775,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 756.934916892221963, 1077.0, 29.5, 22.0 ],
-					"text" : "2 2"
+					"text" : "4 1"
 				}
 
 			}
@@ -844,7 +843,7 @@
 							"parameter_annotation_name" : "Reverse",
 							"parameter_enum" : [ "off", "on" ],
 							"parameter_info" : "Inverse",
-							"parameter_longname" : "live.toggle.reverse1[15]",
+							"parameter_longname" : "live.toggle.reverse1[14]",
 							"parameter_mmax" : 1.0,
 							"parameter_shortname" : "live.toggle.reverse1",
 							"parameter_type" : 1
@@ -1008,7 +1007,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 15.5, 496.0, 136.0, 22.0 ],
-					"restore" : [ "/c/2/b/2" ],
+					"restore" : [ "/c/4/b/1" ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -1060,7 +1059,7 @@
 					}
 ,
 					"tabmode" : 0,
-					"text" : "/c/2/b/2",
+					"text" : "/c/4/b/1",
 					"textcolor" : [ 0.870588235294118, 0.870588235294118, 0.870588235294118, 1.0 ],
 					"textjustification" : 1,
 					"varname" : "textedit[1]",
@@ -1196,7 +1195,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 379.980770915746689, 898.0, 89.62264084815979, 22.0 ],
-					"text" : "ATTA"
+					"text" : "IN"
 				}
 
 			}
@@ -1292,13 +1291,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-105",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 315.0, 977.0, 63.0, 35.0 ],
-					"text" : "/c/2/b/2/title Gate"
+					"patching_rect" : [ 315.0, 977.0, 63.0, 22.0 ],
+					"text" : "Filters"
 				}
 
 			}
@@ -1387,7 +1385,7 @@
 					"patching_rect" : [ 809.0, 670.557376861572266, 59.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 303.934070459433997, 52.292045831680298, 59.0, 22.0 ],
-					"text" : "/c/2/b/2"
+					"text" : "/c/4/b/1"
 				}
 
 			}
@@ -1399,7 +1397,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 457.337916276284659, 777.0, 53.0, 22.0 ],
-					"text" : "/c/2/b/2"
+					"text" : "/c/4/b/1"
 				}
 
 			}
@@ -1459,7 +1457,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 602.97253300888201, 977.0, 132.02746699111799, 22.0 ],
-					"text" : "/c/2/b/2/type \" \""
+					"text" : "/c/4/b/1/type \" \""
 				}
 
 			}
@@ -1531,7 +1529,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 400.35714536053797, 977.0, 197.0, 22.0 ],
-					"text" : "/c/2/b/2/name ATTA"
+					"text" : "/c/4/b/1/name IN"
 				}
 
 			}
@@ -1593,7 +1591,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-4",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -1742,7 +1740,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1817.5, 741.0, 50.0, 22.0 ],
-					"text" : "29"
+					"text" : "14"
 				}
 
 			}
@@ -1977,7 +1975,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 293.934070459433997, 547.730772376060486, 29.5, 22.0 ],
-					"text" : "29"
+					"text" : "14"
 				}
 
 			}
@@ -1996,7 +1994,14 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 83.296374961733818, 4.292045831680298, 219.380510196089745, 22.0 ],
 					"proportion" : 0.39,
-					"rounded" : 0
+					"rounded" : 0,
+					"saved_attribute_attributes" : 					{
+						"bgfillcolor" : 						{
+							"expression" : ""
+						}
+
+					}
+
 				}
 
 			}
@@ -2093,7 +2098,7 @@
 
 					}
 ,
-					"text" : "Regular",
+					"text" : "<A",
 					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ],
 					"textjustification" : 2
 				}
@@ -2554,13 +2559,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 0 ],
-					"source" : [ "obj-29", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-96", 0 ],
 					"source" : [ "obj-3", 0 ]
 				}
@@ -2590,6 +2588,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-23", 3 ],
+					"order" : 0,
+					"source" : [ "obj-35", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-46", 0 ],
+					"order" : 1,
 					"source" : [ "obj-35", 0 ]
 				}
 
@@ -2775,15 +2782,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
-					"order" : 4,
-					"source" : [ "obj-61", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-46", 0 ],
-					"order" : 2,
+					"order" : 3,
 					"source" : [ "obj-61", 0 ]
 				}
 
@@ -2791,7 +2790,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-82", 0 ],
-					"order" : 3,
+					"order" : 2,
 					"source" : [ "obj-61", 0 ]
 				}
 
@@ -3002,42 +3001,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-15" : [ "live.toggle.reverse1[15]", "live.toggle.reverse1", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "Menu_Select_Parameter.maxpat",
-				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Controller & Hub",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "struplow.js",
-				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Controller & Hub",
-				"patcherrelativepath" : ".",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "thru.maxpat",
-				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "Audiomix",
 				"default" : 				{

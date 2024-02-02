@@ -160,12 +160,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-88",
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 66.857142857142776, 466.277498126029968, 50.0, 22.0 ],
-					"text" : "0 0. <A"
+					"patching_rect" : [ 66.857142857142776, 466.277498126029968, 50.0, 35.0 ],
+					"text" : "50 0. <A"
 				}
 
 			}
@@ -387,13 +388,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-44", 0 ],
-					"source" : [ "obj-64", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-32", 1 ],
 					"order" : 0,
 					"source" : [ "obj-67", 0 ]
@@ -411,6 +405,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-88", 1 ],
+					"order" : 0,
+					"source" : [ "obj-71", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-88", 0 ],
+					"order" : 1,
 					"source" : [ "obj-71", 0 ]
 				}
 
@@ -508,22 +511,13 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-12" : [ "live.tab[1]", "live.tab", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
+		"saved_attribute_attributes" : 		{
+			"default_plcolor" : 			{
+				"expression" : ""
 			}
-,
-			"inherited_shortname" : 1
+
 		}
-,
-		"dependency_cache" : [  ],
-		"autosave" : 0
+
 	}
 
 }
