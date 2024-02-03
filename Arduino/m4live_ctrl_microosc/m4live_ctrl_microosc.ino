@@ -677,7 +677,7 @@ void loop() {
   myMicroOsc.onOscMessageReceived(myOnOscMessageReceived);  // TRIGGER OSC RECEPTION and updat Display if parameter value or button state is updated
   
   // Loop over as5600 instances and /pot1, /pot2, ...
-  if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
+  if (millis() - myChronoStart >= 50) { // && Serial.availableForWrite() > 20) {
     // Loop over ctrl 1,2,3,4
     // Loop over magnectic encoder 1,2,3
     sendValueMagneticEncoder("/c/1/p/1", as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
