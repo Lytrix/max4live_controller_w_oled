@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 341.0, 123.0, 951.0, 765.0 ],
+		"rect" : [ 341.0, 123.0, 551.0, 765.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -162,7 +162,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 877.0, 984.0, 50.0, 22.0 ],
-					"text" : "In"
+					"text" : "Off"
 				}
 
 			}
@@ -212,7 +212,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1012.5, 852.0, 29.5, 22.0 ],
-					"text" : "1."
+					"text" : "0."
 				}
 
 			}
@@ -224,7 +224,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 640.434916892221963, 1175.04914665222168, 127.0, 22.0 ],
-					"text" : "/button 4 1 In 1. 0"
+					"text" : "/button 4 1 Off 0. 0"
 				}
 
 			}
@@ -1062,7 +1062,7 @@
 
 					}
 ,
-					"text" : "In",
+					"text" : "Off",
 					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ],
 					"textjustification" : 2
 				}
@@ -1070,6 +1070,7 @@
 			}
 , 			{
 				"box" : 				{
+					"applycolors" : 1,
 					"fontname" : "Ableton Sans Medium",
 					"id" : "obj-1",
 					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre IN", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Expander", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "Legacy Cut", ",", "S/C Listen", ",", "GroupSense", ",", "Analogue VCA", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "AB Switch" ],
@@ -1077,10 +1078,21 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 410.918445459433997, 345.0, 219.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 83.02922673975786, 3.858952887356281, 220.0, 24.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "Select Parameter", "Bypass", "External S/C", "Input Trim", "Pre IN", "Mic", "Polarity", "Fader Level", "Output Trim", "Width", "Pan", "High Pass Filter", "Low Pass Filter", "Filters to Input", "Filters to S/C", "EQ In", "EQ to S/C", "LF Frequency", "LF Gain", "LF Type", "LMF Frequency", "LMF Gain", "LMF Q", "HMF Frequency", "HMF Gain", "HMF Q", "HF Frequency", "HF Gain", "HF Type", "Dynamics In", "Dynamics Pre-EQ", "Compressor Ratio", "Compressor Threshold", "Compressor Release", "Compressor Mix", "Gate Range", "Gate Threshold", "Gate Release", "Gate Expander", "Legacy Solo", "Legacy Solo Safe", "Legacy Cut", "S/C Listen", "GroupSense", "Analogue VCA", "Filters In", "Width Mode", "Width Frequency", "Compressor Auto Make-up", "Compressor Auto Make-up Offset", "AB Switch" ],
+							"parameter_longname" : "umenu",
+							"parameter_mmax" : 50,
+							"parameter_shortname" : "umenu",
+							"parameter_type" : 2
+						}
+
+					}
+,
 					"style" : "rnbohighcontrast",
 					"textcolor" : [ 0.847058823529412, 0.847058823529412, 0.847058823529412, 1.0 ],
 					"varname" : "umenu"

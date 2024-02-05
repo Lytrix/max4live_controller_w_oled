@@ -113,7 +113,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-68",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -138,7 +138,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-64",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -193,7 +193,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-41",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -205,11 +205,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-15",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 1520.0, 103.0, 30.0, 30.0 ]
 				}
 
@@ -453,7 +453,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 958.134499371051788, 850.0, 50.0, 22.0 ],
-					"text" : "\"-10.0\""
+					"text" : "\"1.0\""
 				}
 
 			}
@@ -515,7 +515,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 2121.0, 1147.0, 127.0, 22.0 ],
-					"text" : "s 4 1 0"
+					"text" : "/offset 4 1 2147"
 				}
 
 			}
@@ -552,7 +552,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 995.612048975058997, 1072.129168808460236, 123.0, 35.0 ],
-					"text" : "/value 4 1 \"-10.0\" 0.250977"
+					"text" : "/value 4 1 \"1.0\" 0.52417"
 				}
 
 			}
@@ -565,7 +565,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 854.612048975058997, 1072.129168808460236, 123.0, 35.0 ],
-					"text" : "/value 4 1 \"-10.0\" 0.250977"
+					"text" : "/value 4 1 \"1.0\" 0.52417"
 				}
 
 			}
@@ -601,7 +601,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 511.337916276284659, 1216.629168808460236, 132.0, 22.0 ],
-					"text" : "/name 0 0 GAIN dB 0"
+					"text" : "/name 4 1 GAIN dB 0"
 				}
 
 			}
@@ -637,7 +637,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 99.22893727961042, 1222.927546203136444, 89.583333333333343, 22.0 ],
-					"text" : "/title 0 HF"
+					"text" : "/title 4 HF"
 				}
 
 			}
@@ -1601,7 +1601,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 2266.5, 737.0, 49.0, 22.0 ],
-					"text" : "1029."
+					"text" : "2147."
 				}
 
 			}
@@ -1962,7 +1962,7 @@
 					"patching_rect" : [ 1820.0, 427.0, 45.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 2.934070459433997, 52.292045831680298, 69.0, 22.0 ],
-					"text" : "1029"
+					"text" : "2147"
 				}
 
 			}
@@ -1974,7 +1974,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1758.0, 780.0, 62.0, 22.0 ],
-					"text" : "0.251221"
+					"text" : "0.52417"
 				}
 
 			}
@@ -1988,7 +1988,7 @@
 					"patching_rect" : [ 1754.760870397090912, 862.050860285758972, 84.239129602909088, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 73.934070459433997, 52.292045831680298, 110.576925098896027, 22.0 ],
-					"text" : "20 0."
+					"text" : "20 0.52417"
 				}
 
 			}
@@ -2083,7 +2083,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1010.134499371051788, 664.0, 59.0, 22.0 ],
-					"text" : "0.251221"
+					"text" : "0.52417"
 				}
 
 			}
@@ -2199,7 +2199,14 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 83.485773789563382, 4.959454044699669, 219.086905900388956, 21.798997685313225 ],
 					"proportion" : 0.39,
-					"rounded" : 0
+					"rounded" : 0,
+					"saved_attribute_attributes" : 					{
+						"bgfillcolor" : 						{
+							"expression" : ""
+						}
+
+					}
+
 				}
 
 			}
@@ -2233,7 +2240,7 @@
 
 					}
 ,
-					"text" : "-10.",
+					"text" : "1.",
 					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ],
 					"textjustification" : 2
 				}
@@ -2241,6 +2248,7 @@
 			}
 , 			{
 				"box" : 				{
+					"applycolors" : 1,
 					"fontname" : "Ableton Sans Medium",
 					"id" : "obj-16",
 					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "AB Switch" ],
@@ -2248,10 +2256,21 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
-					"parameter_enable" : 0,
+					"parameter_enable" : 1,
 					"patching_rect" : [ 1402.5, 511.467560410499573, 219.0, 24.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 83.02922673975786, 3.858952887356281, 220.0, 24.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "Select Parameter", "Bypass", "External S/C", "Input Trim", "Polarity", "Low Pass Filter", "High Pass Filter", "EQ In", "EQ Type", "LF Type", "LF Frequency", "LF Gain", "LMF Frequency", "LMF Gain", "LMF Q", "HMF Freq", "HMF Gain", "HMF Q", "HF Type", "HF Freq", "HF Gain", "Dynamics In", "Compressor Peak", "Compressor Fast Attack", "Compressor Ratio", "Compressor Threshold", "Compressor Release", "Compressor Mix", "Gate Expander", "Gate Attack", "Gate Hold", "Gate Threshold", "Gate Range", "Gate Release", "Filters to Input", "Dynamics Pre-EQ", "Filters to S/C", "EQ to S/C", "S/C Listen", "Fader Level", "Output Trim", "Width", "Pan", "Legacy Cut", "Legacy Solo", "Legacy Solo Safe", "GroupSense", "Filters In", "Width Mode", "Width Frequency", "Compressor Auto Make-up", "Compressor Auto Make-up Offset", "AB Switch" ],
+							"parameter_longname" : "parameter_menu",
+							"parameter_mmax" : 52,
+							"parameter_shortname" : "parameter_menu",
+							"parameter_type" : 2
+						}
+
+					}
+,
 					"style" : "rnbohighcontrast",
 					"textcolor" : [ 0.847058823529412, 0.847058823529412, 0.847058823529412, 1.0 ],
 					"varname" : "parameter_menu"
@@ -2297,7 +2316,7 @@
 					"order" : 1,
 					"source" : [ "obj-100", 0 ],
 					"watchpoint_flags" : 1,
-					"watchpoint_id" : 25
+					"watchpoint_id" : 3
 				}
 
 			}
@@ -2527,7 +2546,7 @@
 					"destination" : [ "obj-40", 0 ],
 					"source" : [ "obj-14", 1 ],
 					"watchpoint_flags" : 1,
-					"watchpoint_id" : 26
+					"watchpoint_id" : 4
 				}
 
 			}
@@ -3276,35 +3295,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-22" : [ "live.toggle.reverse1[3]", "live.toggle.reverse1", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "struplow.js",
-				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Controller & Hub",
-				"patcherrelativepath" : ".",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "thru.maxpat",
-				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "Audiomix",
 				"default" : 				{
