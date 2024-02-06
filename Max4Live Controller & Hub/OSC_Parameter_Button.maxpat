@@ -225,7 +225,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 522.0, 744.0, 127.0, 22.0 ],
-					"text" : "/button 4 1 Off 0. 0"
+					"text" : "/button 4 1 Off 0 0"
 				}
 
 			}
@@ -983,9 +983,9 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-46", 0 ],
-					"midpoints" : [ 569.5, 518.0, 500.5, 518.0 ],
-					"order" : 2,
-					"source" : [ "obj-183", 0 ]
+					"midpoints" : [ 613.5, 518.0, 500.5, 518.0 ],
+					"order" : 3,
+					"source" : [ "obj-183", 1 ]
 				}
 
 			}
