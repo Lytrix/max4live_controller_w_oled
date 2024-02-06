@@ -226,7 +226,10 @@ float ledState[4][2];
 unsigned int lastButtonState[4][2];
 unsigned int currentButtonState[4][2];
 
+// display slider variables
 int16_t sliderLength = 37;
+int16_t sliderHeight = 5;
+int16_t fillLength;
 
 // Test variables
 // int ledPinTeensy = 13;
@@ -319,7 +322,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // No display update need, because update display is triggered by /name when selecting potentiometer 1
   // For example /title 1 2 "LMF"
   if (oscMessage.checkOscAddressAndTypeTags("/title", "is")) {  
-    unsigned int ctrl = oscMessage.nextAsInt() -1;
+    unsigned int ctrl = oscMessage.nextAsInt();
     char *title = oscMessage.nextAsString();
     strcpy(displayTxtController[ctrl], title); 
   } else 
@@ -329,8 +332,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // For example: /value 1 2 "FREQ" "kHz" 0
   if (oscMessage.checkOscAddressAndTypeTags("/name", "iissi")) { 
 
-    unsigned int ctrl = oscMessage.nextAsInt() -1;
-    unsigned int pot = oscMessage.nextAsInt() -1;
+    unsigned int ctrl = oscMessage.nextAsInt();
+    unsigned int pot = oscMessage.nextAsInt();
     char *name = oscMessage.nextAsString();
     char *units = oscMessage.nextAsString();
     unsigned int invert = oscMessage.nextAsInt(); 
@@ -351,17 +354,17 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // and the 0-1 float value to set the slider width 
   // For example: /value 1 2 "12.0" 0.860321
   if (oscMessage.checkOscAddressAndTypeTags("/value", "iisi")) { 
-    unsigned int ctrl = oscMessage.nextAsInt() -1;
-    unsigned int pot = oscMessage.nextAsInt() -1;
+    unsigned int ctrl = oscMessage.nextAsInt();
+    unsigned int pot = oscMessage.nextAsInt();
     char *value = oscMessage.nextAsString();
     int sliderInt = oscMessage.nextAsInt();
     float slider = ((float)sliderInt/100) * sliderLength;
     Serial.println(slider);
     if (displayTxtKnob[ctrl][pot][1] != value) {
       strcpy(displayTxtKnob[ctrl][pot][1], value); // "12.0"
+      sliderValue[ctrl][pot] = slider;               // 0.12345
       timeCnt = millis();                          // Reset time for screensaver 
     } 
-    sliderValue[ctrl][pot] = slider;               // 0.12345
     updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
   } else 
   
@@ -369,8 +372,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // It will offset the encoder to the new value if the current value is less or more then 5 out of range.
   // For example: /offset 1 2 4096"
   if (oscMessage.checkOscAddressAndTypeTags("/offset", "iii")) { 
-    unsigned int ctrl = oscMessage.nextAsInt() -1;
-    unsigned int pot = oscMessage.nextAsInt() -1;
+    unsigned int ctrl = oscMessage.nextAsInt();
+    unsigned int pot = oscMessage.nextAsInt();
     unsigned int parameterOffset = oscMessage.nextAsInt();
     setOffsetMagneticEncoder(ctrl, as5600List[ctrl][pot][0], pot, parameterOffset, tcaAddress[ctrl][pot], lastEncoderValue[ctrl][pot]); // cntr 1, channel 0, offset 4096, instance as5600_0
   } else
@@ -379,8 +382,8 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // it uses floats as states to also cater for continuous values > or < 0.5
   // For example: /button 1 2 0. "Off"
   if (oscMessage.checkOscAddressAndTypeTags("/button", "iisii")) {  
-    unsigned int ctrl = oscMessage.nextAsInt() -1;
-    unsigned int pot = oscMessage.nextAsInt() -1;
+    unsigned int ctrl = oscMessage.nextAsInt();
+    unsigned int pot = oscMessage.nextAsInt();
     const char *buttonValue = oscMessage.nextAsString();
     int state = oscMessage.nextAsInt(); // 1. or 0.
     invertButton[ctrl][pot] = oscMessage.nextAsInt();
@@ -418,8 +421,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // }
 }
 
-int16_t sliderHeight = 5;
-int16_t fillLength;
+
 
 // Clear and push display with updated values in void Loop()
 void updateDisplay(Adafruit_SSD1306 &display, unsigned int c, unsigned int tcaDisplayAddress[2]) {
@@ -683,34 +685,34 @@ void loop() {
     // myMicroOsc.sendInt("/heartbeat", 1);
     // Loop over ctrl 1,2,3,4
     // Loop over magnectic encoder 1,2,3
-    sendValueMagneticEncoder("/c/1/p/1", as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
-    sendValueMagneticEncoder("/c/1/p/2", as5600List[0][1][0], lastEncoderValue[0][1], tcaAddress[0][1]);
-    sendValueMagneticEncoder("/c/1/p/3", as5600List[0][2][0], lastEncoderValue[0][2], tcaAddress[0][2]);
+    sendValueMagneticEncoder("/c/0/p/0", as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
+    sendValueMagneticEncoder("/c/0/p/1", as5600List[0][1][0], lastEncoderValue[0][1], tcaAddress[0][1]);
+    sendValueMagneticEncoder("/c/0/p/2", as5600List[0][2][0], lastEncoderValue[0][2], tcaAddress[0][2]);
 
-    sendValueMagneticEncoder("/c/2/p/1", as5600List[1][0][0], lastEncoderValue[1][0], tcaAddress[1][0]);
-    sendValueMagneticEncoder("/c/2/p/2", as5600List[1][1][0], lastEncoderValue[1][1], tcaAddress[1][1]);
-    sendValueMagneticEncoder("/c/2/p/3", as5600List[1][2][0], lastEncoderValue[1][2], tcaAddress[1][2]);
+    sendValueMagneticEncoder("/c/1/p/0", as5600List[1][0][0], lastEncoderValue[1][0], tcaAddress[1][0]);
+    sendValueMagneticEncoder("/c/1/p/1", as5600List[1][1][0], lastEncoderValue[1][1], tcaAddress[1][1]);
+    sendValueMagneticEncoder("/c/1/p/2", as5600List[1][2][0], lastEncoderValue[1][2], tcaAddress[1][2]);
 
-    sendValueMagneticEncoder("/c/3/p/1", as5600List[2][0][0], lastEncoderValue[2][0], tcaAddress[2][0]);
-    sendValueMagneticEncoder("/c/3/p/2", as5600List[2][1][0], lastEncoderValue[2][1], tcaAddress[2][1]);
-    sendValueMagneticEncoder("/c/3/p/3", as5600List[2][2][0], lastEncoderValue[2][2], tcaAddress[2][2]);
+    sendValueMagneticEncoder("/c/2/p/0", as5600List[2][0][0], lastEncoderValue[2][0], tcaAddress[2][0]);
+    sendValueMagneticEncoder("/c/2/p/1", as5600List[2][1][0], lastEncoderValue[2][1], tcaAddress[2][1]);
+    sendValueMagneticEncoder("/c/2/p/2", as5600List[2][2][0], lastEncoderValue[2][2], tcaAddress[2][2]);
 
-    sendValueMagneticEncoder("/c/4/p/1", as5600List[3][0][0], lastEncoderValue[3][0], tcaAddress[3][0]);
-    sendValueMagneticEncoder("/c/4/p/2", as5600List[3][1][0], lastEncoderValue[3][1], tcaAddress[3][1]);
-    sendValueMagneticEncoder("/c/4/p/3", as5600List[3][2][0], lastEncoderValue[3][2], tcaAddress[3][2]);
+    sendValueMagneticEncoder("/c/3/p/0", as5600List[3][0][0], lastEncoderValue[3][0], tcaAddress[3][0]);
+    sendValueMagneticEncoder("/c/3/p/1", as5600List[3][1][0], lastEncoderValue[3][1], tcaAddress[3][1]);
+    sendValueMagneticEncoder("/c/3/p/2", as5600List[3][2][0], lastEncoderValue[3][2], tcaAddress[3][2]);
     
     // loop over button 1, 2 for each controller
-    buttonState("/c/1/b/1", 0, 0);
-    buttonState("/c/1/b/2", 0, 1);
+    buttonState("/c/0/b/0", 0, 0);
+    buttonState("/c/0/b/1", 0, 1);
 
-    buttonState("/c/2/b/1", 1, 0);
-    buttonState("/c/2/b/2", 1, 1);
+    buttonState("/c/1/b/0", 1, 0);
+    buttonState("/c/1/b/1", 1, 1);
     
-    buttonState("/c/3/b/1", 2, 0);
-    buttonState("/c/3/b/2", 2, 1);
+    buttonState("/c/2/b/0", 2, 0);
+    buttonState("/c/2/b/1", 2, 1);
     
-    buttonState("/c/4/b/1", 3, 0);
-    buttonState("/c/4/b/2", 3, 1);
+    buttonState("/c/3/b/0", 3, 0);
+    buttonState("/c/3/b/1", 3, 1);
 
     myChronoStart = millis(); // update delay
   } 
