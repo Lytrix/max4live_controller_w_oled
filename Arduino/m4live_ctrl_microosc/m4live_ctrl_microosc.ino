@@ -378,11 +378,11 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // Receive VST button state to set led state AND set led on/off
   // it uses floats as states to also cater for continuous values > or < 0.5
   // For example: /button 1 2 0. "Off"
-  if (oscMessage.checkOscAddressAndTypeTags("/button", "iisfi")) {  
+  if (oscMessage.checkOscAddressAndTypeTags("/button", "iisii")) {  
     unsigned int ctrl = oscMessage.nextAsInt() -1;
     unsigned int pot = oscMessage.nextAsInt() -1;
     const char *buttonValue = oscMessage.nextAsString();
-    float state = oscMessage.nextAsFloat(); // 1. or 0.
+    int state = oscMessage.nextAsInt(); // 1. or 0.
     invertButton[ctrl][pot] = oscMessage.nextAsInt();
 
     strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
@@ -390,18 +390,18 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     timeCnt = millis(); // reset time for screensaver
     
     if (invertButton[ctrl][pot] == 1) {
-      if (state > 0.5){
+      if (state == 1 ){
         digitalWrite(ledPin[ctrl][pot], LOW);
         ledState[ctrl][pot]=HIGH; 
-      } else {
+      } else if (state == 0 ){
         digitalWrite(ledPin[ctrl][pot], HIGH);
         ledState[ctrl][pot]=LOW;
       }
     } else  {
-      if (state > 0.5){
+      if (state == 1){
         digitalWrite(ledPin[ctrl][pot], HIGH);
         ledState[ctrl][pot]=HIGH;
-      }  else {
+      }  else if (state == 0 ){
         digitalWrite(ledPin[ctrl][pot], LOW);
         ledState[ctrl][pot]=LOW; 
       }  
