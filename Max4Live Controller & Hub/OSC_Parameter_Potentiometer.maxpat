@@ -40,13 +40,25 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"comment" : "",
+					"id" : "obj-6",
+					"index" : 3,
+					"maxclass" : "inlet",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1530.188557028770447, 69.811315178871155, 30.0, 30.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-49",
 					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 298.358460426330566, 1124.5, 164.0, 33.0 ],
-					"presentation_linecount" : 2,
 					"text" : "OSC address for potentiometer routing"
 				}
 
@@ -55,7 +67,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-48",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -69,8 +81,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1665.88242244720459, 68.311315178871155, 200.000008344650269, 20.0 ],
-					"text" : "get all potentiometer osc messages"
+					"patching_rect" : [ 1566.0, 68.311315178871155, 200.000008344650269, 20.0 ],
+					"text" : "get all potentiometer osc message"
 				}
 
 			}
@@ -93,7 +105,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 60.377353668212891, 1124.528212070465088, 164.0, 33.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Forward 1/0 from Select track API to next bpatcher"
 				}
 
@@ -105,8 +116,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 522.641467690467834, 109.433953523635864, 188.0, 33.0 ],
-					"presentation_linecount" : 3,
+					"patching_rect" : [ 522.641467690467834, 109.433953523635864, 191.0, 33.0 ],
 					"text" : "Main trigger object to route bangs sequentially and open gates"
 				}
 
@@ -118,7 +128,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1012.941218733787537, 68.311315178871155, 200.000008344650269, 20.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Get value from get parameter index"
 				}
 
@@ -133,7 +142,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 553.0, 417.0, 173.0, 36.0 ],
-					"presentation_linecount" : 2,
 					"text" : "Main regex to select db/kHz based on name"
 				}
 
@@ -145,7 +153,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 541.509390711784363, 69.811315178871155, 164.0, 20.0 ],
-					"presentation_linecount" : 3,
 					"text" : "Get1/0 from Select track API"
 				}
 
@@ -225,7 +232,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-68",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
@@ -250,7 +257,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-64",
-					"index" : 0,
+					"index" : 3,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -293,7 +300,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-41",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -305,11 +312,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-15",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "int" ],
 					"patching_rect" : [ 507.547129273414612, 69.811315178871155, 30.0, 30.0 ]
 				}
 
@@ -686,7 +693,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 377.358460426330566, 986.792374014854431, 132.0, 22.0 ],
-					"text" : "/name 0 0 GAIN dB 0"
+					"text" : "/name 4 1 GAIN dB 0"
 				}
 
 			}
@@ -722,7 +729,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 77.358484387397766, 986.792374014854431, 89.583333333333343, 22.0 ],
-					"text" : "/title 0 HF"
+					"text" : "/title 4 HF"
 				}
 
 			}
@@ -943,30 +950,6 @@
 					"outlettype" : [ "", "int", "int" ],
 					"patching_rect" : [ 1530.188557028770447, 379.245252728462219, 48.0, 22.0 ],
 					"text" : "change"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-2",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 1530.188557028770447, 345.282991290092468, 102.0, 22.0 ],
-					"text" : "route oscAddress"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-7",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1543.188557028770447, 68.311315178871155, 115.0, 22.0 ],
-					"text" : "r receive_all_values"
 				}
 
 			}
@@ -1597,18 +1580,6 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-127",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1530.188557028770447, 309.433937549591064, 32.0, 22.0 ],
-					"text" : "gate"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"id" : "obj-210",
 					"linecount" : 2,
 					"maxclass" : "comment",
@@ -2133,7 +2104,14 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 83.485773789563382, 4.959454044699669, 219.086905900388956, 21.798997685313225 ],
 					"proportion" : 0.39,
-					"rounded" : 0
+					"rounded" : 0,
+					"saved_attribute_attributes" : 					{
+						"bgfillcolor" : 						{
+							"expression" : ""
+						}
+
+					}
+
 				}
 
 			}
@@ -2234,7 +2212,7 @@
 					"order" : 1,
 					"source" : [ "obj-100", 0 ],
 					"watchpoint_flags" : 1,
-					"watchpoint_id" : 25
+					"watchpoint_id" : 3
 				}
 
 			}
@@ -2312,13 +2290,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-2", 0 ],
-					"source" : [ "obj-127", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-85", 0 ],
 					"source" : [ "obj-128", 0 ]
 				}
@@ -2381,14 +2352,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-127", 0 ],
-					"midpoints" : [ 548.547129273414612, 269.20753014087677, 1539.688557028770447, 269.20753014087677 ],
-					"source" : [ "obj-14", 3 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-134", 0 ],
 					"midpoints" : [ 538.047129273414612, 291.594917714595795, 487.020713877677963, 291.594917714595795, 487.020713877677963, 291.919242084026337, 394.5, 291.919242084026337 ],
 					"source" : [ "obj-14", 2 ]
@@ -2433,7 +2396,7 @@
 					"destination" : [ "obj-40", 0 ],
 					"source" : [ "obj-14", 1 ],
 					"watchpoint_flags" : 1,
-					"watchpoint_id" : 26
+					"watchpoint_id" : 4
 				}
 
 			}
@@ -2674,13 +2637,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-20", 0 ],
-					"source" : [ "obj-2", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"midpoints" : [ 1539.688557028770447, 644.501643419265747, 1686.858356595039368, 644.501643419265747 ],
 					"order" : 0,
@@ -2848,6 +2804,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-20", 0 ],
+					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-22", 0 ],
 					"source" : [ "obj-60", 1 ]
 				}
@@ -2855,17 +2818,8 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-2", 1 ],
-					"midpoints" : [ 81.5, 678.098335325717926, 48.020713877677963, 678.098335325717926, 48.020713877677963, 111.063807308673859, 1622.688557028770447, 111.063807308673859 ],
-					"order" : 0,
-					"source" : [ "obj-61", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-27", 1 ],
-					"order" : 2,
+					"order" : 1,
 					"source" : [ "obj-61", 0 ]
 				}
 
@@ -2874,7 +2828,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-48", 0 ],
 					"midpoints" : [ 81.5, 678.0, 48.0, 678.0, 48.0, 1095.0, 271.5, 1095.0 ],
-					"order" : 1,
+					"order" : 0,
 					"source" : [ "obj-61", 0 ]
 				}
 
@@ -2882,7 +2836,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-82", 0 ],
-					"order" : 4,
+					"order" : 3,
 					"source" : [ "obj-61", 0 ]
 				}
 
@@ -2890,7 +2844,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-83", 0 ],
-					"order" : 3,
+					"order" : 2,
 					"source" : [ "obj-61", 0 ]
 				}
 
@@ -2914,13 +2868,6 @@
 					"destination" : [ "obj-100", 4 ],
 					"midpoints" : [ 528.5, 700.509326815605164, 550.752790856361344, 700.509326815605164 ],
 					"source" : [ "obj-69", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-127", 1 ],
-					"source" : [ "obj-7", 0 ]
 				}
 
 			}
@@ -3158,35 +3105,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"obj-22" : [ "live.toggle.reverse1[3]", "live.toggle.reverse1", 0 ],
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
-		"dependency_cache" : [ 			{
-				"name" : "struplow.js",
-				"bootpath" : "~/Music/Ableton/User Library/Presets/Audio Effects/magnetic_encoder_controller_oled/Max4Live Controller & Hub",
-				"patcherrelativepath" : ".",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "thru.maxpat",
-				"bootpath" : "C74:/patchers/m4l/Pluggo for Live resources/patches",
-				"type" : "JSON",
-				"implicit" : 1
-			}
- ],
-		"autosave" : 0,
 		"styles" : [ 			{
 				"name" : "Audiomix",
 				"default" : 				{
