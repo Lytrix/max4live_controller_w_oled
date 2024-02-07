@@ -1292,8 +1292,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 340.515152000000057, 335.0, 46.0, 21.0 ],
-					"text" : "metro 5"
+					"patching_rect" : [ 340.515152000000057, 335.0, 52.0, 21.0 ],
+					"text" : "qmetro 5"
 				}
 
 			}
@@ -1306,8 +1306,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "" ],
-					"patching_rect" : [ 252.333327999999995, 405.0, 206.0, 21.0 ],
-					"text" : "serial @bufsize 1024 dtr 1 @autoopen 0"
+					"patching_rect" : [ 252.333327999999995, 405.0, 271.0, 21.0 ],
+					"text" : "serial @bufsize 1024 dtr 1 @chunk 512 @autoopen 0"
 				}
 
 			}

@@ -687,7 +687,7 @@ void loop() {
   
   // Loop over as5600 instances and /pot1, /pot2, ...
   if (millis() - myChronoStart >= 50 && Serial.availableForWrite() > 20) {
-    // myMicroOsc.sendInt("/heartbeat", 1);
+    myMicroOsc.sendInt("/heartbeat", 1);
     // Loop over ctrl 1,2,3,4
     // Loop over magnectic encoder 1,2,3
     sendValueMagneticEncoder("/c/0/p/0", as5600List[0][0][0], lastEncoderValue[0][0], tcaAddress[0][0]); 
