@@ -207,14 +207,14 @@ unsigned int displayPos[3][3][2] = {
 };
 
 // Button and led pin numbers per ctrl module 
-const unsigned int buttonPin[4][2] = {
+byte buttonPin[4][2] = {
   {0, 1},
   {2, 3},
   {4, 5},
   {6, 7}
 };
 
-const unsigned int ledPin[4][2] = {
+byte ledPin[4][2] = {
   {8, 9},
   {10, 11},
   {12, 15},
@@ -223,8 +223,8 @@ const unsigned int ledPin[4][2] = {
 
 // Led, buttonstate variables
 float ledState[4][2];
-unsigned int lastButtonState[4][2];
-unsigned int currentButtonState[4][2];
+byte lastButtonState[4][2];
+byte currentButtonState[4][2];
 
 // display slider variables
 int16_t sliderLength = 37;
@@ -385,29 +385,31 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     unsigned int ctrl = oscMessage.nextAsInt();
     unsigned int pot = oscMessage.nextAsInt();
     const char *buttonValue = oscMessage.nextAsString();
-    int state = oscMessage.nextAsInt(); // 1. or 0.
-    invertButton[ctrl][pot] = oscMessage.nextAsInt();
-
+    byte state = oscMessage.nextAsInt(); // 1. or 0.
+    byte invertState = oscMessage.nextAsInt();
+    // invertButton[ctrl][pot] = invertState;
     strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
     updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
     timeCnt = millis(); // reset time for screensaver
     
-    if (invertButton[ctrl][pot] == 1) {
-      if (state == 1 ){
-        digitalWrite(ledPin[ctrl][pot], LOW);
-        ledState[ctrl][pot]=HIGH; 
-      } else if (state == 0 ){
+    if (invertState == HIGH) {
+      if (state == HIGH){
+         digitalWrite(ledPin[ctrl][pot], LOW);
+        //ledState[ctrl][pot]=LOW; 
+      }  else  {
         digitalWrite(ledPin[ctrl][pot], HIGH);
-        ledState[ctrl][pot]=LOW;
+        //ledState[ctrl][pot]=HIGH;
+       
       }
-    } else  {
-      if (state == 1){
+    } else {
+      if (state == HIGH ){
         digitalWrite(ledPin[ctrl][pot], HIGH);
-        ledState[ctrl][pot]=HIGH;
-      }  else if (state == 0 ){
-        digitalWrite(ledPin[ctrl][pot], LOW);
         ledState[ctrl][pot]=LOW; 
-      }  
+      } else {
+        digitalWrite(ledPin[ctrl][pot], LOW);
+        ledState[ctrl][pot]=HIGH;
+      }
+      
     }
    
   }
@@ -517,8 +519,9 @@ void buttonState(const char *oscAddress, unsigned int ctrl, unsigned int btn) {
 
   if(lastButtonState[ctrl][btn] == HIGH && currentButtonState[ctrl][btn] == LOW) {
     // invert state of LED
-    ledState[ctrl][btn] = !ledState[ctrl][btn];
-    myMicroOsc.sendFloat(oscAddress, ledState[ctrl][btn]);
+    //ledState[ctrl][btn] = !ledState[ctrl][btn];
+    myMicroOsc.sendInt(oscAddress, ledPin[ctrl][btn]);
+    //myMicroOsc.sendFloat(oscAddress, ledState[ctrl][btn]);
   }
 }
 
@@ -601,8 +604,9 @@ void setup() {
     
     for (int b = 0; b <= 1; b++) {
       pinMode(buttonPin[c][b], INPUT_PULLUP); // set arduino pin to input pull-up mode
-      pinMode(ledPin[c][b], OUTPUT);          // set arduino pin to output mode
       currentButtonState[c][b] = digitalRead(buttonPin[c][b]);
+      pinMode(ledPin[c][b], OUTPUT);          // set arduino pin to output mode
+      ledState[c][b] = digitalRead(ledPin[c][b]);
     }
 
     tcaSelect(tcaDisplayAddress[c]);
@@ -702,17 +706,17 @@ void loop() {
     sendValueMagneticEncoder("/c/3/p/2", as5600List[3][2][0], lastEncoderValue[3][2], tcaAddress[3][2]);
     
     // loop over button 1, 2 for each controller
-    buttonState("/c/0/b/0", 0, 0);
-    buttonState("/c/0/b/1", 0, 1);
+    // buttonState("/c/0/b/0", 0, 0);
+    // buttonState("/c/0/b/1", 0, 1);
 
-    buttonState("/c/1/b/0", 1, 0);
-    buttonState("/c/1/b/1", 1, 1);
+    // buttonState("/c/1/b/0", 1, 0);
+    // buttonState("/c/1/b/1", 1, 1);
     
-    buttonState("/c/2/b/0", 2, 0);
-    buttonState("/c/2/b/1", 2, 1);
+    // buttonState("/c/2/b/0", 2, 0);
+    // buttonState("/c/2/b/1", 2, 1);
     
-    buttonState("/c/3/b/0", 3, 0);
-    buttonState("/c/3/b/1", 3, 1);
+    // buttonState("/c/3/b/0", 3, 0);
+    // buttonState("/c/3/b/1", 3, 1);
 
     myChronoStart = millis(); // update delay
   } 
