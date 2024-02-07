@@ -126,43 +126,43 @@ const char initialDisplay[4][5] = {
 
 const char oscPotentiometerAddress[4][3][9] = {
    {
+    "/c/0/p/0", 
+    "/c/0/p/1", 
+    "/c/0/p/2"
+  },
+  {
+    "/c/1/p/0", 
     "/c/1/p/1", 
-    "/c/1/p/2", 
-    "/c/1/p/3"
+    "/c/1/p/2"
   },
   {
+    "/c/2/p/0", 
     "/c/2/p/1", 
-    "/c/2/p/2", 
-    "/c/2/p/3"
+    "/c/2/p/2"
   },
   {
+    "/c/3/p/0", 
     "/c/3/p/1", 
-    "/c/3/p/2", 
-    "/c/3/p/3"
-  },
-  {
-    "/c/4/p/1", 
-    "/c/4/p/2", 
-    "/c/4/p/3"
+    "/c/3/p/2"
   }
 };
 
 const char oscAddressButton[4][3][9]= {
   {
-    "/c/1/b/1",
-    "/c/1/b/2"
+    "/c/0/b/0",
+    "/c/0/b/1"
   },
   {
-    "/c/2/b/1",
-    "/c/2/b/2"
+    "/c/1/b/0",
+    "/c/1/b/1"
   },
   {
-    "/c/3/b/1",
-    "/c/3/b/2"
+    "/c/2/b/0",
+    "/c/2/b/1"
   },
   {
-    "/c/4/b/1",
-    "/c/4/b/2"
+    "/c/3/b/0",
+    "/c/3/b/1"
   }
 };
 
@@ -185,7 +185,12 @@ volatile float sliderValue[4][3];
 // char strParamNumber[3];
 
 // Store old and new send value for each TCA channel in a list to reduce number of serial sends
-unsigned int lastEncoderValue[4][3];
+unsigned int lastEncoderValue[4][3] = {
+  {0,0,0},
+  {0,0,0},
+  {0,0,0},
+  {0,0,0}
+};
 
 // Setup default display cursor positions to loop in updateDisplay function.
 unsigned int displayPos[3][3][2] = {
@@ -222,7 +227,7 @@ const unsigned int ledPin[4][2] = {
 };
 
 // Led, buttonstate variables
-float ledState[4][2];
+unsigned int ledState[4][2];
 unsigned int lastButtonState[4][2];
 unsigned int currentButtonState[4][2];
 
@@ -394,19 +399,19 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     
     if (invertButton[ctrl][pot] == 1) {
       if (state == 1 ){
-        digitalWrite(ledPin[ctrl][pot], LOW);
-        ledState[ctrl][pot]=HIGH; 
-      } else if (state == 0 ){
-        digitalWrite(ledPin[ctrl][pot], HIGH);
-        ledState[ctrl][pot]=LOW;
+        digitalWrite(ledPin[ctrl][pot], 0);
+        ledState[ctrl][pot]=1; 
+      } else {
+        digitalWrite(ledPin[ctrl][pot], 1);
+        ledState[ctrl][pot]=0;
       }
     } else  {
       if (state == 1){
-        digitalWrite(ledPin[ctrl][pot], HIGH);
-        ledState[ctrl][pot]=HIGH;
-      }  else if (state == 0 ){
-        digitalWrite(ledPin[ctrl][pot], LOW);
-        ledState[ctrl][pot]=LOW; 
+        digitalWrite(ledPin[ctrl][pot], 0);
+        //ledState[ctrl][pot]=0; 
+      }  else if (state == 0){
+        digitalWrite(ledPin[ctrl][pot], 1);
+        //ledState[ctrl][pot]=1;
       }  
     }
    
@@ -518,7 +523,7 @@ void buttonState(const char *oscAddress, unsigned int ctrl, unsigned int btn) {
   if(lastButtonState[ctrl][btn] == HIGH && currentButtonState[ctrl][btn] == LOW) {
     // invert state of LED
     ledState[ctrl][btn] = !ledState[ctrl][btn];
-    myMicroOsc.sendFloat(oscAddress, ledState[ctrl][btn]);
+    myMicroOsc.sendInt(oscAddress, ledState[ctrl][btn]);
   }
 }
 
