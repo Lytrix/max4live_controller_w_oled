@@ -388,29 +388,30 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     byte state = oscMessage.nextAsInt(); // 1. or 0.
     byte invertState = oscMessage.nextAsInt();
     // invertButton[ctrl][pot] = invertState;
+    digitalWrite(ledPin[ctrl][pot], state);
     strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
     updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
     timeCnt = millis(); // reset time for screensaver
     
-    if (invertState == HIGH) {
-      if (state == HIGH){
-         digitalWrite(ledPin[ctrl][pot], LOW);
-        //ledState[ctrl][pot]=LOW; 
-      }  else  {
-        digitalWrite(ledPin[ctrl][pot], HIGH);
-        //ledState[ctrl][pot]=HIGH;
+    // if (invertState == HIGH) {
+    //   if (state == HIGH){
+    //      digitalWrite(ledPin[ctrl][pot], state);
+    //     //ledState[ctrl][pot]=LOW; 
+    //   }  else if (state == LOW ) {
+    //     digitalWrite(ledPin[ctrl][pot], HIGH);
+    //     //ledState[ctrl][pot]=HIGH;
        
-      }
-    } else {
-      if (state == HIGH ){
-        digitalWrite(ledPin[ctrl][pot], HIGH);
-        ledState[ctrl][pot]=LOW; 
-      } else {
-        digitalWrite(ledPin[ctrl][pot], LOW);
-        ledState[ctrl][pot]=HIGH;
-      }
+    //   }
+    // } else {
+    //   if (state == HIGH ){
+    //     digitalWrite(ledPin[ctrl][pot], HIGH);
+    //     ledState[ctrl][pot]=LOW; 
+    //   } else if (state == LOW ){
+    //     digitalWrite(ledPin[ctrl][pot], LOW);
+    //     ledState[ctrl][pot]=HIGH;
+    //   }
       
-    }
+    // }
    
   }
  
@@ -520,7 +521,7 @@ void buttonState(const char *oscAddress, unsigned int ctrl, unsigned int btn) {
   if(lastButtonState[ctrl][btn] == HIGH && currentButtonState[ctrl][btn] == LOW) {
     // invert state of LED
     //ledState[ctrl][btn] = !ledState[ctrl][btn];
-    myMicroOsc.sendInt(oscAddress, (int)digitalRead(ledPin[ctrl][btn]));
+    myMicroOsc.sendInt(oscAddress, (int)!digitalRead(ledPin[ctrl][btn]));
     //myMicroOsc.sendFloat(oscAddress, ledState[ctrl][btn]);
   }
 }
