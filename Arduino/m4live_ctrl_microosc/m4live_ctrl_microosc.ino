@@ -520,7 +520,7 @@ void buttonState(const char *oscAddress, unsigned int ctrl, unsigned int btn) {
   if(lastButtonState[ctrl][btn] == HIGH && currentButtonState[ctrl][btn] == LOW) {
     // invert state of LED
     //ledState[ctrl][btn] = !ledState[ctrl][btn];
-    myMicroOsc.sendInt(oscAddress, ledPin[ctrl][btn]);
+    myMicroOsc.sendInt(oscAddress, (int)digitalRead(ledPin[ctrl][btn]));
     //myMicroOsc.sendFloat(oscAddress, ledState[ctrl][btn]);
   }
 }
@@ -706,17 +706,17 @@ void loop() {
     sendValueMagneticEncoder("/c/3/p/2", as5600List[3][2][0], lastEncoderValue[3][2], tcaAddress[3][2]);
     
     // loop over button 1, 2 for each controller
-    // buttonState("/c/0/b/0", 0, 0);
-    // buttonState("/c/0/b/1", 0, 1);
+    buttonState("/c/0/b/0", 0, 0);
+    buttonState("/c/0/b/1", 0, 1);
 
-    // buttonState("/c/1/b/0", 1, 0);
-    // buttonState("/c/1/b/1", 1, 1);
+    buttonState("/c/1/b/0", 1, 0);
+    buttonState("/c/1/b/1", 1, 1);
     
-    // buttonState("/c/2/b/0", 2, 0);
-    // buttonState("/c/2/b/1", 2, 1);
+    buttonState("/c/2/b/0", 2, 0);
+    buttonState("/c/2/b/1", 2, 1);
     
-    // buttonState("/c/3/b/0", 3, 0);
-    // buttonState("/c/3/b/1", 3, 1);
+    buttonState("/c/3/b/0", 3, 0);
+    buttonState("/c/3/b/1", 3, 1);
 
     myChronoStart = millis(); // update delay
   } 

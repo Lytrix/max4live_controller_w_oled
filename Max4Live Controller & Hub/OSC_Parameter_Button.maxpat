@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 67.0, 100.0, 1099.0, 825.0 ],
+		"rect" : [ 67.0, 100.0, 790.0, 825.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -69,7 +69,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "int" ],
-					"patching_rect" : [ 817.0, 187.733393945693962, 29.5, 22.0 ],
+					"patching_rect" : [ 878.0, 186.733393945693962, 29.5, 22.0 ],
 					"text" : "t b i"
 				}
 
@@ -95,7 +95,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 817.0, 78.0, 30.0, 30.0 ]
+					"patching_rect" : [ 878.0, 79.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -261,7 +261,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 522.0, 695.666667819023132, 127.0, 22.0 ],
-					"text" : "/button 0 0 Shelf 0 0"
+					"text" : "/button 3 1 Shelf 0 0"
 				}
 
 			}
@@ -285,7 +285,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 160.526314258575439, 500.877188205718994, 29.5, 22.0 ],
-					"text" : "2 1"
+					"text" : "3 1"
 				}
 
 			}
@@ -353,7 +353,7 @@
 							"parameter_annotation_name" : "Reverse",
 							"parameter_enum" : [ "off", "on" ],
 							"parameter_info" : "Inverse",
-							"parameter_longname" : "live.toggle.reverse1[14]",
+							"parameter_longname" : "live.toggle.reverse1[13]",
 							"parameter_mmax" : 1.0,
 							"parameter_shortname" : "live.toggle.reverse1",
 							"parameter_type" : 1
@@ -397,7 +397,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 151.0, 345.0, 136.0, 22.0 ],
-					"restore" : [ "/c/2/b/1" ],
+					"restore" : [ "/c/3/b/1" ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -449,7 +449,7 @@
 					}
 ,
 					"tabmode" : 0,
-					"text" : "/c/2/b/1",
+					"text" : "/c/3/b/1",
 					"textcolor" : [ 0.870588235294118, 0.870588235294118, 0.870588235294118, 1.0 ],
 					"textjustification" : 1,
 					"varname" : "textedit[1]",
@@ -517,7 +517,7 @@
 					"patching_rect" : [ 68.0, 459.0, 59.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 303.934070459433997, 52.292045831680298, 59.0, 22.0 ],
-					"text" : "/c/2/b/1"
+					"text" : "/c/3/b/1"
 				}
 
 			}
@@ -636,7 +636,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 799.380435198545456, 555.0, 84.239129602909088, 22.0 ],
+					"patching_rect" : [ 794.0, 556.0, 84.239129602909088, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 73.934070459433997, 52.292045831680298, 110.576925098896027, 22.0 ],
 					"text" : "18 0."
@@ -650,8 +650,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 844.0, 501.0, 41.0, 22.0 ],
-					"text" : "pak i f"
+					"patching_rect" : [ 860.5, 500.0, 47.0, 22.0 ],
+					"text" : "pack i f"
 				}
 
 			}
@@ -813,7 +813,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-75", 0 ],
-					"midpoints" : [ 301.5, 320.0, 853.5, 320.0 ],
+					"midpoints" : [ 301.5, 320.0, 870.0, 320.0 ],
 					"order" : 0,
 					"source" : [ "obj-1", 0 ]
 				}
@@ -1026,6 +1026,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-50", 0 ],
+					"midpoints" : [ 887.5, 486.0, 803.5, 486.0 ],
 					"source" : [ "obj-26", 0 ]
 				}
 
