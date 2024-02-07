@@ -73,7 +73,7 @@ unsigned int tcaAddress[4][3][2] = {
 unsigned int as5600_rotation[4][3];
 
 // Store invert button 1 or 0 for each button
-unsigned int invertButton[4][2];
+byte invertButton[4][2];
 
 // List of Multiplexer wire and channel number for each display
 unsigned int tcaDisplayAddress[4][2] = {
@@ -227,9 +227,11 @@ const unsigned int ledPin[4][2] = {
 };
 
 // Led, buttonstate variables
-unsigned int ledState[4][2];
-unsigned int lastButtonState[4][2];
-unsigned int currentButtonState[4][2];
+byte ledState[4][2];
+
+byte lastButtonState[4][2];
+
+byte currentButtonState[4][2];
 
 // display slider variables
 int16_t sliderLength = 37;
@@ -390,30 +392,31 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     unsigned int ctrl = oscMessage.nextAsInt();
     unsigned int pot = oscMessage.nextAsInt();
     const char *buttonValue = oscMessage.nextAsString();
-    int state = oscMessage.nextAsInt(); // 1. or 0.
+    byte state = oscMessage.nextAsInt(); // 1. or 0.
     invertButton[ctrl][pot] = oscMessage.nextAsInt();
-
+    ledState[ctrl][pot]= state;
     strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
+    digitalWrite(ledPin[ctrl][pot], !ledState[ctrl][pot]);
     updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
     timeCnt = millis(); // reset time for screensaver
     
-    if (invertButton[ctrl][pot] == 1) {
-      if (state == 1 ){
-        digitalWrite(ledPin[ctrl][pot], 0);
-        ledState[ctrl][pot]=1; 
-      } else {
-        digitalWrite(ledPin[ctrl][pot], 1);
-        ledState[ctrl][pot]=0;
-      }
-    } else  {
-      if (state == 1){
-        digitalWrite(ledPin[ctrl][pot], 0);
-        //ledState[ctrl][pot]=0; 
-      }  else if (state == 0){
-        digitalWrite(ledPin[ctrl][pot], 1);
-        //ledState[ctrl][pot]=1;
-      }  
-    }
+    // if (invertButton[ctrl][pot] == 1) {
+    //   if (state == 1 ){
+    //     digitalWrite(ledPin[ctrl][pot], 1);
+    //     ledState[ctrl][pot]=1; 
+    //   } else {
+    //     digitalWrite(ledPin[ctrl][pot], 0);
+    //     ledState[ctrl][pot]=0;
+    //   }
+    // } else  {
+    //   if (state == 1){
+        //digitalWrite(ledPin[ctrl][pot], (byte)!state);
+        //ledState[ctrl][pot]=state; 
+    //   }  else {
+    //     digitalWrite(ledPin[ctrl][pot], 1);
+    //     ledState[ctrl][pot]=0;
+    //   }  
+    // }
    
   }
  
@@ -520,7 +523,7 @@ void buttonState(const char *oscAddress, unsigned int ctrl, unsigned int btn) {
   lastButtonState[ctrl][btn] = currentButtonState[ctrl][btn];      // save the last state
   currentButtonState[ctrl][btn] = digitalRead(buttonPin[ctrl][btn]); // read new state
 
-  if(lastButtonState[ctrl][btn] == HIGH && currentButtonState[ctrl][btn] == LOW) {
+  if(lastButtonState[ctrl][btn] == LOW && currentButtonState[ctrl][btn] == HIGH) {
     // invert state of LED
     ledState[ctrl][btn] = !ledState[ctrl][btn];
     myMicroOsc.sendInt(oscAddress, ledState[ctrl][btn]);
