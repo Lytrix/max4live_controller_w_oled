@@ -336,16 +336,16 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     unsigned int pot = oscMessage.nextAsInt();
     char *name = oscMessage.nextAsString();
     char *units = oscMessage.nextAsString();
-    unsigned int invert = oscMessage.nextAsInt(); 
+    byte invert = oscMessage.nextAsInt(); 
 
     // copy values to display buffer
     strcpy(displayTxtKnob[ctrl][pot][0], name); 
     strcpy(displayTxtKnob[ctrl][pot][2], units);
       
-    if (invert == 0) {  // 0 or 1 to inverse potentiometer direction
-      as5600List[ctrl][pot][0].setDirection(AS5600_CLOCK_WISE);
-    } else {
+    if (invert == HIGH) {  // 0 or 1 to inverse potentiometer direction
       as5600List[ctrl][pot][0].setDirection(AS5600_COUNTERCLOCK_WISE);
+    } else {
+      as5600List[ctrl][pot][0].setDirection(AS5600_CLOCK_WISE);
     }
     updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]); 
   } else
@@ -357,7 +357,7 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     unsigned int ctrl = oscMessage.nextAsInt();
     unsigned int pot = oscMessage.nextAsInt();
     char *value = oscMessage.nextAsString();
-    int sliderInt = oscMessage.nextAsInt();
+    unsigned int sliderInt = oscMessage.nextAsInt();
     float slider = ((float)sliderInt/100) * sliderLength;
     Serial.println(slider);
     if (displayTxtKnob[ctrl][pot][1] != value) {
@@ -388,6 +388,9 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
     byte state = oscMessage.nextAsInt(); // 1. or 0.
     byte invertState = oscMessage.nextAsInt();
     // invertButton[ctrl][pot] = invertState;
+    if (invertState == HIGH) {
+      state = !state;
+    }
     digitalWrite(ledPin[ctrl][pot], state);
     strcpy(displayTxtButton[ctrl][pot], buttonValue);  // "IN" 
     updateDisplay(displayList[ctrl][0], ctrl, tcaDisplayAddress[ctrl]);
