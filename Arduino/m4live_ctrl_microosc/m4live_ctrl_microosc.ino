@@ -330,19 +330,19 @@ void myOnOscMessageReceived(MicroOscMessage& oscMessage) {
   // Receive the selected 4 chars parameter name for each controller (1,2,3,4) and potentiometer (1,2,3)
   // Along with corresponding unit names, optionally with the set inverse of potentiometer
   // For example: /value 1 2 "FREQ" "kHz" 0
-  if (oscMessage.checkOscAddressAndTypeTags("/name", "iissi")) { 
+  if (oscMessage.checkOscAddressAndTypeTags("/name", "iiiss")) { 
 
     unsigned int ctrl = oscMessage.nextAsInt();
     unsigned int pot = oscMessage.nextAsInt();
+    unsigned int invert = oscMessage.nextAsInt(); 
     char *name = oscMessage.nextAsString();
     char *units = oscMessage.nextAsString();
-    byte invert = oscMessage.nextAsInt(); 
 
     // copy values to display buffer
     strcpy(displayTxtKnob[ctrl][pot][0], name); 
     strcpy(displayTxtKnob[ctrl][pot][2], units);
       
-    if (invert == HIGH) {  // 0 or 1 to inverse potentiometer direction
+    if (invert == 1) {  // 0 or 1 to inverse potentiometer direction
       as5600List[ctrl][pot][0].setDirection(AS5600_COUNTERCLOCK_WISE);
     } else {
       as5600List[ctrl][pot][0].setDirection(AS5600_CLOCK_WISE);
