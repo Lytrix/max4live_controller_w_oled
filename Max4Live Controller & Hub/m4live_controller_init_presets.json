@@ -2,10 +2,76 @@
 	"pattrstorage" : 	{
 		"name" : "u603006327",
 		"slots" : 		{
+			"1000" : 			{
+				"id" : 1000,
+				"data" : 				{
+					"ctrl1::Parameter_1::save_osc_address" : [ "/c/0/p/0" ],
+					"ctrl1::Parameter_1::save_invert_input" : [ 0.0 ],
+					"ctrl1::Parameter_1::save_parameter" : [ 0 ],
+					"ctrl1::Parameter_2::save_osc_address" : [ "/c/0/p/1" ],
+					"ctrl1::Parameter_2::save_invert_input" : [ 0.0 ],
+					"ctrl1::Parameter_2::save_parameter" : [ 0 ],
+					"ctrl1::Parameter_3::save_osc_address" : [ "/c/0/p/2" ],
+					"ctrl1::Parameter_3::save_invert_input" : [ 0.0 ],
+					"ctrl1::Parameter_3::save_parameter" : [ 0 ],
+					"ctrl1::Parameter_4::save_osc_address" : [ "/c/0/b/0" ],
+					"ctrl1::Parameter_4::save_invert_input" : [ 0.0 ],
+					"ctrl1::Parameter_4::save_parameter" : [ 0 ],
+					"ctrl1::Parameter_5::save_osc_address" : [ "/c/0/b/1" ],
+					"ctrl1::Parameter_5::save_invert_input" : [ 0.0 ],
+					"ctrl1::Parameter_5::save_parameter" : [ 0 ],
+					"ctrl3::Parameter_1::save_osc_address" : [ "/c/2/p/0" ],
+					"ctrl3::Parameter_1::save_invert_input" : [ 0.0 ],
+					"ctrl3::Parameter_1::save_parameter" : [ 0 ],
+					"ctrl3::Parameter_2::save_osc_address" : [ "/c/2/p/1" ],
+					"ctrl3::Parameter_2::save_invert_input" : [ 0.0 ],
+					"ctrl3::Parameter_2::save_parameter" : [ 0 ],
+					"ctrl3::Parameter_3::save_osc_address" : [ "/c/2/p/2" ],
+					"ctrl3::Parameter_3::save_invert_input" : [ 0.0 ],
+					"ctrl3::Parameter_3::save_parameter" : [ 0 ],
+					"ctrl3::Parameter_4::save_osc_address" : [ "/c/2/b/0" ],
+					"ctrl3::Parameter_4::save_invert_input" : [ 0.0 ],
+					"ctrl3::Parameter_4::save_parameter" : [ 0 ],
+					"ctrl3::Parameter_5::save_osc_address" : [ "/c/2/b/1" ],
+					"ctrl3::Parameter_5::save_invert_input" : [ 0.0 ],
+					"ctrl3::Parameter_5::save_parameter" : [ 0 ],
+					"ctrl2::Parameter_1::save_osc_address" : [ "/c/1/p/0" ],
+					"ctrl2::Parameter_1::save_invert_input" : [ 0.0 ],
+					"ctrl2::Parameter_1::save_parameter" : [ 0 ],
+					"ctrl2::Parameter_2::save_osc_address" : [ "/c/1/p/1" ],
+					"ctrl2::Parameter_2::save_invert_input" : [ 0.0 ],
+					"ctrl2::Parameter_2::save_parameter" : [ 0 ],
+					"ctrl2::Parameter_3::save_osc_address" : [ "/c/1/p/2" ],
+					"ctrl2::Parameter_3::save_invert_input" : [ 0.0 ],
+					"ctrl2::Parameter_3::save_parameter" : [ 0 ],
+					"ctrl2::Parameter_4::save_osc_address" : [ "/c/1/b/0" ],
+					"ctrl2::Parameter_4::save_invert_input" : [ 0.0 ],
+					"ctrl2::Parameter_4::save_parameter" : [ 0 ],
+					"ctrl2::Parameter_5::save_osc_address" : [ "/c/1/b/1" ],
+					"ctrl2::Parameter_5::save_invert_input" : [ 0.0 ],
+					"ctrl2::Parameter_5::save_parameter" : [ 0 ],
+					"ctrl4::Parameter_1::save_osc_address" : [ "/c/3/p/0" ],
+					"ctrl4::Parameter_1::save_invert_input" : [ 0.0 ],
+					"ctrl4::Parameter_1::save_parameter" : [ 0 ],
+					"ctrl4::Parameter_2::save_osc_address" : [ "/c/3/p/1" ],
+					"ctrl4::Parameter_2::save_invert_input" : [ 0.0 ],
+					"ctrl4::Parameter_2::save_parameter" : [ 0 ],
+					"ctrl4::Parameter_3::save_osc_address" : [ "/c/3/p/2" ],
+					"ctrl4::Parameter_3::save_invert_input" : [ 0.0 ],
+					"ctrl4::Parameter_3::save_parameter" : [ 0 ],
+					"ctrl4::Parameter_4::save_osc_address" : [ "/c/3/b/0" ],
+					"ctrl4::Parameter_4::save_invert_input" : [ 0.0 ],
+					"ctrl4::Parameter_4::save_parameter" : [ 0 ],
+					"ctrl4::Parameter_5::save_osc_address" : [ "/c/3/b/1" ],
+					"ctrl4::Parameter_5::save_invert_input" : [ 0.0 ],
+					"ctrl4::Parameter_5::save_parameter" : [ 0 ]
+				}
+
+			}
+,
 			"1001" : 			{
 				"id" : 1001,
 				"data" : 				{
-					"selected_vst" : [ "SSL 4K E" ],
 					"ctrl1::Parameter_1::save_osc_address" : [ "/c/0/p/0" ],
 					"ctrl1::Parameter_1::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_1::save_parameter" : [ 23 ],
@@ -73,7 +139,6 @@
 			"1002" : 			{
 				"id" : 1002,
 				"data" : 				{
-					"selected_vst" : [ "SSL Native Channel Strip 2" ],
 					"ctrl1::Parameter_1::save_osc_address" : [ "/c/0/p/0" ],
 					"ctrl1::Parameter_1::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_1::save_parameter" : [ 11 ],
@@ -141,7 +206,6 @@
 			"1003" : 			{
 				"id" : 1003,
 				"data" : 				{
-					"selected_vst" : [ "SSL 4K B" ],
 					"ctrl1::Parameter_1::save_osc_address" : [ "/c/0/p/0" ],
 					"ctrl1::Parameter_1::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_1::save_parameter" : [ 18 ],
@@ -209,7 +273,6 @@
 			"1101" : 			{
 				"id" : 1101,
 				"data" : 				{
-					"selected_vst" : [ "SSL 4K E" ],
 					"ctrl1::Parameter_1::save_osc_address" : [ "/c/0/p/0" ],
 					"ctrl1::Parameter_1::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_1::save_parameter" : [ 36 ],
@@ -277,7 +340,6 @@
 			"1102" : 			{
 				"id" : 1102,
 				"data" : 				{
-					"selected_vst" : [ "SSL Native Channel Strip 2" ],
 					"ctrl1::Parameter_1::save_osc_address" : [ "/c/0/p/0" ],
 					"ctrl1::Parameter_1::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_1::save_parameter" : [ 24 ],
@@ -345,7 +407,6 @@
 			"1103" : 			{
 				"id" : 1103,
 				"data" : 				{
-					"selected_vst" : [ "SSL 4K B" ],
 					"ctrl1::Parameter_1::save_osc_address" : [ "/c/0/p/0" ],
 					"ctrl1::Parameter_1::save_invert_input" : [ 0.0 ],
 					"ctrl1::Parameter_1::save_parameter" : [ 31 ],
