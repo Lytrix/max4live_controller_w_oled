@@ -40,6 +40,39 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-90",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1064.0, 368.0, 175.0, 22.0 ],
+					"text" : "print BANG_TRACK_CHANGE"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-78",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1259.0, 578.0, 73.0, 22.0 ],
+					"text" : "print PATTR"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-54",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1277.0, 517.0, 109.0, 22.0 ],
+					"text" : "print PARAMETER"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-106",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -83,18 +116,6 @@
 					"outlettype" : [ "int" ],
 					"patching_rect" : [ 1676.133397191762924, 676.694063365459442, 29.5, 22.0 ],
 					"text" : "int"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-92",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 1371.543882429599762, 311.186426401138306, 35.0, 22.0 ],
-					"text" : "clear"
 				}
 
 			}
@@ -338,7 +359,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1518.245010364055815, 676.694063365459442, 53.5, 22.0 ],
-					"text" : "2049"
+					"text" : "-1"
 				}
 
 			}
@@ -374,7 +395,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1588.335705459117889, 676.694063365459442, 51.470205217599869, 22.0 ],
-					"text" : "2049"
+					"text" : "2"
 				}
 
 			}
@@ -507,7 +528,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1055.0, 888.679174304008484, 50.0, 22.0 ],
-					"text" : "50"
+					"text" : "0"
 				}
 
 			}
@@ -770,7 +791,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 1078.296517193317413, 311.186426401138306, 123.0, 22.0 ],
-					"restore" : [ 20 ],
+					"restore" : [ 27 ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -997,7 +1018,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1066.0, 623.740942239761353, 50.0, 22.0 ],
-					"text" : "\"0.0\""
+					"text" : "\"-15.0\""
 				}
 
 			}
@@ -1047,7 +1068,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1428.947623896598998, 990.780665993690491, 95.0, 22.0 ],
-					"text" : "/offset 3 0 2048"
+					"text" : "/offset 3 0 2"
 				}
 
 			}
@@ -1071,7 +1092,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 936.547086000442505, 986.792374014854431, 121.0, 22.0 ],
-					"text" : "/value 3 0 \"0.0\" 50"
+					"text" : "/value 3 0 \"-15.0\" 0"
 				}
 
 			}
@@ -2211,7 +2232,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1897.500961899757385, 886.766948819160461, 62.0, 22.0 ],
-					"text" : "0.500244"
+					"text" : "0.000488"
 				}
 
 			}
@@ -2225,7 +2246,7 @@
 					"patching_rect" : [ 1899.387754201889038, 977.332979321479797, 81.714285612106323, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 73.934070459433997, 52.292045831680298, 110.576925098896027, 22.0 ],
-					"text" : "20 0.500244"
+					"text" : "27 0.000488"
 				}
 
 			}
@@ -2286,7 +2307,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 885.83011257648468, 623.740942239761353, 69.5, 22.0 ],
-					"text" : "0.500244"
+					"text" : "0.000488"
 				}
 
 			}
@@ -2333,7 +2354,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1240.649462640285492, 423.0, 29.5, 22.0 ],
-					"text" : "20"
+					"text" : "27"
 				}
 
 			}
@@ -2393,7 +2414,7 @@
 
 					}
 ,
-					"text" : "0.",
+					"text" : "-15.",
 					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ],
 					"textjustification" : 2
 				}
@@ -2404,7 +2425,7 @@
 					"applycolors" : 1,
 					"fontname" : "Ableton Sans Medium",
 					"id" : "obj-16",
-					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Polarity", ",", "Low Pass Filter", ",", "High Pass Filter", ",", "EQ In", ",", "EQ Type", ",", "LF Type", ",", "LF Frequency", ",", "LF Gain", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Freq", ",", "HMF Gain", ",", "HMF Q", ",", "HF Type", ",", "HF Freq", ",", "HF Gain", ",", "Dynamics In", ",", "Compressor Peak", ",", "Compressor Fast Attack", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Expander", ",", "Gate Attack", ",", "Gate Hold", ",", "Gate Threshold", ",", "Gate Range", ",", "Gate Release", ",", "Filters to Input", ",", "Dynamics Pre-EQ", ",", "Filters to S/C", ",", "EQ to S/C", ",", "S/C Listen", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "Legacy Cut", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "GroupSense", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "AB Switch" ],
+					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre IN", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Expander", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "Legacy Cut", ",", "S/C Listen", ",", "GroupSense", ",", "Analogue VCA", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "AB Switch" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2535,6 +2556,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
+					"order" : 1,
+					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-54", 0 ],
+					"order" : 0,
 					"source" : [ "obj-11", 0 ]
 				}
 
@@ -2664,6 +2694,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-140", 0 ],
 					"midpoints" : [ 569.547129273414612, 180.476847350597382, 1476.403861582279205, 180.476847350597382 ],
+					"order" : 0,
 					"source" : [ "obj-14", 5 ]
 				}
 
@@ -2671,7 +2702,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
-					"midpoints" : [ 548.547129273414612, 219.794942855834961, 1213.678875386714935, 219.794942855834961 ],
 					"source" : [ "obj-14", 3 ]
 				}
 
@@ -2696,6 +2726,14 @@
 					"destination" : [ "obj-41", 0 ],
 					"midpoints" : [ 517.047129273414612, 305.20753014087677, 181.020713877677963, 305.20753014087677, 181.020713877677963, 305.20753014087677, 37.801884531974792, 305.20753014087677 ],
 					"source" : [ "obj-14", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-90", 0 ],
+					"order" : 1,
+					"source" : [ "obj-14", 5 ]
 				}
 
 			}
@@ -3427,13 +3465,6 @@
 				"patchline" : 				{
 					"destination" : [ "obj-99", 1 ],
 					"source" : [ "obj-91", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-16", 0 ],
-					"source" : [ "obj-92", 0 ]
 				}
 
 			}

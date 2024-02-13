@@ -273,7 +273,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 170.0, 245.0, 123.0, 22.0 ],
-					"restore" : [ 0 ],
+					"restore" : [ 45 ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -341,7 +341,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 614.917186081409454, 523.489927113056183, 50.0, 22.0 ],
-					"text" : "-"
+					"text" : "Shelf"
 				}
 
 			}
@@ -374,12 +374,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-33",
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 522.0, 695.666667819023132, 100.0, 22.0 ],
-					"text" : "/button 0 0 \" \" 0 0"
+					"patching_rect" : [ 522.0, 695.666667819023132, 100.0, 35.0 ],
+					"text" : "/button 3 1 Shelf 0 0"
 				}
 
 			}
@@ -403,7 +404,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 160.526314258575439, 500.877188205718994, 29.5, 22.0 ],
-					"text" : "0 0"
+					"text" : "3 0"
 				}
 
 			}
@@ -491,7 +492,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 150.0, 340.0, 136.0, 22.0 ],
-					"restore" : [ "/c/0/b/0" ],
+					"restore" : [ "/c/3/b/0" ],
 					"saved_object_attributes" : 					{
 						"parameter_enable" : 0,
 						"parameter_mappable" : 0
@@ -543,7 +544,7 @@
 					}
 ,
 					"tabmode" : 0,
-					"text" : "/c/0/b/0",
+					"text" : "/c/3/b/0",
 					"textcolor" : [ 0.870588235294118, 0.870588235294118, 0.870588235294118, 1.0 ],
 					"textjustification" : 1,
 					"varname" : "textedit[1]",
@@ -600,7 +601,7 @@
 					"patching_rect" : [ 68.0, 459.0, 59.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 303.934070459433997, 52.292045831680298, 59.0, 22.0 ],
-					"text" : "/c/0/b/0"
+					"text" : "/c/3/b/0"
 				}
 
 			}
@@ -688,7 +689,7 @@
 					"patching_rect" : [ 795.260870397090912, 555.047618925571442, 84.239129602909088, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 73.934070459433997, 52.292045831680298, 110.576925098896027, 22.0 ],
-					"text" : "0 0."
+					"text" : "45 0."
 				}
 
 			}
@@ -736,7 +737,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 263.0, 383.0, 29.5, 22.0 ],
-					"text" : "0"
+					"text" : "45"
 				}
 
 			}
@@ -797,7 +798,7 @@
 
 					}
 ,
-					"text" : "-",
+					"text" : "Shelf",
 					"textcolor" : [ 0.631372549019608, 0.631372549019608, 0.631372549019608, 1.0 ],
 					"textjustification" : 2
 				}
@@ -808,7 +809,7 @@
 					"applycolors" : 1,
 					"fontname" : "Ableton Sans Medium",
 					"id" : "obj-1",
-					"items" : "<empty>",
+					"items" : [ "Select Parameter", ",", "Bypass", ",", "External S/C", ",", "Input Trim", ",", "Pre IN", ",", "Mic", ",", "Polarity", ",", "Fader Level", ",", "Output Trim", ",", "Width", ",", "Pan", ",", "High Pass Filter", ",", "Low Pass Filter", ",", "Filters to Input", ",", "Filters to S/C", ",", "EQ In", ",", "EQ to S/C", ",", "LF Frequency", ",", "LF Gain", ",", "LF Type", ",", "LMF Frequency", ",", "LMF Gain", ",", "LMF Q", ",", "HMF Frequency", ",", "HMF Gain", ",", "HMF Q", ",", "HF Frequency", ",", "HF Gain", ",", "HF Type", ",", "Dynamics In", ",", "Dynamics Pre-EQ", ",", "Compressor Ratio", ",", "Compressor Threshold", ",", "Compressor Release", ",", "Compressor Mix", ",", "Gate Range", ",", "Gate Threshold", ",", "Gate Release", ",", "Gate Expander", ",", "Legacy Solo", ",", "Legacy Solo Safe", ",", "Legacy Cut", ",", "S/C Listen", ",", "GroupSense", ",", "Analogue VCA", ",", "Filters In", ",", "Width Mode", ",", "Width Frequency", ",", "Compressor Auto Make-up", ",", "Compressor Auto Make-up Offset", ",", "AB Switch" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -921,7 +922,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
-					"midpoints" : [ 301.913785099983215, 200.311476230621338, 301.107914209365845, 200.311476230621338, 301.107914209365845, 280.0, 301.5, 280.0 ],
 					"source" : [ "obj-18", 2 ]
 				}
 
